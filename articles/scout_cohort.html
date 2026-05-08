@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>SCOUT cohort • SCOUT</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -53,8 +58,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>SCOUT cohort</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>SCOUT cohort</h1>
             
       
 
@@ -63,9 +67,235 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caravagnalab.github.io/SCOUT/">SCOUT</a></span><span class="op">)</span></span></code></pre></div>
-  </main>
+<p>The Simulated Cohort of Universal Tumours (SCOUT) is a cohort
+generated with <a href="https://caravagnalab.github.io/ProCESS/latest/" class="external-link">ProCESS</a>,
+containing prototypical tumours with matched sequencing data. As in
+other fields of Machine Learning, the intent of SCOUT is to become a
+standard to benchmark algorithms for:</p>
+<ul>
+<li>mutation calling;</li>
+<li>copy number alteration calling;</li>
+<li>mutational signatures deconvolution;</li>
+<li>tumour subclonal deconvolution.</li>
+</ul>
+<p>The main features of SCOUT are:</p>
+<ul>
+<li>a cohort that contains realistic tumours inspired from
+adenocarcinomas (colorectal and lung), leukemias (chronic lymphocitic
+and acute myeloid), breast cancer and glioblastoma;</li>
+<li>for each simulated tumour, both multi-region and/or longitudinal
+data, with different configurations of sample purity and sequencing
+coverage;</li>
+<li>for some tumours, the simulated effect of treatment following
+typical patterns for each tumour type, including resistance caused by
+pre-existing or de novo tumour clones;</li>
+<li>data available in the format of simulated read counts format, or as
+raw sequencing reads (FASTq) to be streamlined in any bioinformatics
+pipeline, with raw data in the format of whole-genome or whole-exome
+sequencing.</li>
+</ul>
+<p>With a total of ~20 TB of data, SCOUT samples can be used to
+benchmark pretty much most standard computational methods commonly used
+in the cancer genomics field.</p>
+<div class="section level2">
+<h2 id="summary-statistics">Summary statistics<a class="anchor" aria-label="anchor" href="#summary-statistics"></a>
+</h2>
+</div>
+<div class="section level2">
+<h2 id="simulated-tumours">Simulated tumours<a class="anchor" aria-label="anchor" href="#simulated-tumours"></a>
+</h2>
+<table style="width:99%;" class="table">
+<colgroup>
+<col width="4%">
+<col width="4%">
+<col width="9%">
+<col width="81%">
+</colgroup>
+<thead><tr class="header">
+<th>Tumour</th>
+<th>
+<p>Type</p>
+<p>(clones)</p>
+</th>
+<th>Samples (timepoints)</th>
+<th>Synopsis</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><a href="#spn01">SPN01</a></td>
+<td>P (n=4)</td>
+<td>b=3 (t=1)</td>
+<td>Micro-satellite stable (MSS) colorectal cancer composed of a single
+clonal population, sampled at a single time-point with two multi-region
+biopsies.</td>
+</tr>
+<tr class="even">
+<td><a href="#spn02">SPN02</a></td>
+<td>P (n=3)</td>
+<td>b=2 (t=1)</td>
+<td>Micro-satellite instable (MSI) colorectal cancer composed of a main
+clonal population, sampled at a single time-point with two multi-region
+biopsies.</td>
+</tr>
+<tr class="odd">
+<td><a href="#spn03">SPN03</a></td>
+<td>P (n=3)</td>
+<td>b=4 (t=4)</td>
+<td>Chronic lympocitic laeukemia in a watch-and-wait (i.e., untreated)
+scenario, with multiple subclones sampled longitudinally over four
+time-points.</td>
+</tr>
+<tr class="even">
+<td><a href="#spn04">SPN04</a></td>
+<td>P/R (n=3)</td>
+<td>b=2 (t=2)</td>
+<td>Acute myeloyd laeukemia with a dominant clone, relapsing
+platinum-based chemotherapy with, sampled longitudinally before
+treatment and at relapse.</td>
+</tr>
+<tr class="odd">
+<td><a href="#spn05">SPN05</a></td>
+<td>P (n=5)</td>
+<td>b=3 (t=1)</td>
+<td>Mismatch deficient breast cancer, with many subclones, sampled at
+one time-point with with three multi-region biopsies.</td>
+</tr>
+<tr class="even">
+<td><a href="#spn06">SPN06</a></td>
+<td>P/R (n=6)</td>
+<td>b=5 (t=3)</td>
+<td>Smoking-associated lung adenocardinoma with many subclones, treated
+with two lines of chemotherapy, both time relapsing with a de-novo
+clone, sampled at three time-points with five multi-region
+biopsies.</td>
+</tr>
+<tr class="odd">
+<td><a href="#spn07">SPN07</a></td>
+<td>P/R (n=6)</td>
+<td>b=5 (t=2)</td>
+<td>Glioblastoma with many subclones, treated with a line of
+chemotherapy, relapsing with a hypermutant clone, sampled at three
+time-points with five multi-region biopsies.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Legend:</strong> Primary (P), Relapse (R), Number of
+simulated clones (n), Number of sampled time-points (t), Total number of
+biopsies (b).</p>
+<div class="section level3">
+<h3 id="spn01">SPN01<a class="anchor" aria-label="anchor" href="#spn01"></a>
+</h3>
+<div align="center">
+<p><img src="img/SCOUT/spn01.png" alt="SPN01" width="350"></p>
+</div>
+<p>SPN01 is a prototype micro-satellite stable (MSS) colorectal cancer
+composed of 4 clones, with one dominant clone at sampling. The dominant
+clone harbours a full inactivation of the APC gene by point mutation and
+concurrent loss of heterozygosity (LOH) of the wildtype allele, together
+with two activating mutations in the KRAS and PIK3CA oncogenes.</p>
+<p>SPN01 is profiled by multi-region with 3 samples collected at the
+same time-point.</p>
+</div>
+<div class="section level3">
+<h3 id="spn02">SPN02<a class="anchor" aria-label="anchor" href="#spn02"></a>
+</h3>
+<div align="center">
+<p><img src="img/SCOUT/spn02.png" alt="SPN01" width="350"></p>
+</div>
+<p>SPN02 is a prototype micro-satellite instable (MSI) colorectal cancer
+composed of 3 clones, with one dominant clone at sampling. The dominant
+clone harbours a mutant BRAF, PIK3CA and MSH6. The MSH6 mutation makes
+the tumour hypermutant, enabling a specific mutational signature.</p>
+<p>SPN02 is profiled by multi-region with 2 samples collected at the
+same time-point.</p>
+</div>
+<div class="section level3">
+<h3 id="spn03">SPN03<a class="anchor" aria-label="anchor" href="#spn03"></a>
+</h3>
+<div align="center">
+<p><img src="img/SCOUT/spn03.png" alt="SPN01" width="350"></p>
+</div>
+<p>SPN03 is a prototype chronic lymphocitic leukemia composed of 3
+clones, with eventually one largely dominant but one still expanding.
+The largest clone harbours activating mutations in NOTCH1 and KRAS, and
+the last expanding subclone is not linked to any specific genetic
+mutation or copy number driver event.</p>
+<p>SPN03 is profiled in a watch-and-wait scenario (an active
+survaillance scenario in which the patient is observed untill white
+blood counts exceed a predefined threshould), acquiring one sample at
+each of 4 time-points, with distinct clonal compositions reflecting the
+ongoing dynamics.</p>
+</div>
+<div class="section level3">
+<h3 id="spn04">SPN04<a class="anchor" aria-label="anchor" href="#spn04"></a>
+</h3>
+<div align="center">
+<p><img src="img/SCOUT/spn04.png" alt="SPN01" width="350"></p>
+</div>
+<p>SPN02 is a prototype acute myeloyd leukemia composed of 3 clones,
+with one becoming dominant at every sampling. The dominant clone
+harbours a mutant IDH1, a copy number gain of KRAS and a mutant
+NRAS.</p>
+<p>SPN01 is profiled before and after platinum-based chemotherapy,
+relapsing with the same clone presented before treatment. Chemotherapy
+generates a mutational signature specific during its exposure.</p>
+</div>
+<div class="section level3">
+<h3 id="spn05">SPN05<a class="anchor" aria-label="anchor" href="#spn05"></a>
+</h3>
+<div align="center">
+<p><img src="img/SCOUT/spn05.png" alt="SPN01" width="350"></p>
+</div>
+<p>SPN05 is a prototype mismatch-repair deficient breast cancer composed
+of 5 clones, with three detectable at sampling. The ancestral clone
+harbours a mutant TP53, and a full BRCA2 inactivation by joint mutation
+and LOH (also linked to a specific mutational signature). The two
+expanding subclones are both associated with copy numbers: one has
+ongoing TP53 LOH, the other CDKN2A LOH.</p>
+<p>SPN05 is profiled at a single time-point with three biopsies,
+reflecting the distinct tumour composition in terms of clones
+distribution.</p>
+</div>
+<div class="section level3">
+<h3 id="spn06">SPN06<a class="anchor" aria-label="anchor" href="#spn06"></a>
+</h3>
+<div align="center">
+<p><img src="img/SCOUT/spn06.png" alt="SPN01" width="350"></p>
+</div>
+<p>SPN06 is a prototype smoking-associated lung adenocarcinoma, with 6
+clones that compete over time during two lines of treatment. The main
+clonal population is driven by mutant TP53 and STK11, but manifests two
+subclones: one associated with an EGFR amplification, and one by a KEAP1
+mutation. Upon chemo-immunotherapy (which leaves a mutational
+signature), a KRAS-driven subclone drives relapse, whereas the two other
+subclones are eradicated by treatment. Upon a second line of
+chemotherapy (which does not leave a mutational signature), resistance
+is driven by an aquired amplification of the mutant KRAS allele.</p>
+<p>SPN06 is profiled at a three time-points, before treatment and at
+relapse of each treatment. The two diagnostic biopsies are polyclonal,
+whereas relapse biopsies are monoclonal.</p>
+</div>
+<div class="section level3">
+<h3 id="spn07">SPN07<a class="anchor" aria-label="anchor" href="#spn07"></a>
+</h3>
+<div align="center">
+<p><img src="img/SCOUT/spn07.png" alt="SPN01" width="350"></p>
+</div>
+<p>SPN07 is a prototype glioblastoma with 6 clones that compete over
+time during a single line of treatment. The main clonal population is
+driven by inactivated PTEN (mutation and LOH), but manifests two
+subclones: one associated with an ATRX1 mutation, and one by a NF1
+mutation. Upon chemotherapy by timolozomide (which causes an MSH6
+mutation and microsatellite instability), resistance is achieved by a
+hypermutant subclone. Within the relapse clone, an extra subclone
+emerges due to a TP53 mutation.</p>
+<p>SPN07 is profiled at a two time-points, before treatment and at
+relapse of each treatment. The three diagnostic and two relapse biopsies
+are polyclonal.</p>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
