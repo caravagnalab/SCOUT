@@ -1,7 +1,5 @@
 # SCOUT
 
-# SCOUT
-
 `SCOUT` is an R package for …
 
 ## Installation
