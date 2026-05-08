@@ -3,8 +3,6 @@
 
 # SCOUT <a href="https://caravagnalab.github.io/SCOUT/"><img src="man/figures/logo.png" align="right" height="130" alt="SCOUT website" /></a>
 
-# SCOUT
-
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/caravagnalab/SCOUT/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/caravagnalab/SCOUT/actions/workflows/R-CMD-check.yaml)
