@@ -1,8 +1,9 @@
 pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
-articles: {}
-last_built: 2026-05-08T10:56Z
+articles:
+  scout_cohort: scout_cohort.html
+last_built: 2026-05-08T11:29Z
 urls:
   reference: https://caravagnalab.github.io/SCOUT/reference
   article: https://caravagnalab.github.io/SCOUT/articles
