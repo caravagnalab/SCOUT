@@ -1,10 +1,11 @@
 Package: SCOUT
 Title: SCOUT
-Version: 0.0.0.1
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Version: 0.0.1
+Authors@R: c(
+    person("Lucrezia", "Valeriani", email = "lucrezia.valeriani@areasciencepark.it", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0005-4378-6044")),
+    person("Giorgia", "Gandolfi", email = "giorgia.gandolfi@phd.units.it", role = c("aut")))
+Description: SCOUT is a package for accessing data of the SCOUT cohort.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

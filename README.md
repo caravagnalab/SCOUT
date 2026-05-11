@@ -8,7 +8,8 @@
 [![R-CMD-check](https://github.com/caravagnalab/SCOUT/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/caravagnalab/SCOUT/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-`SCOUT` is an R package for …
+`SCOUT` is an R package for accessing data of the SCOUT cohort simulated
+with [ProCESS](https://github.com/caravagnalab/ProCESS) package.
 
 ## Installation
 
