@@ -1,6 +1,7 @@
 # SCOUT
 
-`SCOUT` is an R package for …
+`SCOUT` is an R package for accessing data of the SCOUT cohort simulated
+with [ProCESS](https://github.com/caravagnalab/ProCESS) package.
 
 ## Installation
 
