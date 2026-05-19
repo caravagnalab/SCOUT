@@ -31,8 +31,6 @@ With a total of ~20 TB of data, SCOUT samples can be used to benchmark
 pretty much most standard computational methods commonly used in the
 cancer genomics field.
 
-## Summary statistics
-
 ## Simulated tumours
 
 [TABLE]
@@ -48,7 +46,8 @@ SPN01 is a prototype micro-satellite stable (MSS) colorectal cancer
 composed of 4 clones, with one dominant clone at sampling. The dominant
 clone harbours a full inactivation of the APC gene by point mutation and
 concurrent loss of heterozygosity (LOH) of the wildtype allele, together
-with two activating mutations in the KRAS and PIK3CA oncogenes.
+with two activating mutations in the TP53 tumour suppressor gene and
+PIK3CA oncogene.
 
 SPN01 is profiled by multi-region with 3 samples collected at the same
 time-point.
@@ -59,8 +58,8 @@ time-point.
 
 SPN02 is a prototype micro-satellite instable (MSI) colorectal cancer
 composed of 3 clones, with one dominant clone at sampling. The dominant
-clone harbours a mutant BRAF, PIK3CA and MSH6. The MSH6 mutation makes
-the tumour hypermutant, enabling a specific mutational signature.
+clone harbours a mutant BRAF, PIK3CA and POLE. The POLE mutation makes
+the tumour hypermutant, enabling a specific mutational signatures.
 
 SPN02 is profiled by multi-region with 2 samples collected at the same
 time-point.
@@ -71,9 +70,9 @@ time-point.
 
 SPN03 is a prototype chronic lymphocitic leukemia composed of 3 clones,
 with eventually one largely dominant but one still expanding. The
-largest clone harbours activating mutations in NOTCH1 and KRAS, and the
-last expanding subclone is not linked to any specific genetic mutation
-or copy number driver event.
+largest clone harbours activating mutations in NOTCH1 and TP53 and
+deletion of q-arm of chromosome 13, and the last expanding subclone is
+linked to MAP2K1 mutation.
 
 SPN03 is profiled in a watch-and-wait scenario (an active survaillance
 scenario in which the patient is observed untill white blood counts
@@ -85,13 +84,13 @@ dynamics.
 
 ![SPN01](img/SCOUT/spn04.png)
 
-SPN02 is a prototype acute myeloyd leukemia composed of 3 clones, with
+SPN04 is a prototype acute myeloyd leukemia composed of 3 clones, with
 one becoming dominant at every sampling. The dominant clone harbours a
-mutant IDH1, a copy number gain of KRAS and a mutant NRAS.
+mutant IDH1, a copy number gain of MYC and a mutant NRAS.
 
-SPN01 is profiled before and after platinum-based chemotherapy,
-relapsing with the same clone presented before treatment. Chemotherapy
-generates a mutational signature specific during its exposure.
+SPN04 is profiled before and after chemotherapy, relapsing with the same
+clone presented before treatment. Chemotherapy generates a mutational
+signature specific during its exposure.
 
 ### SPN05
 
@@ -100,9 +99,10 @@ generates a mutational signature specific during its exposure.
 SPN05 is a prototype mismatch-repair deficient breast cancer composed of
 5 clones, with three detectable at sampling. The ancestral clone
 harbours a mutant TP53, and a full BRCA2 inactivation by joint mutation
-and LOH (also linked to a specific mutational signature). The two
-expanding subclones are both associated with copy numbers: one has
-ongoing TP53 LOH, the other CDKN2A LOH.
+and LOH (also linked to a specific mutational signature) after which the
+tumour becomes hypermutant. The two expanding subclones are both
+associated with copy numbers: one has ongoing TP53 LOH, the other CDKN2A
+LOH.
 
 SPN05 is profiled at a single time-point with three biopsies, reflecting
 the distinct tumour composition in terms of clones distribution.
@@ -111,19 +111,20 @@ the distinct tumour composition in terms of clones distribution.
 
 ![SPN01](img/SCOUT/spn06.png)
 
-SPN06 is a prototype smoking-associated lung adenocarcinoma, with 6
+SPN06 is a prototype smoking-associated lung adenocarcinoma, with 7
 clones that compete over time during two lines of treatment. The main
-clonal population is driven by mutant TP53 and STK11, but manifests two
-subclones: one associated with an EGFR amplification, and one by a KEAP1
-mutation. Upon chemo-immunotherapy (which leaves a mutational
+clonal population is driven by mutant TP53 and STK11 LOH, but manifests
+two subclones: one associated with an EGFR amplification, and one by a
+KEAP1 mutation. Upon chemo-immunotherapy (which leaves a mutational
 signature), a KRAS-driven subclone drives relapse, whereas the two other
 subclones are eradicated by treatment. Upon a second line of
 chemotherapy (which does not leave a mutational signature), resistance
-is driven by an aquired amplification of the mutant KRAS allele.
+is driven by an aquired amplification of the mutant KRAS allele and the
+last clone by WGD.
 
 SPN06 is profiled at a three time-points, before treatment and at
 relapse of each treatment. The two diagnostic biopsies are polyclonal,
-whereas relapse biopsies are monoclonal.
+whereas relapse biopsies are monoclonal and polyclonal.
 
 ### SPN07
 
@@ -140,4 +141,4 @@ TP53 mutation.
 
 SPN07 is profiled at a two time-points, before treatment and at relapse
 of each treatment. The three diagnostic and two relapse biopsies are
-polyclonal.
+polyclonal and monoclonal.

@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="SCOUT cohort">
 </head>
@@ -34,13 +34,18 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/scout_cohort.html">SCOUT cohort</a></li>
+<li><a class="dropdown-item" href="../articles/scout_cohort.html">The SCOUT cohort</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Data download</h6></li>
+    <li><a class="dropdown-item" href="../articles/getting_started.html">Getting started</a></li>
+    <li><a class="dropdown-item" href="../articles/google_sheets.html">Google Sheets</a></li>
+    <li><a class="dropdown-item" href="../articles/zenodo.html">Zenodo</a></li>
   </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -97,10 +102,7 @@ sequencing.</li>
 <p>With a total of ~20 TB of data, SCOUT samples can be used to
 benchmark pretty much most standard computational methods commonly used
 in the cancer genomics field.</p>
-<div class="section level2">
-<h2 id="summary-statistics">Summary statistics<a class="anchor" aria-label="anchor" href="#summary-statistics"></a>
-</h2>
-</div>
+<!-- # Summary statistics -->
 <div class="section level2">
 <h2 id="simulated-tumours">Simulated tumours<a class="anchor" aria-label="anchor" href="#simulated-tumours"></a>
 </h2>
@@ -162,7 +164,7 @@ one time-point with with three multi-region biopsies.</td>
 </tr>
 <tr class="even">
 <td><a href="#spn06">SPN06</a></td>
-<td>P/R (n=6)</td>
+<td>P/R (n=7)</td>
 <td>b=5 (t=3)</td>
 <td>Smoking-associated lung adenocardinoma with many subclones, treated
 with two lines of chemotherapy, both time relapsing with a de-novo
@@ -192,7 +194,8 @@ biopsies (b).</p>
 composed of 4 clones, with one dominant clone at sampling. The dominant
 clone harbours a full inactivation of the APC gene by point mutation and
 concurrent loss of heterozygosity (LOH) of the wildtype allele, together
-with two activating mutations in the KRAS and PIK3CA oncogenes.</p>
+with two activating mutations in the TP53 tumour suppressor gene and
+PIK3CA oncogene.</p>
 <p>SPN01 is profiled by multi-region with 3 samples collected at the
 same time-point.</p>
 </div>
@@ -204,8 +207,8 @@ same time-point.</p>
 </div>
 <p>SPN02 is a prototype micro-satellite instable (MSI) colorectal cancer
 composed of 3 clones, with one dominant clone at sampling. The dominant
-clone harbours a mutant BRAF, PIK3CA and MSH6. The MSH6 mutation makes
-the tumour hypermutant, enabling a specific mutational signature.</p>
+clone harbours a mutant BRAF, PIK3CA and POLE. The POLE mutation makes
+the tumour hypermutant, enabling a specific mutational signatures.</p>
 <p>SPN02 is profiled by multi-region with 2 samples collected at the
 same time-point.</p>
 </div>
@@ -217,9 +220,9 @@ same time-point.</p>
 </div>
 <p>SPN03 is a prototype chronic lymphocitic leukemia composed of 3
 clones, with eventually one largely dominant but one still expanding.
-The largest clone harbours activating mutations in NOTCH1 and KRAS, and
-the last expanding subclone is not linked to any specific genetic
-mutation or copy number driver event.</p>
+The largest clone harbours activating mutations in NOTCH1 and TP53 and
+deletion of q-arm of chromosome 13, and the last expanding subclone is
+linked to MAP2K1 mutation.</p>
 <p>SPN03 is profiled in a watch-and-wait scenario (an active
 survaillance scenario in which the patient is observed untill white
 blood counts exceed a predefined threshould), acquiring one sample at
@@ -230,28 +233,28 @@ ongoing dynamics.</p>
 <h3 id="spn04">SPN04<a class="anchor" aria-label="anchor" href="#spn04"></a>
 </h3>
 <div align="center">
-<p><img src="img/SCOUT/spn04.png" alt="SPN01" width="350"></p>
+<p><img src="img/SCOUT/spn04.png" alt="SPN01" width="400"></p>
 </div>
-<p>SPN02 is a prototype acute myeloyd leukemia composed of 3 clones,
+<p>SPN04 is a prototype acute myeloyd leukemia composed of 3 clones,
 with one becoming dominant at every sampling. The dominant clone
-harbours a mutant IDH1, a copy number gain of KRAS and a mutant
-NRAS.</p>
-<p>SPN01 is profiled before and after platinum-based chemotherapy,
-relapsing with the same clone presented before treatment. Chemotherapy
-generates a mutational signature specific during its exposure.</p>
+harbours a mutant IDH1, a copy number gain of MYC and a mutant NRAS.</p>
+<p>SPN04 is profiled before and after chemotherapy, relapsing with the
+same clone presented before treatment. Chemotherapy generates a
+mutational signature specific during its exposure.</p>
 </div>
 <div class="section level3">
 <h3 id="spn05">SPN05<a class="anchor" aria-label="anchor" href="#spn05"></a>
 </h3>
 <div align="center">
-<p><img src="img/SCOUT/spn05.png" alt="SPN01" width="350"></p>
+<p><img src="img/SCOUT/spn05.png" alt="SPN01" width="450"></p>
 </div>
 <p>SPN05 is a prototype mismatch-repair deficient breast cancer composed
 of 5 clones, with three detectable at sampling. The ancestral clone
 harbours a mutant TP53, and a full BRCA2 inactivation by joint mutation
-and LOH (also linked to a specific mutational signature). The two
-expanding subclones are both associated with copy numbers: one has
-ongoing TP53 LOH, the other CDKN2A LOH.</p>
+and LOH (also linked to a specific mutational signature) after which the
+tumour becomes hypermutant. The two expanding subclones are both
+associated with copy numbers: one has ongoing TP53 LOH, the other CDKN2A
+LOH.</p>
 <p>SPN05 is profiled at a single time-point with three biopsies,
 reflecting the distinct tumour composition in terms of clones
 distribution.</p>
@@ -260,26 +263,27 @@ distribution.</p>
 <h3 id="spn06">SPN06<a class="anchor" aria-label="anchor" href="#spn06"></a>
 </h3>
 <div align="center">
-<p><img src="img/SCOUT/spn06.png" alt="SPN01" width="350"></p>
+<p><img src="img/SCOUT/spn06.png" alt="SPN01" width="500"></p>
 </div>
-<p>SPN06 is a prototype smoking-associated lung adenocarcinoma, with 6
+<p>SPN06 is a prototype smoking-associated lung adenocarcinoma, with 7
 clones that compete over time during two lines of treatment. The main
-clonal population is driven by mutant TP53 and STK11, but manifests two
-subclones: one associated with an EGFR amplification, and one by a KEAP1
-mutation. Upon chemo-immunotherapy (which leaves a mutational
+clonal population is driven by mutant TP53 and STK11 LOH, but manifests
+two subclones: one associated with an EGFR amplification, and one by a
+KEAP1 mutation. Upon chemo-immunotherapy (which leaves a mutational
 signature), a KRAS-driven subclone drives relapse, whereas the two other
 subclones are eradicated by treatment. Upon a second line of
 chemotherapy (which does not leave a mutational signature), resistance
-is driven by an aquired amplification of the mutant KRAS allele.</p>
+is driven by an aquired amplification of the mutant KRAS allele and the
+last clone by WGD.</p>
 <p>SPN06 is profiled at a three time-points, before treatment and at
 relapse of each treatment. The two diagnostic biopsies are polyclonal,
-whereas relapse biopsies are monoclonal.</p>
+whereas relapse biopsies are monoclonal and polyclonal.</p>
 </div>
 <div class="section level3">
 <h3 id="spn07">SPN07<a class="anchor" aria-label="anchor" href="#spn07"></a>
 </h3>
 <div align="center">
-<p><img src="img/SCOUT/spn07.png" alt="SPN01" width="350"></p>
+<p><img src="img/SCOUT/spn07.png" alt="SPN01" width="500"></p>
 </div>
 <p>SPN07 is a prototype glioblastoma with 6 clones that compete over
 time during a single line of treatment. The main clonal population is
@@ -291,7 +295,7 @@ hypermutant subclone. Within the relapse clone, an extra subclone
 emerges due to a TP53 mutation.</p>
 <p>SPN07 is profiled at a two time-points, before treatment and at
 relapse of each treatment. The three diagnostic and two relapse biopsies
-are polyclonal.</p>
+are polyclonal and monoclonal.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

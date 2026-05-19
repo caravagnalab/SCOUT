@@ -2,8 +2,11 @@ pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
+  getting_started: getting_started.html
+  google_sheets: google_sheets.html
   scout_cohort: scout_cohort.html
-last_built: 2026-05-11T10:10Z
+  zenodo: zenodo.html
+last_built: 2026-05-19T12:31Z
 urls:
   reference: https://caravagnalab.github.io/SCOUT/reference
   article: https://caravagnalab.github.io/SCOUT/articles
