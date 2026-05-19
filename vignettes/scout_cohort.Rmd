@@ -31,8 +31,7 @@ The main features of SCOUT are:
 With a total of ~20 TB of data, SCOUT samples can be used to benchmark pretty much most standard computational methods commonly used in the cancer genomics field.
 
 
-# Summary statistics
-
+<!-- # Summary statistics -->
 
 # Simulated tumours
 
@@ -52,7 +51,7 @@ With a total of ~20 TB of data, SCOUT samples can be used to benchmark pretty mu
 +----------+-----------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | [SPN05]  | P (n=5)   | b=3 (t=1)            | Mismatch deficient breast cancer, with many subclones, sampled at one time-point with with three multi-region biopsies.                                                                                     |
 +----------+-----------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| [SPN06]  | P/R (n=6) | b=5 (t=3)            | Smoking-associated lung adenocardinoma with many subclones, treated with two lines of chemotherapy, both time relapsing with a de-novo clone, sampled at three time-points with five multi-region biopsies. |
+| [SPN06]  | P/R (n=7) | b=5 (t=3)            | Smoking-associated lung adenocardinoma with many subclones, treated with two lines of chemotherapy, both time relapsing with a de-novo clone, sampled at three time-points with five multi-region biopsies. |
 +----------+-----------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | [SPN07]  | P/R (n=6) | b=5 (t=2)            | Glioblastoma with many subclones, treated with a line of chemotherapy, relapsing with a hypermutant clone, sampled at three time-points with five multi-region biopsies.                                    |
 +----------+-----------+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -65,7 +64,7 @@ With a total of ~20 TB of data, SCOUT samples can be used to benchmark pretty mu
   <img src="img/SCOUT/spn01.png" alt="SPN01" width="350"/>
 </div>
 
-SPN01 is a prototype micro-satellite stable (MSS) colorectal cancer composed of 4 clones, with one dominant clone at sampling. The dominant clone harbours a full inactivation of the APC gene by point mutation and concurrent loss of heterozygosity (LOH) of the wildtype allele, together with two activating mutations in the KRAS and PIK3CA oncogenes.
+SPN01 is a prototype micro-satellite stable (MSS) colorectal cancer composed of 4 clones, with one dominant clone at sampling. The dominant clone harbours a full inactivation of the APC gene by point mutation and concurrent loss of heterozygosity (LOH) of the wildtype allele, together with two activating mutations in the TP53 tumour suppressor gene and PIK3CA oncogene.
 
 SPN01 is profiled by multi-region with 3 samples collected at the same time-point.
 
@@ -75,7 +74,7 @@ SPN01 is profiled by multi-region with 3 samples collected at the same time-poin
   <img src="img/SCOUT/spn02.png" alt="SPN01" width="350"/>
 </div>
 
-SPN02 is a prototype micro-satellite instable (MSI) colorectal cancer composed of 3 clones, with one dominant clone at sampling. The dominant clone harbours a mutant BRAF, PIK3CA and MSH6. The MSH6 mutation makes the tumour hypermutant, enabling a specific mutational signature.
+SPN02 is a prototype micro-satellite instable (MSI) colorectal cancer composed of 3 clones, with one dominant clone at sampling. The dominant clone harbours a mutant BRAF, PIK3CA and POLE. The POLE mutation makes the tumour hypermutant, enabling a specific mutational signatures.
 
 SPN02 is profiled by multi-region with 2 samples collected at the same time-point.
 
@@ -85,46 +84,46 @@ SPN02 is profiled by multi-region with 2 samples collected at the same time-poin
   <img src="img/SCOUT/spn03.png" alt="SPN01" width="350"/>
 </div>
 
-SPN03 is a prototype chronic lymphocitic leukemia composed of 3 clones, with eventually one largely dominant but one still expanding. The largest clone harbours activating mutations in NOTCH1 and KRAS, and the last expanding subclone is not linked to any specific genetic mutation or copy number driver event.
+SPN03 is a prototype chronic lymphocitic leukemia composed of 3 clones, with eventually one largely dominant but one still expanding. The largest clone harbours activating mutations in NOTCH1 and TP53 and deletion of q-arm of chromosome 13, and the last expanding subclone is linked to MAP2K1 mutation.
 
 SPN03 is profiled in a watch-and-wait scenario (an active survaillance scenario in which the patient is observed untill white blood counts exceed a predefined threshould), acquiring one sample at each of 4 time-points, with distinct clonal compositions reflecting the ongoing dynamics.
 
 ## SPN04
 
 <div align="center">
-  <img src="img/SCOUT/spn04.png" alt="SPN01" width="350"/>
+  <img src="img/SCOUT/spn04.png" alt="SPN01" width="400"/>
 </div>
 
-SPN02 is a prototype acute myeloyd leukemia composed of 3 clones, with one becoming dominant at every sampling. The dominant clone harbours a mutant IDH1, a copy number gain of KRAS and a mutant NRAS.
+SPN04 is a prototype acute myeloyd leukemia composed of 3 clones, with one becoming dominant at every sampling. The dominant clone harbours a mutant IDH1, a copy number gain of MYC and a mutant NRAS.
 
-SPN01 is profiled before and after platinum-based chemotherapy, relapsing with the same clone presented before treatment. Chemotherapy generates a mutational signature specific during its exposure.
+SPN04 is profiled before and after chemotherapy, relapsing with the same clone presented before treatment. Chemotherapy generates a mutational signature specific during its exposure.
 
 ## SPN05
 
 <div align="center">
-  <img src="img/SCOUT/spn05.png" alt="SPN01" width="350"/>
+  <img src="img/SCOUT/spn05.png" alt="SPN01" width="450"/>
 </div>
 
-SPN05 is a prototype mismatch-repair deficient breast cancer composed of 5 clones, with three detectable at sampling. The ancestral clone harbours a mutant TP53, and a full BRCA2 inactivation by joint mutation and LOH (also linked to a specific mutational signature). The two expanding subclones are both associated with copy numbers: one has ongoing TP53 LOH, the other CDKN2A LOH.
+SPN05 is a prototype mismatch-repair deficient breast cancer composed of 5 clones, with three detectable at sampling. The ancestral clone harbours a mutant TP53, and a full BRCA2 inactivation by joint mutation and LOH (also linked to a specific mutational signature) after which the tumour becomes hypermutant. The two expanding subclones are both associated with copy numbers: one has ongoing TP53 LOH, the other CDKN2A LOH.
 
 SPN05 is profiled at a single time-point with three biopsies, reflecting the distinct tumour composition in terms of clones distribution.
 
 ## SPN06
 
 <div align="center">
-  <img src="img/SCOUT/spn06.png" alt="SPN01" width="350"/>
+  <img src="img/SCOUT/spn06.png" alt="SPN01" width="500"/>
 </div>
 
-SPN06 is a prototype smoking-associated lung adenocarcinoma, with 6 clones that compete over time during two lines of treatment. The main clonal population is driven by mutant TP53 and STK11, but manifests two subclones: one associated with an EGFR amplification, and one by a KEAP1 mutation. Upon chemo-immunotherapy (which leaves a mutational signature), a KRAS-driven subclone drives relapse, whereas the two other subclones are eradicated by treatment. Upon a second line of chemotherapy (which does not leave a mutational signature), resistance is driven by an aquired amplification of the mutant KRAS allele.
+SPN06 is a prototype smoking-associated lung adenocarcinoma, with 7 clones that compete over time during two lines of treatment. The main clonal population is driven by mutant TP53 and STK11 LOH, but manifests two subclones: one associated with an EGFR amplification, and one by a KEAP1 mutation. Upon chemo-immunotherapy (which leaves a mutational signature), a KRAS-driven subclone drives relapse, whereas the two other subclones are eradicated by treatment. Upon a second line of chemotherapy (which does not leave a mutational signature), resistance is driven by an aquired amplification of the mutant KRAS allele and the last clone by WGD.
 
-SPN06 is profiled at a three time-points, before treatment and at relapse of each treatment. The two diagnostic biopsies are polyclonal, whereas relapse biopsies are monoclonal.
+SPN06 is profiled at a three time-points, before treatment and at relapse of each treatment. The two diagnostic biopsies are polyclonal, whereas relapse biopsies are monoclonal and polyclonal.
 
 ## SPN07
 
 <div align="center">
-  <img src="img/SCOUT/spn07.png" alt="SPN01" width="350"/>
+  <img src="img/SCOUT/spn07.png" alt="SPN01" width="500"/>
 </div>
 
 SPN07 is a prototype glioblastoma with 6 clones that compete over time during a single line of treatment. The main clonal population is driven by inactivated PTEN (mutation and LOH), but manifests two subclones: one associated with an ATRX1  mutation, and one by a NF1 mutation. Upon chemotherapy by timolozomide (which causes an MSH6 mutation and microsatellite instability), resistance is achieved by a hypermutant subclone. Within the relapse clone, an extra subclone emerges due to a TP53 mutation.
 
-SPN07 is profiled at a two time-points, before treatment and at relapse of each treatment. The three diagnostic and two relapse biopsies are polyclonal.
+SPN07 is profiled at a two time-points, before treatment and at relapse of each treatment. The three diagnostic and two relapse biopsies are polyclonal and monoclonal.

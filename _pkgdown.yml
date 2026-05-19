@@ -2,3 +2,68 @@ url: https://caravagnalab.github.io/SCOUT/
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left:  [intro, articles, reference]
+    right: [search, github]
+  components:
+    articles:
+      text: Articles
+      menu:
+        - text: The SCOUT cohort
+          href: articles/scout_cohort.html
+        - text: "---"
+        - text: Data download
+        - text: Getting started
+          href: articles/getting_started.html
+        - text: Google Sheets
+          href: articles/google_sheets.html
+        - text: Zenodo
+          href: articles/zenodo.html
+
+articles:
+  - title: The SCOUT cohort
+    contents:
+      - scout_cohort
+  - title: Data download
+    contents:
+      - getting_started
+      - google_sheets
+      - zenodo
+
+reference:
+  - title: Google Sheets
+    desc: Functions to read cohort tables from Google Sheets.
+    contents:
+      - get_metadata
+      - get_ground_truth_cna
+      - get_ground_truth_drivers
+      - get_ground_truth_exposures
+      - get_sampling_information
+      - read_sheet
+  - title: Zenodo — download
+    desc: Functions to download and cache per-SPN archives from Zenodo.
+    contents:
+      - get_ground_truth
+      - get_sarek_results
+      - get_tumourevo_results
+      - list_zenodo_files
+  - title: Ground truth getters
+    desc: Access simulation ground truth data (mutations, CNA, forests).
+    contents:
+      - get_mutations
+      - get_sample_names
+      - get_gender
+      - get_tumour_type
+  - title: Sarek getters
+    desc: Access Sarek pipeline results (VCF and CNA files).
+    contents:
+      - get_sarek_vcf
+      - get_sarek_cna
+  - title: tumourevo getters
+    desc: Access tumourevo pipeline results by tool and analysis type.
+    contents:
+      - get_tumourevo_driver
+      - get_tumourevo_subclonal
+      - get_tumourevo_qc
+      - get_tumourevo_signatures
