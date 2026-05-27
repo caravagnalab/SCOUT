@@ -4,14 +4,22 @@
 \alias{get_tumourevo_qc}
 \title{Get tumourevo QC result paths}
 \usage{
-get_tumourevo_qc(spn, coverage, purity, vcf_caller, cna_caller, tool, sample)
+get_tumourevo_qc(
+  spn,
+  coverage,
+  purity,
+  vcf_caller,
+  cna_caller,
+  tool,
+  sample = NULL
+)
 }
 \arguments{
 \item{spn}{SPN identifier.}
 
 \item{coverage}{Sequencing coverage (integer).}
 
-\item{purity}{Sample purity (0–1).}
+\item{purity}{Sample purity: \code{0.9}, \code{0.6}, or \code{0.3}.}
 
 \item{vcf_caller}{VCF caller: \code{"mutect2"} or \code{"strelka"}.}
 
@@ -19,7 +27,7 @@ get_tumourevo_qc(spn, coverage, purity, vcf_caller, cna_caller, tool, sample)
 
 \item{tool}{QC tool: \code{"cnaqc"}, \code{"join_cnaqc"}, or \code{"tinc"}.}
 
-\item{sample}{Sample name.}
+\item{sample}{Sample name. Required for \code{"cnaqc"} and \code{"tinc"}.}
 }
 \value{
 Named list of file paths.
@@ -29,6 +37,7 @@ Get tumourevo QC result paths
 }
 \examples{
 \dontrun{
-get_tumourevo_qc("SPN01", 100, 0.9, "mutect2", "ascat", "cnaqc", "SPN01_1")
+get_tumourevo_qc("SPN04", 50, 0.6, "mutect2", "sequenza", "cnaqc", "SPN04_1.1")
+get_tumourevo_qc("SPN04", 50, 0.6, "mutect2", "sequenza", "join_cnaqc")
 }
 }

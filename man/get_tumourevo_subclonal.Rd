@@ -11,7 +11,7 @@ get_tumourevo_subclonal(
   vcf_caller,
   cna_caller,
   tool,
-  sample
+  sample = NULL
 )
 }
 \arguments{
@@ -19,16 +19,16 @@ get_tumourevo_subclonal(
 
 \item{coverage}{Sequencing coverage (integer).}
 
-\item{purity}{Sample purity (0–1).}
+\item{purity}{Sample purity: \code{0.9}, \code{0.6}, or \code{0.3}.}
 
 \item{vcf_caller}{VCF caller: \code{"mutect2"} or \code{"strelka"}.}
 
 \item{cna_caller}{CNA caller: \code{"ascat"} or \code{"sequenza"}.}
 
-\item{tool}{Deconvolution tool: \code{"mobster"}, \code{"pyclonevi"}, \code{"ctree"},
-or \code{"viber"}.}
+\item{tool}{Tool: \code{"mobster"}, \code{"pyclonevi"}, \code{"ctree"}, or \code{"viber"}.}
 
-\item{sample}{Sample name.}
+\item{sample}{Sample name. Required for \code{"mobster"} and per-sample
+\code{"ctree"} results.}
 }
 \value{
 Named list of file paths.
@@ -38,6 +38,8 @@ Get tumourevo subclonal deconvolution result paths
 }
 \examples{
 \dontrun{
-get_tumourevo_subclonal("SPN01", 100, 0.9, "mutect2", "ascat", "mobster", "SPN01_1")
+get_tumourevo_subclonal("SPN04", 50, 0.6, "mutect2", "sequenza",
+                         "mobster", "SPN04_1.1")
+get_tumourevo_subclonal("SPN04", 50, 0.6, "mutect2", "sequenza", "viber")
 }
 }

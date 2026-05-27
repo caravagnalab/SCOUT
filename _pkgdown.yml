@@ -16,7 +16,7 @@ navbar:
         - text: Data download
         - text: Getting started
           href: articles/getting_started.html
-        - text: Google Sheets
+        - text: Tables
           href: articles/google_sheets.html
         - text: Zenodo
           href: articles/zenodo.html
@@ -32,29 +32,30 @@ articles:
       - zenodo
 
 reference:
-  - title: Google Sheets
-    desc: Functions to read cohort tables from Google Sheets.
+  - title: Tables
+    desc: Functions to read cohort annotation tables.
     contents:
       - get_metadata
       - get_ground_truth_cna
       - get_ground_truth_drivers
       - get_ground_truth_exposures
       - get_sampling_information
+      - get_sample_names
+      - get_tumour_type
+      - get_gender
       - read_sheet
   - title: Zenodo — download
     desc: Functions to download and cache per-SPN archives from Zenodo.
     contents:
-      - get_ground_truth
+      - get_sequencing_data
+      - get_normal_data
       - get_sarek_results
       - get_tumourevo_results
       - list_zenodo_files
   - title: Ground truth getters
-    desc: Access simulation ground truth data (mutations, CNA, forests).
+    desc: Access sequencing ground truth mutation data.
     contents:
       - get_mutations
-      - get_sample_names
-      - get_gender
-      - get_tumour_type
   - title: Sarek getters
     desc: Access Sarek pipeline results (VCF and CNA files).
     contents:
@@ -63,6 +64,10 @@ reference:
   - title: tumourevo getters
     desc: Access tumourevo pipeline results by tool and analysis type.
     contents:
+      - get_tumourevo_snv
+      - get_tumourevo_cna
+      - get_tumourevo_joint_table
+      - get_tumourevo_vep
       - get_tumourevo_driver
       - get_tumourevo_subclonal
       - get_tumourevo_qc

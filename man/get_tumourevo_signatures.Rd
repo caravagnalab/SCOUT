@@ -19,17 +19,17 @@ get_tumourevo_signatures(
 
 \item{coverage}{Sequencing coverage (integer).}
 
-\item{purity}{Sample purity (0–1).}
+\item{purity}{Sample purity: \code{0.9}, \code{0.6}, or \code{0.3}.}
 
 \item{vcf_caller}{VCF caller: \code{"mutect2"} or \code{"strelka"}.}
 
 \item{cna_caller}{CNA caller: \code{"ascat"} or \code{"sequenza"}.}
 
-\item{tool}{Signature tool: \code{"sigprofiler"}, \code{"sparsesignatures"}, or
+\item{tool}{Tool: \code{"sigprofiler"}, \code{"sparsesignatures"}, or
 \code{"BASCULE"}.}
 
-\item{context}{Mutational context, e.g. \code{"SBS96"} or \code{"ID83"}. Required
-for \code{tool = "sigprofiler"}.}
+\item{context}{Mutational context, e.g. \code{"SBS96"}, \code{"ID83"}, \code{"DBS78"}.
+Required for \code{tool = "sigprofiler"}.}
 }
 \value{
 Named list of file paths.
@@ -39,7 +39,8 @@ Get tumourevo signature deconvolution result paths
 }
 \examples{
 \dontrun{
-get_tumourevo_signatures("SPN01", 100, 0.9, "mutect2", "ascat", "BASCULE")
-get_tumourevo_signatures("SPN01", 100, 0.9, "mutect2", "ascat", "sigprofiler", "SBS96")
+get_tumourevo_signatures("SPN04", 50, 0.6, "mutect2", "sequenza", "BASCULE")
+get_tumourevo_signatures("SPN04", 50, 0.6, "mutect2", "sequenza",
+                          "sigprofiler", context = "SBS96")
 }
 }

@@ -21,7 +21,7 @@ get_sarek_vcf(
 
 \item{coverage}{Sequencing coverage (integer, e.g. \code{100}).}
 
-\item{purity}{Sample purity (0–1, e.g. \code{0.9}).}
+\item{purity}{Sample purity: \code{0.9}, \code{0.6}, or \code{0.3}.}
 
 \item{caller}{VCF caller: \code{"mutect2"}, \code{"strelka"}, \code{"freebayes"},
 or \code{"haplotypecaller"}.}

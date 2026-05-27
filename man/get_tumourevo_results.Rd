@@ -6,28 +6,30 @@
 \usage{
 get_tumourevo_results(
   spn,
-  record_id = .scout_record_id(spn),
-  cache_dir = .scout_cache_dir(spn)
+  purity,
+  record_id = .scout_record_id(spn, purity, type = "tumourevo"),
+  cache_dir = .scout_cache_dir(spn, purity)
 )
 }
 \arguments{
 \item{spn}{SPN identifier, e.g. \code{"SPN01"}.}
 
-\item{record_id}{Zenodo record ID for this SPN.}
+\item{purity}{Sample purity: \code{0.9}, \code{0.6}, or \code{0.3}.}
 
-\item{cache_dir}{Local directory to cache downloaded files.
-Defaults to \verb{~/.cache/SCOUT/<spn>/}.}
+\item{record_id}{Zenodo record ID. Defaults to the registered record for
+this SPN and purity.}
+
+\item{cache_dir}{Local directory to cache downloaded files.}
 }
 \value{
 Invisible path to the directory containing the tumourevo results.
 }
 \description{
-Downloads and unzips the tumourevo archive from the SPN's Zenodo record
+Downloads and extracts the tumourevo archive for a given SPN and purity
 (if not already cached) and returns the path to the extracted directory.
 }
 \examples{
 \dontrun{
-path <- get_tumourevo_results("SPN01", record_id = "1234567")
-list.files(path)
+path <- get_tumourevo_results("SPN01", purity = 0.9)
 }
 }

@@ -20,7 +20,7 @@ get_sarek_cna(
 
 \item{coverage}{Sequencing coverage (integer).}
 
-\item{purity}{Sample purity (0–1).}
+\item{purity}{Sample purity: \code{0.9}, \code{0.6}, or \code{0.3}.}
 
 \item{caller}{CNA caller: \code{"ascat"}, \code{"sequenza"}, or \code{"cnvkit"}.}
 

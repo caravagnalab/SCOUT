@@ -2,9 +2,16 @@
 # All functions resolve paths inside the cached ground_truth/ directory.
 # The sarek/ directory mirrors the same base_path structure used by ProCESS.
 
-.gt_base <- function(spn) {
-  file.path(.scout_cache_dir(spn), "ground_truth")
+# Sequencing data extracts to: <cache>/<spn>/sequencing/sequencing/
+.gt_seq_base <- function(spn) {
+  file.path(.scout_cache_dir(spn), "sequencing", "sequencing")
 }
+
+# Normal data extracts to: <cache>/<spn>/normal/<spn>_normal/
+.gt_normal_base <- function(spn) {
+  file.path(.scout_cache_dir(spn), "normal", paste0(spn, "_normal"))
+}
+
 
 #' Get mutations from SCOUT ground truth
 #'
@@ -28,19 +35,18 @@
 #' }
 get_mutations <- function(spn, type, coverage = NA, purity = NA) {
   if (is.na(type)) stop("type is required: 'tumour' or 'normal'", call. = FALSE)
-  base_path <- .gt_base(spn)
 
   if (type == "tumour") {
     if (is.na(coverage))
       stop("coverage is required for type = 'tumour'", call. = FALSE)
     if (is.na(purity))
       stop("purity is required for type = 'tumour'", call. = FALSE)
-    path <- file.path(base_path, spn,
-                      paste0("sequencing/tumour/purity_", purity),
+    path <- file.path(.gt_seq_base(spn),
+                      paste0("tumour/purity_", purity),
                       paste0("data/mutations/seq_results_muts_merged_coverage_",
                              coverage, "x.rds"))
   } else {
-    path <- file.path(base_path, spn,
+    path <- file.path(.gt_normal_base(spn),
                       "sequencing/normal/purity_1/data/mutations",
                       "seq_results_muts_merged_coverage_30x.rds")
   }
