@@ -6,40 +6,41 @@
 \usage{
 get_sarek_vcf(
   spn,
-  sample_id,
+  sample,
   coverage,
   purity,
   caller,
-  type,
   normal_id = "normal_sample"
 )
 }
 \arguments{
-\item{spn}{SPN identifier, e.g. \code{"SPN01"}.}
+\item{spn}{SPN identifier, e.g. \code{"SPN04"}.}
 
-\item{sample_id}{Sample identifier.}
+\item{sample}{Sample identifier, e.g. \code{"SPN04_1.1"}. Not required for
+\code{"mutect2"} (SPN-level) or normal-only callers.}
 
 \item{coverage}{Sequencing coverage (integer, e.g. \code{100}).}
 
 \item{purity}{Sample purity: \code{0.9}, \code{0.6}, or \code{0.3}.}
 
-\item{caller}{VCF caller: \code{"mutect2"}, \code{"strelka"}, \code{"freebayes"},
-or \code{"haplotypecaller"}.}
-
-\item{type}{Sample type: \code{"tumour"} or \code{"normal"}.}
+\item{caller}{VCF caller: \code{"mutect2"}, \code{"strelka"}, \code{"freebayes"}, or
+\code{"haplotypecaller"}.}
 
 \item{normal_id}{Normal sample ID. Defaults to \code{"normal_sample"}.}
 }
 \value{
-Named list of file paths (keys depend on caller, e.g. \code{vcf}, \code{tbi},
-\code{snvs_vcf}, etc.).
+Named list of file paths.
 }
 \description{
 Returns a named list of VCF (and index) file paths from the Sarek variant
 calling results for a given sample, coverage, purity and caller.
+Supported callers: \code{"mutect2"}, \code{"strelka"}, \code{"freebayes"},
+\code{"haplotypecaller"}.
 }
 \examples{
 \dontrun{
-get_sarek_vcf("SPN01", "SPN01_1", 100, 0.9, "mutect2", "tumour")
+get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.3, "mutect2")
+get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.3, "strelka")
+get_sarek_vcf("SPN04", NULL, 100, 0.3, "haplotypecaller")
 }
 }

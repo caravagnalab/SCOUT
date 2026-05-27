@@ -1,80 +1,82 @@
 # ── Sarek getters ─────────────────────────────────────────────────────────────
+# Archive structure after extraction:
+#   <cache>/<spn>/purity_<p>/sarek/<spn>/sarek/<cov>x_<p>p/variant_calling/
+#                                                            <caller>/
+#                                                            <sample>_vs_normal_sample/
 
 .sarek_base <- function(spn, purity) {
-  file.path(.scout_cache_dir(spn, purity), "sarek")
+  file.path(.scout_cache_dir(spn, purity), "sarek", spn, "sarek")
 }
 
-.sarek_variant_files <- function(spn, sample_id, coverage, purity,
-                                  variant_caller, type,
-                                  normal_id = "normal_sample") {
-  accepted_callers <- c("mutect2", "strelka", "ascat", "freebayes",
-                        "haplotypecaller", "cnvkit", "sequenza")
+.sarek_dir <- function(spn, coverage, purity) {
+  file.path(.sarek_base(spn, purity),
+            paste0(coverage, "x_", purity, "p"),
+            "variant_calling")
+}
 
-  if (!is.null(type) && !(type %in% c("tumour", "normal")))
-    stop("'type' must be 'tumour' or 'normal'", call. = FALSE)
-  if (!(variant_caller %in% accepted_callers))
-    stop("'variant_caller' not supported: ", variant_caller, call. = FALSE)
+# Sample directory name: e.g. "SPN04_1.1_vs_normal_sample"
+.sarek_sample_dir <- function(sample, normal_id = "normal_sample") {
+  paste0(sample, "_vs_", normal_id)
+}
 
-  cov_purity <- paste0(coverage, "x_", purity, "p")
-  base_path  <- .sarek_base(spn, purity)
-
-  if (is.null(type) || type == "tumour") {
-    sample_naming <- if (variant_caller == "mutect2") spn
-                     else paste0(sample_id, "_vs_", normal_id)
-    path <- file.path(base_path, spn, "sarek", cov_purity,
-                      "variant_calling", variant_caller, sample_naming)
+.sarek_caller_path <- function(spn, coverage, purity, caller, sample,
+                                normal_id) {
+  base <- .sarek_dir(spn, coverage, purity)
+  if (caller == "mutect2") {
+    # mutect2 uses SPN-level directory
+    file.path(base, "mutect2", spn)
+  } else if (caller %in% c("haplotypecaller", "freebayes", "strelka") &&
+             is.null(sample)) {
+    # normal-only callers
+    file.path(base, caller, normal_id)
   } else {
-    if (variant_caller == "mutect2")
-      stop("No normal files associated with caller: mutect2", call. = FALSE)
-    path <- file.path(base_path, spn, "sarek", cov_purity,
-                      "variant_calling", variant_caller, normal_id)
+    file.path(base, caller, .sarek_sample_dir(sample, normal_id))
   }
-
-  list.files(path, full.names = TRUE)
 }
 
-.sarek_parse_files <- function(files) {
+.sarek_list_files <- function(path) {
+  list.files(path, full.names = TRUE, recursive = FALSE)
+}
+
+.sarek_parse_files <- function(files, caller) {
   if (length(files) == 0) return(list())
-  first <- files[[1]]
   named <- list()
 
-  if (grepl("mutect2", first, fixed = TRUE)) {
+  if (caller == "mutect2") {
     for (f in files) {
-      if (endsWith(f, "filtered.vcf.gz"))
+      if (endsWith(f, "filtered.vcf.gz") && !grepl("filteringStats", f))
         named[["vcf"]] <- f
       else if (endsWith(f, "filtered.vcf.gz.tbi"))
         named[["tbi"]] <- f
+      else if (endsWith(f, "filteringStats.tsv"))
+        named[["filteringStats"]] <- f
     }
-  } else if (grepl("strelka", first, fixed = TRUE)) {
+  } else if (caller == "strelka") {
     for (f in files) {
-      if (endsWith(f, "snvs.vcf.gz"))
-        named[["snvs_vcf"]] <- f
-      else if (endsWith(f, "snvs.vcf.gz.tbi"))
-        named[["snvs_tbi"]] <- f
-      else if (endsWith(f, "indels.vcf.gz"))
-        named[["indels_vcf"]] <- f
-      else if (endsWith(f, "indels.vcf.gz.tbi"))
-        named[["indels_tbi"]] <- f
+      if (endsWith(f, "somatic.vcf.gz"))
+        named[["vcf"]] <- f
+      else if (endsWith(f, "somatic.vcf.gz.tbi"))
+        named[["tbi"]] <- f
+      else if (endsWith(f, "genome.vcf.gz"))
+        named[["genome_vcf"]] <- f
       else if (endsWith(f, "variants.vcf.gz"))
         named[["variants_vcf"]] <- f
-      else if (endsWith(f, "variants.vcf.gz.tbi"))
-        named[["variants_tbi"]] <- f
     }
-  } else if (grepl("freebayes", first, fixed = TRUE)) {
+  } else if (caller == "freebayes") {
     for (f in files) {
       if (endsWith(f, "freebayes.vcf.gz"))
         named[["vcf"]] <- f
       else if (endsWith(f, "freebayes.vcf.gz.tbi"))
         named[["tbi"]] <- f
     }
-  } else if (grepl("haplotypecaller", first, fixed = TRUE)) {
+  } else if (caller == "haplotypecaller") {
     for (f in files) {
-      if (endsWith(f, "haplotypecaller.filtered.vcf.gz"))
+      if (endsWith(f, "filtered.vcf.gz"))
         named[["vcf"]] <- f
-      else if (endsWith(f, "haplotypecaller.filtered.vcf.gz.tbi"))
+      else if (endsWith(f, "filtered.vcf.gz.tbi"))
         named[["tbi"]] <- f
     }
-  } else if (grepl("ascat", first, fixed = TRUE)) {
+  } else if (caller == "ascat") {
     for (f in files) {
       if (endsWith(f, "purityploidy.txt"))
         named[["purityploidy"]] <- f
@@ -82,29 +84,42 @@
         named[["segments"]] <- f
       else if (endsWith(f, "cnvs.txt"))
         named[["cnvs"]] <- f
-      else if (endsWith(f, "tumourBAF.txt"))
+      else if (endsWith(f, "tumour_tumourBAF.txt"))
         named[["tumourBAF"]] <- f
-      else if (endsWith(f, "tumourLogR.txt"))
+      else if (endsWith(f, "tumour_tumourLogR.txt"))
         named[["tumourLogR"]] <- f
+      else if (endsWith(f, "metrics.txt"))
+        named[["metrics"]] <- f
     }
-  } else if (grepl("cnvkit", first, fixed = TRUE)) {
+  } else if (caller == "battenberg") {
     for (f in files) {
-      if (endsWith(f, "somatic.call.cns"))
-        named[["somatic.call"]] <- f
-      else if (endsWith(f, ".cnr"))
-        named[["cnr"]] <- f
+      if (endsWith(f, "_subclones.txt"))
+        named[["subclones"]] <- f
+      else if (endsWith(f, "_rho_and_psi.txt"))
+        named[["rho_and_psi"]] <- f
+      else if (endsWith(f, ".BAFsegmented.txt"))
+        named[["BAFsegmented"]] <- f
+      else if (endsWith(f, ".logRsegmented.txt"))
+        named[["logRsegmented"]] <- f
+      else if (endsWith(f, "_GCwindowCorrelations_afterCorrection.txt"))
+        named[["GCwindow"]] <- f
     }
-  } else if (grepl("sequenza", first, fixed = TRUE)) {
+  } else if (caller == "sequenza") {
     for (f in files) {
-      if (endsWith(f, "segments.txt"))
+      if (endsWith(f, "_segments.txt"))
         named[["segments"]] <- f
-      else if (endsWith(f, "confints_CP.txt"))
+      else if (endsWith(f, "_confints_CP.txt"))
         named[["confints_CP"]] <- f
-      else if (endsWith(f, "mutations.txt"))
+      else if (endsWith(f, "_mutations.txt"))
         named[["mutations"]] <- f
+      else if (endsWith(f, "_alternative_solutions.txt"))
+        named[["alternative_solutions"]] <- f
     }
-  } else {
-    stop("Unrecognised caller in file list", call. = FALSE)
+  } else if (caller == "cnvkit") {
+    for (f in files) {
+      if (endsWith(f, ".cns"))
+        named[["cns"]] <- f
+    }
   }
   named
 }
@@ -113,56 +128,68 @@
 #'
 #' Returns a named list of VCF (and index) file paths from the Sarek variant
 #' calling results for a given sample, coverage, purity and caller.
+#' Supported callers: `"mutect2"`, `"strelka"`, `"freebayes"`,
+#' `"haplotypecaller"`.
 #'
-#' @param spn        SPN identifier, e.g. `"SPN01"`.
-#' @param sample_id  Sample identifier.
+#' @param spn        SPN identifier, e.g. `"SPN04"`.
+#' @param sample     Sample identifier, e.g. `"SPN04_1.1"`. Not required for
+#'   `"mutect2"` (SPN-level) or normal-only callers.
 #' @param coverage   Sequencing coverage (integer, e.g. `100`).
 #' @param purity     Sample purity: `0.9`, `0.6`, or `0.3`.
-#' @param caller     VCF caller: `"mutect2"`, `"strelka"`, `"freebayes"`,
-#'   or `"haplotypecaller"`.
-#' @param type       Sample type: `"tumour"` or `"normal"`.
+#' @param caller     VCF caller: `"mutect2"`, `"strelka"`, `"freebayes"`, or
+#'   `"haplotypecaller"`.
 #' @param normal_id  Normal sample ID. Defaults to `"normal_sample"`.
 #'
-#' @return Named list of file paths (keys depend on caller, e.g. `vcf`, `tbi`,
-#'   `snvs_vcf`, etc.).
+#' @return Named list of file paths.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' get_sarek_vcf("SPN01", "SPN01_1", 100, 0.9, "mutect2", "tumour")
+#' get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.3, "mutect2")
+#' get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.3, "strelka")
+#' get_sarek_vcf("SPN04", NULL, 100, 0.3, "haplotypecaller")
 #' }
-get_sarek_vcf <- function(spn, sample_id, coverage, purity, caller, type,
+get_sarek_vcf <- function(spn, sample, coverage, purity, caller,
                            normal_id = "normal_sample") {
-  .sarek_parse_files(
-    .sarek_variant_files(spn, sample_id, coverage, purity,
-                         caller, type, normal_id)
-  )
+  vcf_callers <- c("mutect2", "strelka", "freebayes", "haplotypecaller")
+  if (!(caller %in% vcf_callers))
+    stop("'caller' must be one of: ", paste(vcf_callers, collapse = ", "),
+         call. = FALSE)
+  path  <- .sarek_caller_path(spn, coverage, purity, caller, sample, normal_id)
+  files <- .sarek_list_files(path)
+  .sarek_parse_files(files, caller)
 }
 
 #' Get Sarek CNA output files for a SCOUT SPN
 #'
 #' Returns a named list of CNA file paths from the Sarek copy-number calling
-#' results for a given sample, coverage, purity and caller.
+#' results. Supported callers: `"ascat"`, `"battenberg"`, `"sequenza"`,
+#' `"cnvkit"`.
 #'
-#' @param spn       SPN identifier, e.g. `"SPN01"`.
-#' @param sample_id Sample identifier.
-#' @param coverage  Sequencing coverage (integer).
-#' @param purity    Sample purity: `0.9`, `0.6`, or `0.3`.
-#' @param caller    CNA caller: `"ascat"`, `"sequenza"`, or `"cnvkit"`.
-#' @param normal_id Normal sample ID. Defaults to `"normal_sample"`.
+#' @param spn        SPN identifier, e.g. `"SPN04"`.
+#' @param sample     Sample identifier, e.g. `"SPN04_1.1"`.
+#' @param coverage   Sequencing coverage (integer).
+#' @param purity     Sample purity: `0.9`, `0.6`, or `0.3`.
+#' @param caller     CNA caller: `"ascat"`, `"battenberg"`, `"sequenza"`, or
+#'   `"cnvkit"`.
+#' @param normal_id  Normal sample ID. Defaults to `"normal_sample"`.
 #'
-#' @return Named list of file paths (keys depend on caller, e.g. `segments`,
-#'   `purityploidy`, `cnvs`, etc.).
+#' @return Named list of file paths (keys depend on caller).
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' get_sarek_cna("SPN01", "SPN01_1", 100, 0.9, "ascat")
+#' get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "ascat")
+#' get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "battenberg")
+#' get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "sequenza")
 #' }
-get_sarek_cna <- function(spn, sample_id, coverage, purity, caller,
+get_sarek_cna <- function(spn, sample, coverage, purity, caller,
                            normal_id = "normal_sample") {
-  .sarek_parse_files(
-    .sarek_variant_files(spn, sample_id, coverage, purity,
-                         caller, type = NULL, normal_id)
-  )
+  cna_callers <- c("ascat", "battenberg", "sequenza", "cnvkit")
+  if (!(caller %in% cna_callers))
+    stop("'caller' must be one of: ", paste(cna_callers, collapse = ", "),
+         call. = FALSE)
+  path  <- .sarek_caller_path(spn, coverage, purity, caller, sample, normal_id)
+  files <- .sarek_list_files(path)
+  .sarek_parse_files(files, caller)
 }

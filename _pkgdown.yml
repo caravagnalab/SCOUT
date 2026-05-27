@@ -57,7 +57,7 @@ reference:
     contents:
       - get_mutations
   - title: Sarek getters
-    desc: Access Sarek pipeline results (VCF and CNA files).
+    desc: "Access Sarek pipeline results. VCF callers: mutect2, strelka, freebayes, haplotypecaller. CNA callers: ascat, battenberg, sequenza, cnvkit."
     contents:
       - get_sarek_vcf
       - get_sarek_cna

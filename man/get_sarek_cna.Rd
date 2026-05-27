@@ -6,7 +6,7 @@
 \usage{
 get_sarek_cna(
   spn,
-  sample_id,
+  sample,
   coverage,
   purity,
   caller,
@@ -14,28 +14,31 @@ get_sarek_cna(
 )
 }
 \arguments{
-\item{spn}{SPN identifier, e.g. \code{"SPN01"}.}
+\item{spn}{SPN identifier, e.g. \code{"SPN04"}.}
 
-\item{sample_id}{Sample identifier.}
+\item{sample}{Sample identifier, e.g. \code{"SPN04_1.1"}.}
 
 \item{coverage}{Sequencing coverage (integer).}
 
 \item{purity}{Sample purity: \code{0.9}, \code{0.6}, or \code{0.3}.}
 
-\item{caller}{CNA caller: \code{"ascat"}, \code{"sequenza"}, or \code{"cnvkit"}.}
+\item{caller}{CNA caller: \code{"ascat"}, \code{"battenberg"}, \code{"sequenza"}, or
+\code{"cnvkit"}.}
 
 \item{normal_id}{Normal sample ID. Defaults to \code{"normal_sample"}.}
 }
 \value{
-Named list of file paths (keys depend on caller, e.g. \code{segments},
-\code{purityploidy}, \code{cnvs}, etc.).
+Named list of file paths (keys depend on caller).
 }
 \description{
 Returns a named list of CNA file paths from the Sarek copy-number calling
-results for a given sample, coverage, purity and caller.
+results. Supported callers: \code{"ascat"}, \code{"battenberg"}, \code{"sequenza"},
+\code{"cnvkit"}.
 }
 \examples{
 \dontrun{
-get_sarek_cna("SPN01", "SPN01_1", 100, 0.9, "ascat")
+get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "ascat")
+get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "battenberg")
+get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "sequenza")
 }
 }
