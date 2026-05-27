@@ -1,18 +1,11 @@
-# Get tumourevo driver annotation file paths
+# Get tumourevo formatted CNA (cna2cnaqc) file paths
 
-Get tumourevo driver annotation file paths
+Get tumourevo formatted CNA (cna2cnaqc) file paths
 
 ## Usage
 
 ``` r
-get_tumourevo_driver(
-  spn,
-  coverage,
-  purity,
-  vcf_caller,
-  cna_caller,
-  sample = NULL
-)
+get_tumourevo_cna(spn, coverage, purity, vcf_caller, cna_caller, sample = NULL)
 ```
 
 ## Arguments
@@ -43,12 +36,12 @@ get_tumourevo_driver(
 
 ## Value
 
-Named list of file paths to driver RDS files.
+Named list of file paths to CNA RDS files.
 
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-get_tumourevo_driver("SPN04", 50, 0.6, "mutect2", "sequenza", "SPN04_1.1")
+get_tumourevo_cna("SPN04", 50, 0.6, "mutect2", "sequenza", "SPN04_1.1")
 } # }
 ```

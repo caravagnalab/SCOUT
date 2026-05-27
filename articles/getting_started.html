@@ -41,7 +41,7 @@
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Data download</h6></li>
     <li><a class="dropdown-item" href="../articles/getting_started.html">Getting started</a></li>
-    <li><a class="dropdown-item" href="../articles/google_sheets.html">Google Sheets</a></li>
+    <li><a class="dropdown-item" href="../articles/google_sheets.html">Tables</a></li>
     <li><a class="dropdown-item" href="../articles/zenodo.html">Zenodo</a></li>
   </ul>
 </li>
@@ -88,8 +88,8 @@ and the package knows how to talk to both:</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><strong>Google Sheets</strong></td>
-<td>Cohort metadata, ground truth tables</td>
+<td><strong>Tables</strong></td>
+<td>Cohort metadata, ground truth annotation tables</td>
 <td>
 <code><a href="../reference/get_metadata.html">get_metadata()</a></code>, <code><a href="../reference/get_ground_truth_cna.html">get_ground_truth_cna()</a></code>,
 <code><a href="../reference/get_ground_truth_drivers.html">get_ground_truth_drivers()</a></code>,
@@ -99,9 +99,11 @@ and the package knows how to talk to both:</p>
 </tr>
 <tr class="even">
 <td><strong>Zenodo</strong></td>
-<td>Per-SPN archives (ground truth RDS, Sarek, tumourevo)</td>
+<td>Sequencing RDS files, normal and tumour sarek results, tumourevo
+results</td>
 <td>
-<code><a href="../reference/get_ground_truth.html">get_ground_truth()</a></code>, <code><a href="../reference/get_sarek_results.html">get_sarek_results()</a></code>,
+<code><a href="../reference/get_sequencing_data.html">get_sequencing_data()</a></code>, <code><a href="../reference/get_normal_data.html">get_normal_data()</a></code>,
+<code><a href="../reference/get_sarek_results.html">get_sarek_results()</a></code>,
 <code><a href="../reference/get_tumourevo_results.html">get_tumourevo_results()</a></code>
 </td>
 </tr>
@@ -113,17 +115,13 @@ and the package knows how to talk to both:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"caravagnalab/SCOUT"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caravagnalab.github.io/SCOUT/">SCOUT</a></span><span class="op">)</span></span></code></pre></div>
+<hr>
 </div>
 <div class="section level2">
-<h2 id="data-sources">Data sources<a class="anchor" aria-label="anchor" href="#data-sources"></a>
+<h2 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a>
 </h2>
-<div class="section level3">
-<h3 id="google-sheets">Google Sheets<a class="anchor" aria-label="anchor" href="#google-sheets"></a>
-</h3>
-<p>Cohort tables are published as public Google Sheets. All functions
-return tibbles directly — no authentication or extra packages
-required.</p>
-<p>The following tables are available:</p>
+<p>Cohort annotation tables are stored as public Google Sheets. All
+functions return tibbles directly — no authentication required.</p>
 <table class="table">
 <colgroup>
 <col width="50%">
@@ -170,107 +168,126 @@ required.</p>
 </tbody>
 </table>
 <p>All table functions accept optional <code>spn</code> and
-<code>sample</code> arguments to subset the results:</p>
+<code>sample</code> arguments:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_ground_truth_cna.html">get_ground_truth_cna</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_ground_truth_cna.html">get_ground_truth_cna</a></span><span class="op">(</span><span class="st">"SPN01"</span>, sample <span class="op">=</span> <span class="st">"1.1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_ground_truth_drivers.html">get_ground_truth_drivers</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_ground_truth_exposures.html">get_ground_truth_exposures</a></span><span class="op">(</span><span class="st">"SPN01"</span>, type <span class="op">=</span> <span class="st">"SBS"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/get_sampling_information.html">get_sampling_information</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span></code></pre></div>
-<p>Convenience lookups return a single value for a given SPN:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_sample_names.html">get_sample_names</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_sampling_information.html">get_sampling_information</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/get_sample_names.html">get_sample_names</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_tumour_type.html">get_tumour_type</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_gender.html">get_gender</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span></code></pre></div>
-<p>See the <strong>Google Sheets</strong> article for the full
-column-level reference.</p>
+<p>See the <strong>Tables</strong> article for the full column-level
+reference.</p>
+<hr>
 </div>
-<div class="section level3">
-<h3 id="zenodo">Zenodo<a class="anchor" aria-label="anchor" href="#zenodo"></a>
-</h3>
-<p>Each SPN has a dedicated Zenodo record containing three zip
-archives:</p>
+<div class="section level2">
+<h2 id="zenodo">Zenodo<a class="anchor" aria-label="anchor" href="#zenodo"></a>
+</h2>
+<p>Data on Zenodo are organised as follows:</p>
 <table class="table">
 <colgroup>
-<col width="33%">
-<col width="33%">
-<col width="33%">
+<col width="50%">
+<col width="50%">
 </colgroup>
 <thead><tr class="header">
-<th>Archive</th>
-<th>Contents</th>
-<th>Returned as</th>
+<th>Data type</th>
+<th>Record structure</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><code>ground_truth.zip</code></td>
-<td>Simulation ground truth (RDS files)</td>
-<td>Named list of R objects</td>
+<td>Sequencing ground truth</td>
+<td>One record per SPN — <code>SPN0X_sequencing.tar.gz</code>
+</td>
 </tr>
 <tr class="even">
-<td><code>sarek.zip</code></td>
-<td>Sarek pipeline outputs</td>
-<td>Local directory path</td>
+<td>Normal sarek outputs</td>
+<td>One shared record — <code>SPN0X_normal.tar.gz</code> per SPN</td>
 </tr>
 <tr class="odd">
-<td><code>tumourevo.zip</code></td>
-<td>tumourevo pipeline outputs</td>
-<td>Local directory path</td>
+<td>Sarek + tumourevo (SPN01–06)</td>
+<td>One record per SPN per purity (<code>0.9</code>, <code>0.6</code>,
+<code>0.3</code>)</td>
+</tr>
+<tr class="even">
+<td>SPN07 sarek</td>
+<td>One record per purity</td>
+</tr>
+<tr class="odd">
+<td>SPN07 tumourevo</td>
+<td>One record for purity 0.9 + 0.6, one for 0.3</td>
 </tr>
 </tbody>
 </table>
 <p>Files are downloaded once and cached at
-<code>~/.cache/SCOUT/&lt;spn&gt;/</code>. Repeat calls detect the cache
-and skip the download. Override the cache root with the
-<code>SCOUT_CACHE_DIR</code> environment variable (useful on HPC
-clusters):</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code>~/.cache/SCOUT/&lt;spn&gt;/</code>. Override the cache root with
+<code>SCOUT_CACHE_DIR</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>SCOUT_CACHE_DIR <span class="op">=</span> <span class="st">"/scratch/shared/SCOUT"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="download-functions">Download functions<a class="anchor" aria-label="anchor" href="#download-functions"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Tumour sequencing ground truth (all purities and coverages)</span></span>
+<span><span class="fu"><a href="../reference/get_sequencing_data.html">get_sequencing_data</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Normal sarek VCF outputs</span></span>
+<span><span class="fu"><a href="../reference/get_normal_data.html">get_normal_data</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Sarek and tumourevo pipeline results for a given purity</span></span>
+<span><span class="fu"><a href="../reference/get_sarek_results.html">get_sarek_results</a></span><span class="op">(</span><span class="st">"SPN04"</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_tumourevo_results.html">get_tumourevo_results</a></span><span class="op">(</span><span class="st">"SPN04"</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="getter-functions">Getter functions<a class="anchor" aria-label="anchor" href="#getter-functions"></a>
+</h3>
+<p>Once downloaded, dedicated getters resolve file paths without manual
+directory navigation:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gt</span>        <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth.html">get_ground_truth</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
-<span><span class="va">sarek_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_results.html">get_sarek_results</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
-<span><span class="va">te_dir</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_tumourevo_results.html">get_tumourevo_results</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span></code></pre></div>
-<p>Once downloaded, dedicated getter functions let you access specific
-results without manually navigating the directory structure:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Ground truth mutations</span></span>
-<span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations.html">get_mutations</a></span><span class="op">(</span><span class="st">"SPN01"</span>, type <span class="op">=</span> <span class="st">"tumour"</span>, coverage <span class="op">=</span> <span class="fl">100</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_mutations.html">get_mutations</a></span><span class="op">(</span><span class="st">"SPN04"</span>, type <span class="op">=</span> <span class="st">"tumour"</span>, coverage <span class="op">=</span> <span class="fl">100</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_mutations.html">get_mutations</a></span><span class="op">(</span><span class="st">"SPN04"</span>, type <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Sarek variant calls</span></span>
-<span><span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="st">"SPN01_1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"tumour"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/get_sarek_cna.html">get_sarek_cna</a></span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="st">"SPN01_1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"ascat"</span><span class="op">)</span></span>
+<span><span class="co"># Sarek VCF and CNA files</span></span>
+<span><span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"tumour"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_sarek_cna.html">get_sarek_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"ascat"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># tumourevo results</span></span>
-<span><span class="fu"><a href="../reference/get_tumourevo_driver.html">get_tumourevo_driver</a></span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"ascat"</span>, <span class="st">"SPN01_1"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/get_tumourevo_subclonal.html">get_tumourevo_subclonal</a></span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"ascat"</span>, <span class="st">"mobster"</span>, <span class="st">"SPN01_1"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/get_tumourevo_qc.html">get_tumourevo_qc</a></span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"ascat"</span>, <span class="st">"cnaqc"</span>, <span class="st">"SPN01_1"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/get_tumourevo_signatures.html">get_tumourevo_signatures</a></span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"ascat"</span>, <span class="st">"BASCULE"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># tumourevo outputs</span></span>
+<span><span class="fu"><a href="../reference/get_tumourevo_snv.html">get_tumourevo_snv</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_tumourevo_cna.html">get_tumourevo_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_tumourevo_driver.html">get_tumourevo_driver</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_tumourevo_subclonal.html">get_tumourevo_subclonal</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"mobster"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_tumourevo_qc.html">get_tumourevo_qc</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"cnaqc"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_tumourevo_signatures.html">get_tumourevo_signatures</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"BASCULE"</span><span class="op">)</span></span></code></pre></div>
 <p>See the <strong>Zenodo</strong> article for the full function
 reference.</p>
+<hr>
 </div>
 </div>
 <div class="section level2">
 <h2 id="typical-workflow">Typical workflow<a class="anchor" aria-label="anchor" href="#typical-workflow"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caravagnalab.github.io/SCOUT/">SCOUT</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 1. Explore the cohort</span></span>
+<span><span class="co"># 1. Explore cohort annotations</span></span>
 <span><span class="va">meta</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">drivers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth_drivers.html">get_ground_truth_drivers</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
-<span><span class="va">cna</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth_cna.html">get_ground_truth_cna</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
-<span><span class="va">exp</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth_exposures.html">get_ground_truth_exposures</a></span><span class="op">(</span><span class="st">"SPN01"</span>, type <span class="op">=</span> <span class="st">"SBS"</span><span class="op">)</span></span>
+<span><span class="va">drivers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth_drivers.html">get_ground_truth_drivers</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span>
+<span><span class="va">cna</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth_cna.html">get_ground_truth_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span>
+<span><span class="va">exp</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth_exposures.html">get_ground_truth_exposures</a></span><span class="op">(</span><span class="st">"SPN04"</span>, type <span class="op">=</span> <span class="st">"SBS"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 2. Download archives for one SPN</span></span>
-<span><span class="va">gt</span>        <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth.html">get_ground_truth</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
-<span><span class="va">sarek_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_results.html">get_sarek_results</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
-<span><span class="va">te_dir</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_tumourevo_results.html">get_tumourevo_results</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
+<span><span class="co"># 2. Download data</span></span>
+<span><span class="fu"><a href="../reference/get_sequencing_data.html">get_sequencing_data</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_sarek_results.html">get_sarek_results</a></span><span class="op">(</span><span class="st">"SPN04"</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_tumourevo_results.html">get_tumourevo_results</a></span><span class="op">(</span><span class="st">"SPN04"</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 3. Access specific results</span></span>
-<span><span class="va">mut_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations.html">get_mutations</a></span><span class="op">(</span><span class="st">"SPN01"</span>, type <span class="op">=</span> <span class="st">"tumour"</span>, coverage <span class="op">=</span> <span class="fl">100</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
-<span><span class="va">vcf</span>      <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="st">"SPN01_1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"tumour"</span><span class="op">)</span></span>
-<span><span class="va">sigs</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_tumourevo_signatures.html">get_tumourevo_signatures</a></span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"ascat"</span>, <span class="st">"BASCULE"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">mut</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations.html">get_mutations</a></span><span class="op">(</span><span class="st">"SPN04"</span>, type <span class="op">=</span> <span class="st">"tumour"</span>, coverage <span class="op">=</span> <span class="fl">100</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="va">vcf</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"tumour"</span><span class="op">)</span></span>
+<span><span class="va">sigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_tumourevo_signatures.html">get_tumourevo_signatures</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"BASCULE"</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

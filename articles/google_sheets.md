@@ -1,4 +1,4 @@
-# Google Sheets
+# Tables
 
 Cohort-level tables are stored as public Google Sheets and are
 accessible directly as tibbles — no authentication or extra packages
@@ -31,6 +31,15 @@ meta
 | `Signature Context`  | Mutational signature channel (e.g. `SBS96`, `ID83`) |
 | `Signature Class`    | Complexity class of the signature activity          |
 | `Sex`                | Subject sex chromosome complement (e.g. `XY`, `XX`) |
+
+Convenience functions derived from the metadata table:
+
+``` r
+
+get_sample_names("SPN01")   # character vector of sample names
+get_tumour_type("SPN01")    # tumour type string
+get_gender("SPN01")         # sex chromosome complement
+```
 
 ## `get_ground_truth_cna()`
 
@@ -110,9 +119,9 @@ and/or sample.
 
 ``` r
 
-get_sampling_information()                        # all SPNs
-get_sampling_information("SPN01")                 # one SPN
-get_sampling_information("SPN01", sample = "1.1") # one sample
+get_sampling_information()                          # all SPNs
+get_sampling_information("SPN01")                   # one SPN
+get_sampling_information("SPN01", sample = "1.1")   # one sample
 ```
 
 | Column                 | Description                          |
@@ -125,7 +134,7 @@ get_sampling_information("SPN01", sample = "1.1") # one sample
 
 ## `read_sheet()`
 
-Generic reader for any public Google Sheet. Useful if you need to access
+Generic reader for any public Google Sheet. Useful for accessing
 additional tables not yet wrapped by a dedicated function.
 
 ``` r

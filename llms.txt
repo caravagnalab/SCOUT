@@ -25,9 +25,9 @@ Cancer Data Science (CDS) Laboratory.
 
 # Package index
 
-## Google Sheets
+## Tables
 
-Functions to read cohort tables from Google Sheets.
+Functions to read cohort annotation tables.
 
 - [`get_metadata()`](https://caravagnalab.github.io/SCOUT/reference/get_metadata.md)
   : Get SCOUT sample metadata
@@ -39,6 +39,12 @@ Functions to read cohort tables from Google Sheets.
   : Get SCOUT ground truth mutational signature exposures
 - [`get_sampling_information()`](https://caravagnalab.github.io/SCOUT/reference/get_sampling_information.md)
   : Get SCOUT sampling information
+- [`get_sample_names()`](https://caravagnalab.github.io/SCOUT/reference/get_sample_names.md)
+  : Get sample names for a SCOUT SPN
+- [`get_tumour_type()`](https://caravagnalab.github.io/SCOUT/reference/get_tumour_type.md)
+  : Get tumour type for a SCOUT SPN
+- [`get_gender()`](https://caravagnalab.github.io/SCOUT/reference/get_gender.md)
+  : Get subject gender for a SCOUT SPN
 - [`read_sheet()`](https://caravagnalab.github.io/SCOUT/reference/read_sheet.md)
   : Read a public Google Sheet and return a tibble
 
@@ -46,8 +52,10 @@ Functions to read cohort tables from Google Sheets.
 
 Functions to download and cache per-SPN archives from Zenodo.
 
-- [`get_ground_truth()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth.md)
-  : Get ground truth simulation data for a SCOUT SPN
+- [`get_sequencing_data()`](https://caravagnalab.github.io/SCOUT/reference/get_sequencing_data.md)
+  : Download SCOUT sequencing ground truth for a SPN
+- [`get_normal_data()`](https://caravagnalab.github.io/SCOUT/reference/get_normal_data.md)
+  : Download SCOUT normal sarek results for a SPN
 - [`get_sarek_results()`](https://caravagnalab.github.io/SCOUT/reference/get_sarek_results.md)
   : Get the local path to Sarek results for a SCOUT SPN
 - [`get_tumourevo_results()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_results.md)
@@ -57,16 +65,10 @@ Functions to download and cache per-SPN archives from Zenodo.
 
 ## Ground truth getters
 
-Access simulation ground truth data (mutations, CNA, forests).
+Access sequencing ground truth mutation data.
 
 - [`get_mutations()`](https://caravagnalab.github.io/SCOUT/reference/get_mutations.md)
   : Get mutations from SCOUT ground truth
-- [`get_sample_names()`](https://caravagnalab.github.io/SCOUT/reference/get_sample_names.md)
-  : Get sample names for a SCOUT SPN
-- [`get_gender()`](https://caravagnalab.github.io/SCOUT/reference/get_gender.md)
-  : Get subject gender for a SCOUT SPN
-- [`get_tumour_type()`](https://caravagnalab.github.io/SCOUT/reference/get_tumour_type.md)
-  : Get tumour type for a SCOUT SPN
 
 ## Sarek getters
 
@@ -81,8 +83,16 @@ Access Sarek pipeline results (VCF and CNA files).
 
 Access tumourevo pipeline results by tool and analysis type.
 
+- [`get_tumourevo_snv()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_snv.md)
+  : Get tumourevo formatted SNV (vcf2cnaqc) file paths
+- [`get_tumourevo_cna()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_cna.md)
+  : Get tumourevo formatted CNA (cna2cnaqc) file paths
+- [`get_tumourevo_joint_table()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_joint_table.md)
+  : Get tumourevo joint CNAqc table (cnaqc2tsv)
+- [`get_tumourevo_vep()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_vep.md)
+  : Get tumourevo VEP annotated VCF file paths
 - [`get_tumourevo_driver()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_driver.md)
-  : Get tumourevo driver annotation paths
+  : Get tumourevo driver annotation file paths
 - [`get_tumourevo_subclonal()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_subclonal.md)
   : Get tumourevo subclonal deconvolution result paths
 - [`get_tumourevo_qc()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_qc.md)
@@ -101,6 +111,5 @@ Access tumourevo pipeline results by tool and analysis type.
 
 - [Getting started with
   SCOUT](https://caravagnalab.github.io/SCOUT/articles/getting_started.md):
-- [Google
-  Sheets](https://caravagnalab.github.io/SCOUT/articles/google_sheets.md):
+- [Tables](https://caravagnalab.github.io/SCOUT/articles/google_sheets.md):
 - [Zenodo](https://caravagnalab.github.io/SCOUT/articles/zenodo.md):

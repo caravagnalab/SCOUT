@@ -6,8 +6,8 @@ how to talk to both:
 
 | Source | What is stored there | Key functions |
 |----|----|----|
-| **Google Sheets** | Cohort metadata, ground truth tables | [`get_metadata()`](https://caravagnalab.github.io/SCOUT/reference/get_metadata.md), [`get_ground_truth_cna()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_cna.md), [`get_ground_truth_drivers()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_drivers.md), [`get_ground_truth_exposures()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_exposures.md), [`get_sampling_information()`](https://caravagnalab.github.io/SCOUT/reference/get_sampling_information.md) |
-| **Zenodo** | Per-SPN archives (ground truth RDS, Sarek, tumourevo) | [`get_ground_truth()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth.md), [`get_sarek_results()`](https://caravagnalab.github.io/SCOUT/reference/get_sarek_results.md), [`get_tumourevo_results()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_results.md) |
+| **Tables** | Cohort metadata, ground truth annotation tables | [`get_metadata()`](https://caravagnalab.github.io/SCOUT/reference/get_metadata.md), [`get_ground_truth_cna()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_cna.md), [`get_ground_truth_drivers()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_drivers.md), [`get_ground_truth_exposures()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_exposures.md), [`get_sampling_information()`](https://caravagnalab.github.io/SCOUT/reference/get_sampling_information.md) |
+| **Zenodo** | Sequencing RDS files, normal and tumour sarek results, tumourevo results | [`get_sequencing_data()`](https://caravagnalab.github.io/SCOUT/reference/get_sequencing_data.md), [`get_normal_data()`](https://caravagnalab.github.io/SCOUT/reference/get_normal_data.md), [`get_sarek_results()`](https://caravagnalab.github.io/SCOUT/reference/get_sarek_results.md), [`get_tumourevo_results()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_results.md) |
 
 ## Installation
 
@@ -17,14 +17,12 @@ devtools::install_github("caravagnalab/SCOUT")
 library(SCOUT)
 ```
 
-## Data sources
+------------------------------------------------------------------------
 
-### Google Sheets
+## Tables
 
-Cohort tables are published as public Google Sheets. All functions
-return tibbles directly — no authentication or extra packages required.
-
-The following tables are available:
+Cohort annotation tables are stored as public Google Sheets. All
+functions return tibbles directly — no authentication required.
 
 | Function | Description |
 |----|----|
@@ -37,8 +35,7 @@ The following tables are available:
 | [`get_tumour_type()`](https://caravagnalab.github.io/SCOUT/reference/get_tumour_type.md) | Tumour type for a given SPN |
 | [`get_gender()`](https://caravagnalab.github.io/SCOUT/reference/get_gender.md) | Sex chromosome complement for a given SPN |
 
-All table functions accept optional `spn` and `sample` arguments to
-subset the results:
+All table functions accept optional `spn` and `sample` arguments:
 
 ``` r
 
@@ -48,66 +45,78 @@ get_ground_truth_cna("SPN01", sample = "1.1")
 get_ground_truth_drivers("SPN01")
 get_ground_truth_exposures("SPN01", type = "SBS")
 get_sampling_information("SPN01")
-```
-
-Convenience lookups return a single value for a given SPN:
-
-``` r
 
 get_sample_names("SPN01")
 get_tumour_type("SPN01")
 get_gender("SPN01")
 ```
 
-See the **Google Sheets** article for the full column-level reference.
+See the **Tables** article for the full column-level reference.
 
-### Zenodo
+------------------------------------------------------------------------
 
-Each SPN has a dedicated Zenodo record containing three zip archives:
+## Zenodo
 
-| Archive | Contents | Returned as |
-|----|----|----|
-| `ground_truth.zip` | Simulation ground truth (RDS files) | Named list of R objects |
-| `sarek.zip` | Sarek pipeline outputs | Local directory path |
-| `tumourevo.zip` | tumourevo pipeline outputs | Local directory path |
+Data on Zenodo are organised as follows:
 
-Files are downloaded once and cached at `~/.cache/SCOUT/<spn>/`. Repeat
-calls detect the cache and skip the download. Override the cache root
-with the `SCOUT_CACHE_DIR` environment variable (useful on HPC
-clusters):
+| Data type | Record structure |
+|----|----|
+| Sequencing ground truth | One record per SPN — `SPN0X_sequencing.tar.gz` |
+| Normal sarek outputs | One shared record — `SPN0X_normal.tar.gz` per SPN |
+| Sarek + tumourevo (SPN01–06) | One record per SPN per purity (`0.9`, `0.6`, `0.3`) |
+| SPN07 sarek | One record per purity |
+| SPN07 tumourevo | One record for purity 0.9 + 0.6, one for 0.3 |
+
+Files are downloaded once and cached at `~/.cache/SCOUT/<spn>/`.
+Override the cache root with `SCOUT_CACHE_DIR`:
 
 ``` r
 
 Sys.setenv(SCOUT_CACHE_DIR = "/scratch/shared/SCOUT")
 ```
 
+### Download functions
+
 ``` r
 
-gt        <- get_ground_truth("SPN01")
-sarek_dir <- get_sarek_results("SPN01")
-te_dir    <- get_tumourevo_results("SPN01")
+# Tumour sequencing ground truth (all purities and coverages)
+get_sequencing_data("SPN04")
+
+# Normal sarek VCF outputs
+get_normal_data("SPN04")
+
+# Sarek and tumourevo pipeline results for a given purity
+get_sarek_results("SPN04", purity = 0.9)
+get_tumourevo_results("SPN04", purity = 0.9)
 ```
 
-Once downloaded, dedicated getter functions let you access specific
-results without manually navigating the directory structure:
+### Getter functions
+
+Once downloaded, dedicated getters resolve file paths without manual
+directory navigation:
 
 ``` r
 
 # Ground truth mutations
-path <- get_mutations("SPN01", type = "tumour", coverage = 100, purity = 0.9)
+get_mutations("SPN04", type = "tumour", coverage = 100, purity = 0.9)
+get_mutations("SPN04", type = "normal")
 
-# Sarek variant calls
-get_sarek_vcf("SPN01", "SPN01_1", 100, 0.9, "mutect2", "tumour")
-get_sarek_cna("SPN01", "SPN01_1", 100, 0.9, "ascat")
+# Sarek VCF and CNA files
+get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.9, "mutect2", "tumour")
+get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.9, "ascat")
 
-# tumourevo results
-get_tumourevo_driver("SPN01", 100, 0.9, "mutect2", "ascat", "SPN01_1")
-get_tumourevo_subclonal("SPN01", 100, 0.9, "mutect2", "ascat", "mobster", "SPN01_1")
-get_tumourevo_qc("SPN01", 100, 0.9, "mutect2", "ascat", "cnaqc", "SPN01_1")
-get_tumourevo_signatures("SPN01", 100, 0.9, "mutect2", "ascat", "BASCULE")
+# tumourevo outputs
+get_tumourevo_snv("SPN04", 50, 0.6, "mutect2", "sequenza", "SPN04_1.1")
+get_tumourevo_cna("SPN04", 50, 0.6, "mutect2", "sequenza", "SPN04_1.1")
+get_tumourevo_driver("SPN04", 50, 0.6, "mutect2", "sequenza", "SPN04_1.1")
+get_tumourevo_subclonal("SPN04", 50, 0.6, "mutect2", "sequenza", "mobster", "SPN04_1.1")
+get_tumourevo_qc("SPN04", 50, 0.6, "mutect2", "sequenza", "cnaqc", "SPN04_1.1")
+get_tumourevo_signatures("SPN04", 50, 0.6, "mutect2", "sequenza", "BASCULE")
 ```
 
 See the **Zenodo** article for the full function reference.
+
+------------------------------------------------------------------------
 
 ## Typical workflow
 
@@ -115,19 +124,19 @@ See the **Zenodo** article for the full function reference.
 
 library(SCOUT)
 
-# 1. Explore the cohort
+# 1. Explore cohort annotations
 meta    <- get_metadata()
-drivers <- get_ground_truth_drivers("SPN01")
-cna     <- get_ground_truth_cna("SPN01")
-exp     <- get_ground_truth_exposures("SPN01", type = "SBS")
+drivers <- get_ground_truth_drivers("SPN04")
+cna     <- get_ground_truth_cna("SPN04")
+exp     <- get_ground_truth_exposures("SPN04", type = "SBS")
 
-# 2. Download archives for one SPN
-gt        <- get_ground_truth("SPN01")
-sarek_dir <- get_sarek_results("SPN01")
-te_dir    <- get_tumourevo_results("SPN01")
+# 2. Download data
+get_sequencing_data("SPN04")
+get_sarek_results("SPN04", purity = 0.9)
+get_tumourevo_results("SPN04", purity = 0.9)
 
 # 3. Access specific results
-mut_path <- get_mutations("SPN01", type = "tumour", coverage = 100, purity = 0.9)
-vcf      <- get_sarek_vcf("SPN01", "SPN01_1", 100, 0.9, "mutect2", "tumour")
-sigs     <- get_tumourevo_signatures("SPN01", 100, 0.9, "mutect2", "ascat", "BASCULE")
+mut  <- get_mutations("SPN04", type = "tumour", coverage = 100, purity = 0.9)
+vcf  <- get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.9, "mutect2", "tumour")
+sigs <- get_tumourevo_signatures("SPN04", 50, 0.9, "mutect2", "sequenza", "BASCULE")
 ```

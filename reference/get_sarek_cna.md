@@ -32,7 +32,7 @@ get_sarek_cna(
 
 - purity:
 
-  Sample purity (0–1).
+  Sample purity: `0.9`, `0.6`, or `0.3`.
 
 - caller:
 

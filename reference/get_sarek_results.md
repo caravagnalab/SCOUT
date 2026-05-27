@@ -1,6 +1,6 @@
 # Get the local path to Sarek results for a SCOUT SPN
 
-Downloads and unzips the Sarek archive from the SPN's Zenodo record (if
+Downloads and extracts the Sarek archive for a given SPN and purity (if
 not already cached) and returns the path to the extracted directory.
 
 ## Usage
@@ -8,8 +8,9 @@ not already cached) and returns the path to the extracted directory.
 ``` r
 get_sarek_results(
   spn,
-  record_id = .scout_record_id(spn),
-  cache_dir = .scout_cache_dir(spn)
+  purity,
+  record_id = .scout_record_id(spn, purity, type = "sarek"),
+  cache_dir = .scout_cache_dir(spn, purity)
 )
 ```
 
@@ -19,14 +20,18 @@ get_sarek_results(
 
   SPN identifier, e.g. `"SPN01"`.
 
+- purity:
+
+  Sample purity: `0.9`, `0.6`, or `0.3`.
+
 - record_id:
 
-  Zenodo record ID for this SPN.
+  Zenodo record ID. Defaults to the registered record for this SPN and
+  purity.
 
 - cache_dir:
 
-  Local directory to cache downloaded files. Defaults to
-  `~/.cache/SCOUT/<spn>/`.
+  Local directory to cache downloaded files.
 
 ## Value
 
@@ -36,7 +41,6 @@ Invisible path to the directory containing the Sarek results.
 
 ``` r
 if (FALSE) { # \dontrun{
-path <- get_sarek_results("SPN01", record_id = "1234567")
-list.files(path)
+path <- get_sarek_results("SPN01", purity = 0.9)
 } # }
 ```

@@ -21,7 +21,7 @@
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Data download</h6></li>
     <li><a class="dropdown-item" href="../articles/getting_started.html">Getting started</a></li>
-    <li><a class="dropdown-item" href="../articles/google_sheets.html">Google Sheets</a></li>
+    <li><a class="dropdown-item" href="../articles/google_sheets.html">Tables</a></li>
     <li><a class="dropdown-item" href="../articles/zenodo.html">Zenodo</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
@@ -38,9 +38,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="google-sheets">Google Sheets<a class="anchor" aria-label="anchor" href="#google-sheets"></a></h2>
+      <h2 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a></h2>
 
-      <div class="section-desc"><p>Functions to read cohort tables from Google Sheets.</p></div>
+      <div class="section-desc"><p>Functions to read cohort annotation tables.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -84,6 +84,27 @@
 
         <dt>
 
+          <code><a href="get_sample_names.html">get_sample_names()</a></code>
+
+        </dt>
+        <dd>Get sample names for a SCOUT SPN</dd>
+
+        <dt>
+
+          <code><a href="get_tumour_type.html">get_tumour_type()</a></code>
+
+        </dt>
+        <dd>Get tumour type for a SCOUT SPN</dd>
+
+        <dt>
+
+          <code><a href="get_gender.html">get_gender()</a></code>
+
+        </dt>
+        <dd>Get subject gender for a SCOUT SPN</dd>
+
+        <dt>
+
           <code><a href="read_sheet.html">read_sheet()</a></code>
 
         </dt>
@@ -100,10 +121,17 @@
 
       <dl><dt>
 
-          <code><a href="get_ground_truth.html">get_ground_truth()</a></code>
+          <code><a href="get_sequencing_data.html">get_sequencing_data()</a></code>
 
         </dt>
-        <dd>Get ground truth simulation data for a SCOUT SPN</dd>
+        <dd>Download SCOUT sequencing ground truth for a SPN</dd>
+
+        <dt>
+
+          <code><a href="get_normal_data.html">get_normal_data()</a></code>
+
+        </dt>
+        <dd>Download SCOUT normal sarek results for a SPN</dd>
 
         <dt>
 
@@ -128,7 +156,7 @@
       </dl></div><div class="section level2">
       <h2 id="ground-truth-getters">Ground truth getters<a class="anchor" aria-label="anchor" href="#ground-truth-getters"></a></h2>
 
-      <div class="section-desc"><p>Access simulation ground truth data (mutations, CNA, forests).</p></div>
+      <div class="section-desc"><p>Access sequencing ground truth mutation data.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -141,27 +169,6 @@
 
         </dt>
         <dd>Get mutations from SCOUT ground truth</dd>
-
-        <dt>
-
-          <code><a href="get_sample_names.html">get_sample_names()</a></code>
-
-        </dt>
-        <dd>Get sample names for a SCOUT SPN</dd>
-
-        <dt>
-
-          <code><a href="get_gender.html">get_gender()</a></code>
-
-        </dt>
-        <dd>Get subject gender for a SCOUT SPN</dd>
-
-        <dt>
-
-          <code><a href="get_tumour_type.html">get_tumour_type()</a></code>
-
-        </dt>
-        <dd>Get tumour type for a SCOUT SPN</dd>
       </dl></div><div class="section level2">
       <h2 id="sarek-getters">Sarek getters<a class="anchor" aria-label="anchor" href="#sarek-getters"></a></h2>
 
@@ -197,10 +204,38 @@
 
       <dl><dt>
 
+          <code><a href="get_tumourevo_snv.html">get_tumourevo_snv()</a></code>
+
+        </dt>
+        <dd>Get tumourevo formatted SNV (vcf2cnaqc) file paths</dd>
+
+        <dt>
+
+          <code><a href="get_tumourevo_cna.html">get_tumourevo_cna()</a></code>
+
+        </dt>
+        <dd>Get tumourevo formatted CNA (cna2cnaqc) file paths</dd>
+
+        <dt>
+
+          <code><a href="get_tumourevo_joint_table.html">get_tumourevo_joint_table()</a></code>
+
+        </dt>
+        <dd>Get tumourevo joint CNAqc table (cnaqc2tsv)</dd>
+
+        <dt>
+
+          <code><a href="get_tumourevo_vep.html">get_tumourevo_vep()</a></code>
+
+        </dt>
+        <dd>Get tumourevo VEP annotated VCF file paths</dd>
+
+        <dt>
+
           <code><a href="get_tumourevo_driver.html">get_tumourevo_driver()</a></code>
 
         </dt>
-        <dd>Get tumourevo driver annotation paths</dd>
+        <dd>Get tumourevo driver annotation file paths</dd>
 
         <dt>
 

@@ -9,6 +9,5 @@
 
 - [Getting started with
   SCOUT](https://caravagnalab.github.io/SCOUT/articles/getting_started.md):
-- [Google
-  Sheets](https://caravagnalab.github.io/SCOUT/articles/google_sheets.md):
+- [Tables](https://caravagnalab.github.io/SCOUT/articles/google_sheets.md):
 - [Zenodo](https://caravagnalab.github.io/SCOUT/articles/zenodo.md):

@@ -5,7 +5,15 @@ Get tumourevo QC result paths
 ## Usage
 
 ``` r
-get_tumourevo_qc(spn, coverage, purity, vcf_caller, cna_caller, tool, sample)
+get_tumourevo_qc(
+  spn,
+  coverage,
+  purity,
+  vcf_caller,
+  cna_caller,
+  tool,
+  sample = NULL
+)
 ```
 
 ## Arguments
@@ -20,7 +28,7 @@ get_tumourevo_qc(spn, coverage, purity, vcf_caller, cna_caller, tool, sample)
 
 - purity:
 
-  Sample purity (0–1).
+  Sample purity: `0.9`, `0.6`, or `0.3`.
 
 - vcf_caller:
 
@@ -36,7 +44,7 @@ get_tumourevo_qc(spn, coverage, purity, vcf_caller, cna_caller, tool, sample)
 
 - sample:
 
-  Sample name.
+  Sample name. Required for `"cnaqc"` and `"tinc"`.
 
 ## Value
 
@@ -46,6 +54,7 @@ Named list of file paths.
 
 ``` r
 if (FALSE) { # \dontrun{
-get_tumourevo_qc("SPN01", 100, 0.9, "mutect2", "ascat", "cnaqc", "SPN01_1")
+get_tumourevo_qc("SPN04", 50, 0.6, "mutect2", "sequenza", "cnaqc", "SPN04_1.1")
+get_tumourevo_qc("SPN04", 50, 0.6, "mutect2", "sequenza", "join_cnaqc")
 } # }
 ```

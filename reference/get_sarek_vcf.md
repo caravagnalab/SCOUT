@@ -33,7 +33,7 @@ get_sarek_vcf(
 
 - purity:
 
-  Sample purity (0–1, e.g. `0.9`).
+  Sample purity: `0.9`, `0.6`, or `0.3`.
 
 - caller:
 

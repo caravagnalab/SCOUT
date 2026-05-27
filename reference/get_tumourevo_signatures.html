@@ -21,7 +21,7 @@
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Data download</h6></li>
     <li><a class="dropdown-item" href="../articles/getting_started.html">Getting started</a></li>
-    <li><a class="dropdown-item" href="../articles/google_sheets.html">Google Sheets</a></li>
+    <li><a class="dropdown-item" href="../articles/google_sheets.html">Tables</a></li>
     <li><a class="dropdown-item" href="../articles/zenodo.html">Zenodo</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
@@ -69,7 +69,7 @@
 
 
 <dt id="arg-purity">purity<a class="anchor" aria-label="anchor" href="#arg-purity"></a></dt>
-<dd><p>Sample purity (0–1).</p></dd>
+<dd><p>Sample purity: <code>0.9</code>, <code>0.6</code>, or <code>0.3</code>.</p></dd>
 
 
 <dt id="arg-vcf-caller">vcf_caller<a class="anchor" aria-label="anchor" href="#arg-vcf-caller"></a></dt>
@@ -81,13 +81,13 @@
 
 
 <dt id="arg-tool">tool<a class="anchor" aria-label="anchor" href="#arg-tool"></a></dt>
-<dd><p>Signature tool: <code>"sigprofiler"</code>, <code>"sparsesignatures"</code>, or
+<dd><p>Tool: <code>"sigprofiler"</code>, <code>"sparsesignatures"</code>, or
 <code>"BASCULE"</code>.</p></dd>
 
 
 <dt id="arg-context">context<a class="anchor" aria-label="anchor" href="#arg-context"></a></dt>
-<dd><p>Mutational context, e.g. <code>"SBS96"</code> or <code>"ID83"</code>. Required
-for <code>tool = "sigprofiler"</code>.</p></dd>
+<dd><p>Mutational context, e.g. <code>"SBS96"</code>, <code>"ID83"</code>, <code>"DBS78"</code>.
+Required for <code>tool = "sigprofiler"</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -98,8 +98,9 @@ for <code>tool = "sigprofiler"</code>.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="fu">get_tumourevo_signatures</span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"ascat"</span>, <span class="st">"BASCULE"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">get_tumourevo_signatures</span><span class="op">(</span><span class="st">"SPN01"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"ascat"</span>, <span class="st">"sigprofiler"</span>, <span class="st">"SBS96"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_tumourevo_signatures</span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"BASCULE"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_tumourevo_signatures</span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>,</span></span>
+<span class="r-in"><span>                          <span class="st">"sigprofiler"</span>, context <span class="op">=</span> <span class="st">"SBS96"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

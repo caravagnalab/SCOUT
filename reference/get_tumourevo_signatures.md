@@ -28,7 +28,7 @@ get_tumourevo_signatures(
 
 - purity:
 
-  Sample purity (0–1).
+  Sample purity: `0.9`, `0.6`, or `0.3`.
 
 - vcf_caller:
 
@@ -40,11 +40,11 @@ get_tumourevo_signatures(
 
 - tool:
 
-  Signature tool: `"sigprofiler"`, `"sparsesignatures"`, or `"BASCULE"`.
+  Tool: `"sigprofiler"`, `"sparsesignatures"`, or `"BASCULE"`.
 
 - context:
 
-  Mutational context, e.g. `"SBS96"` or `"ID83"`. Required for
+  Mutational context, e.g. `"SBS96"`, `"ID83"`, `"DBS78"`. Required for
   `tool = "sigprofiler"`.
 
 ## Value
@@ -55,7 +55,8 @@ Named list of file paths.
 
 ``` r
 if (FALSE) { # \dontrun{
-get_tumourevo_signatures("SPN01", 100, 0.9, "mutect2", "ascat", "BASCULE")
-get_tumourevo_signatures("SPN01", 100, 0.9, "mutect2", "ascat", "sigprofiler", "SBS96")
+get_tumourevo_signatures("SPN04", 50, 0.6, "mutect2", "sequenza", "BASCULE")
+get_tumourevo_signatures("SPN04", 50, 0.6, "mutect2", "sequenza",
+                          "sigprofiler", context = "SBS96")
 } # }
 ```

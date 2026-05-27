@@ -12,7 +12,7 @@ get_tumourevo_subclonal(
   vcf_caller,
   cna_caller,
   tool,
-  sample
+  sample = NULL
 )
 ```
 
@@ -28,7 +28,7 @@ get_tumourevo_subclonal(
 
 - purity:
 
-  Sample purity (0–1).
+  Sample purity: `0.9`, `0.6`, or `0.3`.
 
 - vcf_caller:
 
@@ -40,12 +40,12 @@ get_tumourevo_subclonal(
 
 - tool:
 
-  Deconvolution tool: `"mobster"`, `"pyclonevi"`, `"ctree"`, or
-  `"viber"`.
+  Tool: `"mobster"`, `"pyclonevi"`, `"ctree"`, or `"viber"`.
 
 - sample:
 
-  Sample name.
+  Sample name. Required for `"mobster"` and per-sample `"ctree"`
+  results.
 
 ## Value
 
@@ -55,6 +55,8 @@ Named list of file paths.
 
 ``` r
 if (FALSE) { # \dontrun{
-get_tumourevo_subclonal("SPN01", 100, 0.9, "mutect2", "ascat", "mobster", "SPN01_1")
+get_tumourevo_subclonal("SPN04", 50, 0.6, "mutect2", "sequenza",
+                         "mobster", "SPN04_1.1")
+get_tumourevo_subclonal("SPN04", 50, 0.6, "mutect2", "sequenza", "viber")
 } # }
 ```
