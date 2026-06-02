@@ -16,6 +16,8 @@
 
 .scout_zenodo_record <- function(record_id) {
   url <- paste0("https://zenodo.org/api/records/", record_id)
+  # test with sandbox
+  #url <- paste0("https://sandbox.zenodo.org/api/records/", record_id)
   resp <- httr::GET(url, httr::user_agent("SCOUT R package"))
   if (httr::http_error(resp)) {
     stop("Zenodo request failed for record ", record_id,

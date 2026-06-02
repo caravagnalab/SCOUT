@@ -27,13 +27,31 @@ Sys.setenv(SCOUT_CACHE_DIR = "/scratch/shared/SCOUT")
 
 ## Zenodo record structure
 
-| Record | Content | Archive per SPN |
+| Data type | Zenodo record ID | Archive name |
 |---|---|---|
-| One per SPN | Tumour sequencing ground truth (RDS) | `SPN0X_sequencing.tar.gz` |
-| One shared | Normal sarek outputs | `SPN0X_normal.tar.gz` |
-| One per SPN per purity (SPN01–06) | Sarek + tumourevo results | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN07 sarek: one per purity | Sarek results | `sarek.tar.gz` |
-| SPN07 tumourevo: one for 0.9+0.6, one for 0.3 | tumourevo results | `tumourevo.tar.gz` |
+| Sequencing + normal (one shared record, all SPNs) | | `SPN01_sequencing.tar.gz`, `SPN01_normal_sequencing.tar.gz`, … `SPN07_sequencing.tar.gz`, `SPN07_normal_sequencing.tar.gz` |
+| SPN01 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN01 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN01 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN02 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN02 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN02 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN03 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN03 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN03 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN04 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN04 sarek + tumourevo purity 0.6 | 505306 | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN04 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN05 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN05 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN05 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN06 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN06 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN06 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN07 sarek purity 0.9 | | `sarek.tar.gz` |
+| SPN07 sarek purity 0.6 | | `sarek.tar.gz` |
+| SPN07 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN07 tumourevo purity 0.9 + 0.6 | | `tumourevo_0.9.tar.gz`, `tumourevo_0.6.tar.gz` |
 
 ---
 

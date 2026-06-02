@@ -1,61 +1,42 @@
 # Zenodo record IDs.
 #
-# Sequencing ground truth: one record per SPN, containing SPN0X_sequencing.tar.gz
-# Normal samples:          one shared record, containing SPN0X_normal.tar.gz for each SPN
-# tumourevo/sarek:         one record per SPN per purity (SPN01-SPN06);
-#                          SPN07 has separate records for sarek and tumourevo
+# Sequencing + normal: one shared record for all SPNs, containing:
+#   SPN01_sequencing.tar.gz, SPN01_normal_sequencing.tar.gz,
+#   SPN02_sequencing.tar.gz, SPN02_normal_sequencing.tar.gz, ... SPN07
+# tumourevo/sarek: one record per SPN per purity (SPN01-SPN06);
+#   SPN07 has separate records for sarek and tumourevo
 
 .SCOUT_ZENODO_RECORDS <- list(
 
-  # ── Sequencing ground truth (one record per SPN) ───────────────────────────
-  sequencing = list(
-    SPN01 = NA_character_,
-    SPN02 = NA_character_,
-    SPN03 = NA_character_,
-    SPN04 = NA_character_,
-    SPN05 = NA_character_,
-    SPN06 = NA_character_,
-    SPN07 = NA_character_
-  ),
-
-  # ── Normal sarek outputs (one shared record for all SPNs) ──────────────────
-  normal = NA_character_,
+  # ── One shared record for all sequencing + normal archives ────────────────
+  sequencing = NA_character_,
 
   # ── tumourevo + sarek (one record per SPN per purity) ─────────────────────
   SPN01 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
   SPN02 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
   SPN03 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
-  SPN04 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
+  SPN04 = list(`0.9` = NA_character_, `0.6` = 505306,        `0.3` = NA_character_),
   SPN05 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
   SPN06 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
 
   # SPN07: sarek per-purity; tumourevo split (0.9+0.6 share one record)
+  # SPN07: sarek 0.9 and 0.6 are separate records;
+  #         purity 0.3 has one record with both sarek + tumourevo;
+  #         tumourevo 0.9+0.6 share one record
   SPN07 = list(
-    sarek = list(
-      `0.9` = NA_character_,
-      `0.6` = NA_character_,
-      `0.3` = NA_character_
-    ),
-    tumourevo = list(
-      `0.9_0.6` = NA_character_,
-      `0.3`     = NA_character_
-    )
+    sarek_0.9     = NA_character_,
+    sarek_0.6     = NA_character_,
+    purity_0.3    = NA_character_,  # contains sarek.tar.gz + tumourevo.tar.gz
+    tumourevo_0.9_0.6 = NA_character_
   )
 )
 
 # ── Lookup helpers ────────────────────────────────────────────────────────────
 
-# Record for sequencing ground truth of one SPN
-.scout_sequencing_record_id <- function(spn) {
-  id <- .SCOUT_ZENODO_RECORDS[["sequencing"]][[spn]]
-  if (is.null(id))
-    stop("Unknown SPN: '", spn, "'", call. = FALSE)
-  .check_record_id(id, paste("sequencing", spn))
-}
-
-# Shared record for all normal samples
-.scout_normal_record_id <- function() {
-  .check_record_id(.SCOUT_ZENODO_RECORDS[["normal"]], "normal")
+# Shared record containing all SPN0X_sequencing.tar.gz and
+# SPN0X_normal_sequencing.tar.gz archives
+.scout_sequencing_record_id <- function() {
+  .check_record_id(.SCOUT_ZENODO_RECORDS[["sequencing"]], "sequencing")
 }
 
 # Record for sarek/tumourevo of a given SPN + purity (+ type for SPN07)
@@ -65,15 +46,20 @@
     stop("Unknown SPN: '", spn, "'", call. = FALSE)
 
   if (spn == "SPN07") {
-    if (is.null(type))
-      stop("'type' (\"sarek\" or \"tumourevo\") is required for SPN07",
-           call. = FALSE)
-    sub <- entry[[type]]
-    key <- if (type == "tumourevo" && purity %in% c("0.9", "0.6")) "0.9_0.6"
-           else as.character(purity)
-    id <- sub[[key]]
+    p <- as.character(purity)
+    key <- if (p == "0.3") {
+      "purity_0.3"                          # shared sarek + tumourevo record
+    } else if (is.null(type)) {
+      stop("'type' (\"sarek\" or \"tumourevo\") is required for SPN07 purity ",
+           p, call. = FALSE)
+    } else if (type == "sarek") {
+      paste0("sarek_", p)
+    } else {
+      "tumourevo_0.9_0.6"                   # 0.9 and 0.6 share one record
+    }
+    id <- entry[[key]]
     if (is.null(id))
-      stop("No record for SPN07 / ", type, " / purity ", purity, call. = FALSE)
+      stop("No record for SPN07 / key ", key, call. = FALSE)
   } else {
     id <- entry[[as.character(purity)]]
     if (is.null(id))

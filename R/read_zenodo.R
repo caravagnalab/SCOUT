@@ -84,7 +84,7 @@ list_zenodo_files <- function(record_id) {
 #' get_sequencing_data("SPN04")
 #' }
 get_sequencing_data <- function(spn,
-                                 record_id = .scout_sequencing_record_id(spn),
+                                 record_id = .scout_sequencing_record_id(),
                                  cache_dir = .scout_cache_dir(spn)) {
   tar_name <- paste0(spn, "_sequencing.tar.gz")
   dest_dir <- file.path(cache_dir, "sequencing")
@@ -102,12 +102,13 @@ get_sequencing_data <- function(spn,
 
 #' Download SCOUT normal sarek results for a SPN
 #'
-#' Downloads and extracts `SPN0X_normal.tar.gz` from the shared normal Zenodo
-#' record (if not already cached). The archive contains haplotypecaller and
-#' freebayes VCF files for the normal sample.
+#' Downloads and extracts `SPN0X_normal_sequencing.tar.gz` from the SPN's
+#' sequencing Zenodo record (if not already cached). The archive contains
+#' haplotypecaller and freebayes VCF files for the normal sample.
 #'
 #' @param spn       SPN identifier, e.g. `"SPN04"`.
-#' @param record_id Zenodo record ID. Defaults to the shared normal record.
+#' @param record_id Zenodo record ID. Defaults to the sequencing record for
+#'   this SPN.
 #' @param cache_dir Local directory to cache downloaded files.
 #'
 #' @return Invisible path to the extracted directory.
@@ -118,9 +119,9 @@ get_sequencing_data <- function(spn,
 #' get_normal_data("SPN04")
 #' }
 get_normal_data <- function(spn,
-                             record_id = .scout_normal_record_id(),
+                             record_id = .scout_sequencing_record_id(),
                              cache_dir = .scout_cache_dir(spn)) {
-  tar_name <- paste0(spn, "_normal.tar.gz")
+  tar_name <- paste0(spn, "_normal_sequencing.tar.gz")
   dest_dir <- file.path(cache_dir, "normal")
   dest_tar <- file.path(cache_dir, tar_name)
 
@@ -191,11 +192,17 @@ get_tumourevo_results <- function(spn, purity,
                                    record_id = .scout_record_id(spn, purity,
                                                                  type = "tumourevo"),
                                    cache_dir = .scout_cache_dir(spn, purity)) {
+  # SPN07 purity 0.9 and 0.6 live in separate named archives
+  tar_name <- if (spn == "SPN07" && as.character(purity) %in% c("0.9", "0.6"))
+    paste0("tumourevo_", purity, ".tar.gz")
+  else
+    .SCOUT_TAR_TUMOUREVO
+
   dest_dir <- file.path(cache_dir, "tumourevo")
-  dest_tar <- file.path(cache_dir, .SCOUT_TAR_TUMOUREVO)
+  dest_tar <- file.path(cache_dir, tar_name)
 
   if (!dir.exists(dest_dir) || length(list.files(dest_dir)) == 0) {
-    url <- .scout_tar_url(record_id, .SCOUT_TAR_TUMOUREVO)
+    url <- .scout_tar_url(record_id, tar_name)
     .scout_download_tar(url, dest_tar, dest_dir, spn = spn)
   } else {
     message("tumourevo results already cached at: ", dest_dir)
