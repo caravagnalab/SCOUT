@@ -73,8 +73,7 @@
     
     
 <p>The <code>SCOUT</code> package gives you direct access to the
-Simulated Cohort of Universal Tumours from R. Data live in two places
-and the package knows how to talk to both:</p>
+Simulated Cohort of Universal Tumours from R.</p>
 <table class="table">
 <colgroup>
 <col width="33%">
@@ -89,7 +88,7 @@ and the package knows how to talk to both:</p>
 <tbody>
 <tr class="odd">
 <td><strong>Tables</strong></td>
-<td>Cohort metadata, ground truth annotation tables</td>
+<td>Cohort metadata, ground truth tables</td>
 <td>
 <code><a href="../reference/get_metadata.html">get_metadata()</a></code>, <code><a href="../reference/get_ground_truth_cna.html">get_ground_truth_cna()</a></code>,
 <code><a href="../reference/get_ground_truth_drivers.html">get_ground_truth_drivers()</a></code>,
@@ -120,8 +119,8 @@ results</td>
 <div class="section level2">
 <h2 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a>
 </h2>
-<p>Cohort annotation tables are stored as public Google Sheets. All
-functions return tibbles directly — no authentication required.</p>
+<p>Cohort metadata and ground truth tables are stored as public Google
+Sheets.</p>
 <table class="table">
 <colgroup>
 <col width="50%">
@@ -163,7 +162,7 @@ functions return tibbles directly — no authentication required.</p>
 </tr>
 <tr class="even">
 <td><code><a href="../reference/get_gender.html">get_gender()</a></code></td>
-<td>Sex chromosome complement for a given SPN</td>
+<td>Sex chromosome for a given SPN</td>
 </tr>
 </tbody>
 </table>
@@ -195,7 +194,7 @@ reference.</p>
 </colgroup>
 <thead><tr class="header">
 <th>Data type</th>
-<th>Record structure</th>
+<th>Content</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -222,6 +221,8 @@ reference.</p>
 </tr>
 </tbody>
 </table>
+<p>For the full list of record IDs see the <strong>Zenodo</strong>
+article.</p>
 <p>Files are downloaded once and cached at
 <code>~/.cache/SCOUT/&lt;spn&gt;/</code>. Override the cache root with
 <code>SCOUT_CACHE_DIR</code>:</p>
@@ -266,28 +267,6 @@ directory navigation:</p>
 reference.</p>
 <hr>
 </div>
-</div>
-<div class="section level2">
-<h2 id="typical-workflow">Typical workflow<a class="anchor" aria-label="anchor" href="#typical-workflow"></a>
-</h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://caravagnalab.github.io/SCOUT/">SCOUT</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 1. Explore cohort annotations</span></span>
-<span><span class="va">meta</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">drivers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth_drivers.html">get_ground_truth_drivers</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span>
-<span><span class="va">cna</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth_cna.html">get_ground_truth_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span>
-<span><span class="va">exp</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ground_truth_exposures.html">get_ground_truth_exposures</a></span><span class="op">(</span><span class="st">"SPN04"</span>, type <span class="op">=</span> <span class="st">"SBS"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 2. Download data</span></span>
-<span><span class="fu"><a href="../reference/get_sequencing_data.html">get_sequencing_data</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/get_sarek_results.html">get_sarek_results</a></span><span class="op">(</span><span class="st">"SPN04"</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/get_tumourevo_results.html">get_tumourevo_results</a></span><span class="op">(</span><span class="st">"SPN04"</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 3. Access specific results</span></span>
-<span><span class="va">mut</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations.html">get_mutations</a></span><span class="op">(</span><span class="st">"SPN04"</span>, type <span class="op">=</span> <span class="st">"tumour"</span>, coverage <span class="op">=</span> <span class="fl">100</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
-<span><span class="va">vcf</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"tumour"</span><span class="op">)</span></span>
-<span><span class="va">sigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_tumourevo_signatures.html">get_tumourevo_signatures</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"BASCULE"</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

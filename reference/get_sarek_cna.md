@@ -1,14 +1,15 @@
 # Get Sarek CNA output files for a SCOUT SPN
 
 Returns a named list of CNA file paths from the Sarek copy-number
-calling results for a given sample, coverage, purity and caller.
+calling results. Supported callers: `"ascat"`, `"battenberg"`,
+`"sequenza"`, `"cnvkit"`.
 
 ## Usage
 
 ``` r
 get_sarek_cna(
   spn,
-  sample_id,
+  sample,
   coverage,
   purity,
   caller,
@@ -20,11 +21,11 @@ get_sarek_cna(
 
 - spn:
 
-  SPN identifier, e.g. `"SPN01"`.
+  SPN identifier, e.g. `"SPN04"`.
 
-- sample_id:
+- sample:
 
-  Sample identifier.
+  Sample identifier, e.g. `"SPN04_1.1"`.
 
 - coverage:
 
@@ -36,7 +37,7 @@ get_sarek_cna(
 
 - caller:
 
-  CNA caller: `"ascat"`, `"sequenza"`, or `"cnvkit"`.
+  CNA caller: `"ascat"`, `"battenberg"`, `"sequenza"`, or `"cnvkit"`.
 
 - normal_id:
 
@@ -44,13 +45,14 @@ get_sarek_cna(
 
 ## Value
 
-Named list of file paths (keys depend on caller, e.g. `segments`,
-`purityploidy`, `cnvs`, etc.).
+Named list of file paths (keys depend on caller).
 
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-get_sarek_cna("SPN01", "SPN01_1", 100, 0.9, "ascat")
+get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "ascat")
+get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "battenberg")
+get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "sequenza")
 } # }
 ```

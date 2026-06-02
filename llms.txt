@@ -72,7 +72,8 @@ Access sequencing ground truth mutation data.
 
 ## Sarek getters
 
-Access Sarek pipeline results (VCF and CNA files).
+Access Sarek pipeline results. VCF callers: mutect2, strelka, freebayes,
+haplotypecaller. CNA callers: ascat, battenberg, sequenza, cnvkit.
 
 - [`get_sarek_vcf()`](https://caravagnalab.github.io/SCOUT/reference/get_sarek_vcf.md)
   : Get Sarek VCF output files for a SCOUT SPN

@@ -94,37 +94,171 @@ calls detect the cache and skip the download automatically.</p>
 <col width="33%">
 </colgroup>
 <thead><tr class="header">
-<th>Record</th>
-<th>Content</th>
-<th>Archive per SPN</th>
+<th>Data type</th>
+<th>Zenodo record ID</th>
+<th>Archive name</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>One per SPN</td>
-<td>Tumour sequencing ground truth (RDS)</td>
-<td><code>SPN0X_sequencing.tar.gz</code></td>
+<td>Sequencing + normal (one shared record, all SPNs)</td>
+<td></td>
+<td>
+<code>SPN01_sequencing.tar.gz</code>,
+<code>SPN01_normal_sequencing.tar.gz</code>, …
+<code>SPN07_sequencing.tar.gz</code>,
+<code>SPN07_normal_sequencing.tar.gz</code>
+</td>
 </tr>
 <tr class="even">
-<td>One shared</td>
-<td>Normal sarek outputs</td>
-<td><code>SPN0X_normal.tar.gz</code></td>
+<td>SPN01 sarek + tumourevo purity 0.9</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
 </tr>
 <tr class="odd">
-<td>One per SPN per purity (SPN01–06)</td>
-<td>Sarek + tumourevo results</td>
+<td>SPN01 sarek + tumourevo purity 0.6</td>
+<td></td>
 <td>
 <code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
 </td>
 </tr>
 <tr class="even">
-<td>SPN07 sarek: one per purity</td>
-<td>Sarek results</td>
+<td>SPN01 sarek + tumourevo purity 0.3</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="odd">
+<td>SPN02 sarek + tumourevo purity 0.9</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="even">
+<td>SPN02 sarek + tumourevo purity 0.6</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="odd">
+<td>SPN02 sarek + tumourevo purity 0.3</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="even">
+<td>SPN03 sarek + tumourevo purity 0.9</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="odd">
+<td>SPN03 sarek + tumourevo purity 0.6</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="even">
+<td>SPN03 sarek + tumourevo purity 0.3</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="odd">
+<td>SPN04 sarek + tumourevo purity 0.9</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="even">
+<td>SPN04 sarek + tumourevo purity 0.6</td>
+<td>505306</td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="odd">
+<td>SPN04 sarek + tumourevo purity 0.3</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="even">
+<td>SPN05 sarek + tumourevo purity 0.9</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="odd">
+<td>SPN05 sarek + tumourevo purity 0.6</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="even">
+<td>SPN05 sarek + tumourevo purity 0.3</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="odd">
+<td>SPN06 sarek + tumourevo purity 0.9</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="even">
+<td>SPN06 sarek + tumourevo purity 0.6</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="odd">
+<td>SPN06 sarek + tumourevo purity 0.3</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="even">
+<td>SPN07 sarek purity 0.9</td>
+<td></td>
 <td><code>sarek.tar.gz</code></td>
 </tr>
 <tr class="odd">
-<td>SPN07 tumourevo: one for 0.9+0.6, one for 0.3</td>
-<td>tumourevo results</td>
-<td><code>tumourevo.tar.gz</code></td>
+<td>SPN07 sarek purity 0.6</td>
+<td></td>
+<td><code>sarek.tar.gz</code></td>
+</tr>
+<tr class="even">
+<td>SPN07 sarek + tumourevo purity 0.3</td>
+<td></td>
+<td>
+<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
+</td>
+</tr>
+<tr class="odd">
+<td>SPN07 tumourevo purity 0.9 + 0.6</td>
+<td></td>
+<td>
+<code>tumourevo_0.9.tar.gz</code>,
+<code>tumourevo_0.6.tar.gz</code>
+</td>
 </tr>
 </tbody>
 </table>
@@ -219,42 +353,55 @@ file paths for a given sample, coverage, purity and caller.</p>
 <h3 id="get_sarek_vcf">
 <code>get_sarek_vcf()</code><a class="anchor" aria-label="anchor" href="#get_sarek_vcf"></a>
 </h3>
-<p>Returns VCF and index file paths for tumour or normal variant
-calling. Supported callers: <code>"mutect2"</code>,
-<code>"strelka"</code>, <code>"freebayes"</code>,
-<code>"haplotypecaller"</code>.</p>
+<p>Returns a named list of VCF and index file paths. Supported callers:
+<code>"mutect2"</code>, <code>"strelka"</code>,
+<code>"freebayes"</code>, <code>"haplotypecaller"</code>. Sample naming
+convention: <code>"SPN04_1.1"</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># mutect2 — tumour</span></span>
-<span><span class="va">vcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"mutect2"</span>, <span class="st">"tumour"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># mutect2 — SPN-level result, no sample needed</span></span>
+<span><span class="va">vcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="cn">NULL</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"mutect2"</span><span class="op">)</span></span>
 <span><span class="va">vcf</span><span class="op">$</span><span class="va">vcf</span></span>
 <span><span class="va">vcf</span><span class="op">$</span><span class="va">tbi</span></span>
 <span></span>
-<span><span class="co"># strelka — returns separate SNV and indel keys</span></span>
-<span><span class="va">vcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"strelka"</span>, <span class="st">"tumour"</span><span class="op">)</span></span>
-<span><span class="va">vcf</span><span class="op">$</span><span class="va">snvs_vcf</span></span>
-<span><span class="va">vcf</span><span class="op">$</span><span class="va">indels_vcf</span></span>
+<span><span class="co"># strelka — one somatic VCF</span></span>
+<span><span class="va">vcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"strelka"</span><span class="op">)</span></span>
+<span><span class="va">vcf</span><span class="op">$</span><span class="va">vcf</span></span>
 <span></span>
-<span><span class="co"># haplotypecaller — normal sample</span></span>
-<span><span class="va">vcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"haplotypecaller"</span>, <span class="st">"normal"</span><span class="op">)</span></span>
+<span><span class="co"># freebayes</span></span>
+<span><span class="va">vcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"freebayes"</span><span class="op">)</span></span>
+<span><span class="va">vcf</span><span class="op">$</span><span class="va">vcf</span></span>
+<span></span>
+<span><span class="co"># haplotypecaller — normal sample (sample = NULL)</span></span>
+<span><span class="va">vcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="cn">NULL</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"haplotypecaller"</span><span class="op">)</span></span>
 <span><span class="va">vcf</span><span class="op">$</span><span class="va">vcf</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="get_sarek_cna">
 <code>get_sarek_cna()</code><a class="anchor" aria-label="anchor" href="#get_sarek_cna"></a>
 </h3>
-<p>Returns CNA file paths. Supported callers: <code>"ascat"</code>,
+<p>Returns a named list of CNA file paths. Supported callers:
+<code>"ascat"</code>, <code>"battenberg"</code>,
 <code>"sequenza"</code>, <code>"cnvkit"</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ASCAT</span></span>
-<span><span class="va">cna</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_cna.html">get_sarek_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"ascat"</span><span class="op">)</span></span>
+<span><span class="va">cna</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_cna.html">get_sarek_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"ascat"</span><span class="op">)</span></span>
 <span><span class="va">cna</span><span class="op">$</span><span class="va">segments</span></span>
 <span><span class="va">cna</span><span class="op">$</span><span class="va">purityploidy</span></span>
 <span><span class="va">cna</span><span class="op">$</span><span class="va">cnvs</span></span>
 <span></span>
+<span><span class="co"># Battenberg</span></span>
+<span><span class="va">cna</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_cna.html">get_sarek_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"battenberg"</span><span class="op">)</span></span>
+<span><span class="va">cna</span><span class="op">$</span><span class="va">subclones</span></span>
+<span><span class="va">cna</span><span class="op">$</span><span class="va">rho_and_psi</span></span>
+<span></span>
 <span><span class="co"># Sequenza</span></span>
-<span><span class="va">cna</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_cna.html">get_sarek_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.9</span>, <span class="st">"sequenza"</span><span class="op">)</span></span>
+<span><span class="va">cna</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_cna.html">get_sarek_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"sequenza"</span><span class="op">)</span></span>
 <span><span class="va">cna</span><span class="op">$</span><span class="va">segments</span></span>
-<span><span class="va">cna</span><span class="op">$</span><span class="va">confints_CP</span></span></code></pre></div>
+<span><span class="va">cna</span><span class="op">$</span><span class="va">confints_CP</span></span>
+<span></span>
+<span><span class="co"># CNVkit</span></span>
+<span><span class="va">cna</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_cna.html">get_sarek_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"cnvkit"</span><span class="op">)</span></span>
+<span><span class="va">cna</span><span class="op">$</span><span class="va">cns</span></span></code></pre></div>
 <hr>
 </div>
 </div>

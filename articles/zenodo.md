@@ -17,13 +17,31 @@ Sys.setenv(SCOUT_CACHE_DIR = "/scratch/shared/SCOUT")
 
 ## Zenodo record structure
 
-| Record | Content | Archive per SPN |
+| Data type | Zenodo record ID | Archive name |
 |----|----|----|
-| One per SPN | Tumour sequencing ground truth (RDS) | `SPN0X_sequencing.tar.gz` |
-| One shared | Normal sarek outputs | `SPN0X_normal.tar.gz` |
-| One per SPN per purity (SPN01–06) | Sarek + tumourevo results | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN07 sarek: one per purity | Sarek results | `sarek.tar.gz` |
-| SPN07 tumourevo: one for 0.9+0.6, one for 0.3 | tumourevo results | `tumourevo.tar.gz` |
+| Sequencing + normal (one shared record, all SPNs) |  | `SPN01_sequencing.tar.gz`, `SPN01_normal_sequencing.tar.gz`, … `SPN07_sequencing.tar.gz`, `SPN07_normal_sequencing.tar.gz` |
+| SPN01 sarek + tumourevo purity 0.9 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN01 sarek + tumourevo purity 0.6 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN01 sarek + tumourevo purity 0.3 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN02 sarek + tumourevo purity 0.9 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN02 sarek + tumourevo purity 0.6 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN02 sarek + tumourevo purity 0.3 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN03 sarek + tumourevo purity 0.9 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN03 sarek + tumourevo purity 0.6 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN03 sarek + tumourevo purity 0.3 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN04 sarek + tumourevo purity 0.9 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN04 sarek + tumourevo purity 0.6 | 505306 | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN04 sarek + tumourevo purity 0.3 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN05 sarek + tumourevo purity 0.9 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN05 sarek + tumourevo purity 0.6 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN05 sarek + tumourevo purity 0.3 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN06 sarek + tumourevo purity 0.9 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN06 sarek + tumourevo purity 0.6 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN06 sarek + tumourevo purity 0.3 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN07 sarek purity 0.9 |  | `sarek.tar.gz` |
+| SPN07 sarek purity 0.6 |  | `sarek.tar.gz` |
+| SPN07 sarek + tumourevo purity 0.3 |  | `sarek.tar.gz`, `tumourevo.tar.gz` |
+| SPN07 tumourevo purity 0.9 + 0.6 |  | `tumourevo_0.9.tar.gz`, `tumourevo_0.6.tar.gz` |
 
 ------------------------------------------------------------------------
 
@@ -123,44 +141,56 @@ coverage, purity and caller.
 
 ### `get_sarek_vcf()`
 
-Returns VCF and index file paths for tumour or normal variant calling.
-Supported callers: `"mutect2"`, `"strelka"`, `"freebayes"`,
-`"haplotypecaller"`.
+Returns a named list of VCF and index file paths. Supported callers:
+`"mutect2"`, `"strelka"`, `"freebayes"`, `"haplotypecaller"`. Sample
+naming convention: `"SPN04_1.1"`.
 
 ``` r
 
-# mutect2 — tumour
-vcf <- get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.9, "mutect2", "tumour")
+# mutect2 — SPN-level result, no sample needed
+vcf <- get_sarek_vcf("SPN04", NULL, 100, 0.3, "mutect2")
 vcf$vcf
 vcf$tbi
 
-# strelka — returns separate SNV and indel keys
-vcf <- get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.9, "strelka", "tumour")
-vcf$snvs_vcf
-vcf$indels_vcf
+# strelka — one somatic VCF
+vcf <- get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.3, "strelka")
+vcf$vcf
 
-# haplotypecaller — normal sample
-vcf <- get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.9, "haplotypecaller", "normal")
+# freebayes
+vcf <- get_sarek_vcf("SPN04", "SPN04_1.1", 100, 0.3, "freebayes")
+vcf$vcf
+
+# haplotypecaller — normal sample (sample = NULL)
+vcf <- get_sarek_vcf("SPN04", NULL, 100, 0.3, "haplotypecaller")
 vcf$vcf
 ```
 
 ### `get_sarek_cna()`
 
-Returns CNA file paths. Supported callers: `"ascat"`, `"sequenza"`,
-`"cnvkit"`.
+Returns a named list of CNA file paths. Supported callers: `"ascat"`,
+`"battenberg"`, `"sequenza"`, `"cnvkit"`.
 
 ``` r
 
 # ASCAT
-cna <- get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.9, "ascat")
+cna <- get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "ascat")
 cna$segments
 cna$purityploidy
 cna$cnvs
 
+# Battenberg
+cna <- get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "battenberg")
+cna$subclones
+cna$rho_and_psi
+
 # Sequenza
-cna <- get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.9, "sequenza")
+cna <- get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "sequenza")
 cna$segments
 cna$confints_CP
+
+# CNVkit
+cna <- get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.3, "cnvkit")
+cna$cns
 ```
 
 ------------------------------------------------------------------------
