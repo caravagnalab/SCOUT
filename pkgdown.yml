@@ -4,9 +4,10 @@ pkgdown_sha: ~
 articles:
   getting_started: getting_started.html
   google_sheets: google_sheets.html
+  raw_data: raw_data.html
   scout_cohort: scout_cohort.html
   zenodo: zenodo.html
-last_built: 2026-06-02T16:57Z
+last_built: 2026-06-03T16:27Z
 urls:
   reference: https://caravagnalab.github.io/SCOUT/reference
   article: https://caravagnalab.github.io/SCOUT/articles

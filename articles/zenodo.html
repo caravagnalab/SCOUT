@@ -43,6 +43,7 @@
     <li><a class="dropdown-item" href="../articles/getting_started.html">Getting started</a></li>
     <li><a class="dropdown-item" href="../articles/google_sheets.html">Tables</a></li>
     <li><a class="dropdown-item" href="../articles/zenodo.html">Zenodo</a></li>
+    <li><a class="dropdown-item" href="../articles/raw_data.html">Raw FASTQ data</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
@@ -60,8 +61,14 @@
 
 
 
-
-<div class="row">
+<link href="zenodo_files/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="zenodo_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="zenodo_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="zenodo_files/datatables-binding-0.34.0/datatables.js"></script><link href="zenodo_files/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="zenodo_files/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="zenodo_files/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="zenodo_files/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="zenodo_files/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="zenodo_files/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
+<script src="zenodo_files/selectize-0.12.0/selectize.min.js"></script><link href="zenodo_files/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="zenodo_files/crosstalk-1.2.2/js/crosstalk.min.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Zenodo</h1>
             
@@ -87,182 +94,84 @@ calls detect the cache and skip the download automatically.</p>
 <div class="section level2">
 <h2 id="zenodo-record-structure">Zenodo record structure<a class="anchor" aria-label="anchor" href="#zenodo-record-structure"></a>
 </h2>
-<table class="table">
-<colgroup>
-<col width="33%">
-<col width="33%">
-<col width="33%">
-</colgroup>
-<thead><tr class="header">
-<th>Data type</th>
-<th>Zenodo record ID</th>
-<th>Archive name</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Sequencing + normal (one shared record, all SPNs)</td>
-<td></td>
-<td>
-<code>SPN01_sequencing.tar.gz</code>,
-<code>SPN01_normal_sequencing.tar.gz</code>, …
-<code>SPN07_sequencing.tar.gz</code>,
-<code>SPN07_normal_sequencing.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN01 sarek + tumourevo purity 0.9</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN01 sarek + tumourevo purity 0.6</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN01 sarek + tumourevo purity 0.3</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN02 sarek + tumourevo purity 0.9</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN02 sarek + tumourevo purity 0.6</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN02 sarek + tumourevo purity 0.3</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN03 sarek + tumourevo purity 0.9</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN03 sarek + tumourevo purity 0.6</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN03 sarek + tumourevo purity 0.3</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN04 sarek + tumourevo purity 0.9</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN04 sarek + tumourevo purity 0.6</td>
-<td>505306</td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN04 sarek + tumourevo purity 0.3</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN05 sarek + tumourevo purity 0.9</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN05 sarek + tumourevo purity 0.6</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN05 sarek + tumourevo purity 0.3</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN06 sarek + tumourevo purity 0.9</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN06 sarek + tumourevo purity 0.6</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN06 sarek + tumourevo purity 0.3</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="even">
-<td>SPN07 sarek purity 0.9</td>
-<td></td>
-<td><code>sarek.tar.gz</code></td>
-</tr>
-<tr class="odd">
-<td>SPN07 sarek purity 0.6</td>
-<td></td>
-<td><code>sarek.tar.gz</code></td>
-</tr>
-<tr class="even">
-<td>SPN07 sarek + tumourevo purity 0.3</td>
-<td></td>
-<td>
-<code>sarek.tar.gz</code>, <code>tumourevo.tar.gz</code>
-</td>
-</tr>
-<tr class="odd">
-<td>SPN07 tumourevo purity 0.9 + 0.6</td>
-<td></td>
-<td>
-<code>tumourevo_0.9.tar.gz</code>,
-<code>tumourevo_0.6.tar.gz</code>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["all","SPN01","SPN01","SPN01","SPN02","SPN02","SPN02","SPN03","SPN03","SPN03","SPN04","SPN04","SPN04","SPN05","SPN05","SPN05","SPN06","SPN06","SPN06","SPN07","SPN07","SPN07","SPN07"],["-","0.9","0.6","0.3","0.9","0.6","0.3","0.9","0.6","0.3","0.9","0.6","0.3","0.9","0.6","0.3","0.9","0.6","0.3","0.9","0.6","0.3","0.9 + 0.6"],["Sequencing + normal (all SPNs)","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek + tumourevo","sarek only","sarek only","sarek + tumourevo","tumourevo only"],["","","","","","","","","","","","505306","","","","","","","","","","",""],["SPN01_sequencing.tar.gz, SPN01_normal_sequencing.tar.gz, ...","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz, tumourevo.tar.gz","sarek.tar.gz","sarek.tar.gz","sarek.tar.gz, tumourevo.tar.gz","tumourevo_0.9.tar.gz, tumourevo_0.6.tar.gz"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>SPN<\/th>\n      <th>Purity<\/th>\n      <th>Content<\/th>\n      <th>Zenodo record ID<\/th>\n      <th>Archives<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":25,"dom":"ftip","columnDefs":[{"name":"SPN","targets":0},{"name":"Purity","targets":1},{"name":"Content","targets":2},{"name":"Record_ID","targets":3},{"name":"Archives","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script><hr>
+</div>
+<div class="section level2">
+<h2 id="archive-contents">Archive contents<a class="anchor" aria-label="anchor" href="#archive-contents"></a>
+</h2>
+<div class="section level3">
+<h3 id="spn0x_sequencing-tar-gz">
+<code>SPN0X_sequencing.tar.gz</code><a class="anchor" aria-label="anchor" href="#spn0x_sequencing-tar-gz"></a>
+</h3>
+<p>Contains tumour mutation RDS files for all purity and coverage
+combinations.</p>
+<pre><code>sequencing/
+└── tumour/
+    ├── purity_0.9/data/mutations/seq_results_muts_merged_coverage_50x.rds
+    │                             seq_results_muts_merged_coverage_100x.rds
+    │                             seq_results_muts_merged_coverage_150x.rds
+    │                             seq_results_muts_merged_coverage_200x.rds
+    ├── purity_0.6/data/mutations/  (same files)
+    └── purity_0.3/data/mutations/  (same files)</code></pre>
+</div>
+<div class="section level3">
+<h3 id="spn0x_normal_sequencing-tar-gz">
+<code>SPN0X_normal_sequencing.tar.gz</code><a class="anchor" aria-label="anchor" href="#spn0x_normal_sequencing-tar-gz"></a>
+</h3>
+<p>Contains the matched normal mutation RDS file (fixed at 30x, purity
+1).</p>
+<pre><code>sequencing/
+└── normal/
+    └── purity_1/data/mutations/seq_results_muts_merged_coverage_30x.rds</code></pre>
+</div>
+<div class="section level3">
+<h3 id="sarek-tar-gz">
+<code>sarek.tar.gz</code><a class="anchor" aria-label="anchor" href="#sarek-tar-gz"></a>
+</h3>
+<p>Contains Sarek variant calling results for all callers and
+samples.</p>
+<pre><code>sarek/
+└── &lt;coverage&gt;x_&lt;purity&gt;p/
+    └── variant_calling/
+        ├── mutect2/&lt;spn&gt;/                         (SPN-level)
+        ├── strelka/&lt;sample&gt;_vs_normal_sample/
+        ├── freebayes/&lt;sample&gt;_vs_normal_sample/
+        │           normal_sample/
+        ├── haplotypecaller/normal_sample/
+        ├── ascat/&lt;sample&gt;_vs_normal_sample/
+        ├── battenberg/&lt;sample&gt;_vs_normal_sample/
+        ├── sequenza/&lt;sample&gt;_vs_normal_sample/
+        └── cnvkit/&lt;sample&gt;_vs_normal_sample/</code></pre>
+</div>
+<div class="section level3">
+<h3 id="tumourevo-tar-gz">
+<code>tumourevo.tar.gz</code><a class="anchor" aria-label="anchor" href="#tumourevo-tar-gz"></a>
+</h3>
+<p>Contains tumourevo pipeline results for all tools and samples.</p>
+<pre><code>tumourevo/
+└── &lt;coverage&gt;x_&lt;purity&gt;p_&lt;vcf_caller&gt;_&lt;cna_caller&gt;/
+    ├── formatter/
+    │   ├── vcf2cnaqc/SCOUT/&lt;spn&gt;/&lt;sample&gt;/        (SNV RDS per sample)
+    │   ├── cna2cnaqc/SCOUT/&lt;spn&gt;/&lt;sample&gt;/        (CNA RDS per sample)
+    │   └── cnaqc2tsv/SCOUT/&lt;spn&gt;/                 (joint table TSV)
+    ├── variant_annotation/vep/SCOUT/&lt;spn&gt;/&lt;sample&gt;/
+    ├── driver_annotation/annotate_driver/SCOUT/&lt;spn&gt;/&lt;sample&gt;/
+    ├── qc/
+    │   ├── cnaqc/SCOUT/&lt;spn&gt;/&lt;sample&gt;/
+    │   ├── join_cnaqc/SCOUT/&lt;spn&gt;/
+    │   └── tinc/SCOUT/&lt;spn&gt;/&lt;sample&gt;/
+    ├── subclonal_deconvolution/
+    │   ├── mobster/SCOUT/&lt;spn&gt;/&lt;sample&gt;/
+    │   ├── viber/SCOUT/&lt;spn&gt;/
+    │   ├── pyclonevi/SCOUT/&lt;spn&gt;/
+    │   └── ctree/SCOUT/&lt;spn&gt;/  (and per sample)
+    └── signature_deconvolution/
+        ├── BASCULE/SCOUT/
+        ├── sigprofiler/SCOUT/results/&lt;context&gt;/
+        └── sparsesignatures/SCOUT/</code></pre>
 <hr>
+</div>
 </div>
 <div class="section level2">
 <h2 id="downloading-data">Downloading data<a class="anchor" aria-label="anchor" href="#downloading-data"></a>
@@ -274,7 +183,7 @@ calls detect the cache and skip the download automatically.</p>
 <p>Downloads <code>SPN0X_sequencing.tar.gz</code> from the SPN’s
 sequencing record. Contains tumour mutation RDS files for all purity and
 coverage combinations.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_sequencing_data.html">get_sequencing_data</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -284,7 +193,7 @@ coverage combinations.</p>
 <p>Downloads <code>SPN0X_normal.tar.gz</code> from the shared normal
 record. Contains haplotypecaller and freebayes VCF files for the normal
 sample.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_normal_data.html">get_normal_data</a></span><span class="op">(</span><span class="st">"SPN04"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -292,7 +201,7 @@ sample.</p>
 <code>get_sarek_results()</code><a class="anchor" aria-label="anchor" href="#get_sarek_results"></a>
 </h3>
 <p>Downloads <code>sarek.tar.gz</code> for a given SPN and purity.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_sarek_results.html">get_sarek_results</a></span><span class="op">(</span><span class="st">"SPN01"</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_sarek_results.html">get_sarek_results</a></span><span class="op">(</span><span class="st">"SPN01"</span>, purity <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_sarek_results.html">get_sarek_results</a></span><span class="op">(</span><span class="st">"SPN01"</span>, purity <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></code></pre></div>
@@ -303,7 +212,7 @@ sample.</p>
 </h3>
 <p>Downloads <code>tumourevo.tar.gz</code> for a given SPN and
 purity.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_tumourevo_results.html">get_tumourevo_results</a></span><span class="op">(</span><span class="st">"SPN01"</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -311,7 +220,7 @@ purity.</p>
 <code>list_zenodo_files()</code><a class="anchor" aria-label="anchor" href="#list_zenodo_files"></a>
 </h3>
 <p>Inspect what is available in a record before downloading.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/list_zenodo_files.html">list_zenodo_files</a></span><span class="op">(</span><span class="st">"1234567"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 3</span></span>
 <span><span class="co">#&gt;   filename                size download_url</span></span>
@@ -333,7 +242,7 @@ files without navigating the directory structure.</p>
 </h3>
 <p>Returns the path to the mutations RDS file for a given type, coverage
 and purity.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Tumour (requires coverage and purity)</span></span>
 <span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations.html">get_mutations</a></span><span class="op">(</span><span class="st">"SPN04"</span>, type <span class="op">=</span> <span class="st">"tumour"</span>, coverage <span class="op">=</span> <span class="fl">100</span>, purity <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
@@ -357,7 +266,7 @@ file paths for a given sample, coverage, purity and caller.</p>
 <code>"mutect2"</code>, <code>"strelka"</code>,
 <code>"freebayes"</code>, <code>"haplotypecaller"</code>. Sample naming
 convention: <code>"SPN04_1.1"</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># mutect2 — SPN-level result, no sample needed</span></span>
 <span><span class="va">vcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_vcf.html">get_sarek_vcf</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="cn">NULL</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"mutect2"</span><span class="op">)</span></span>
 <span><span class="va">vcf</span><span class="op">$</span><span class="va">vcf</span></span>
@@ -382,7 +291,7 @@ convention: <code>"SPN04_1.1"</code>.</p>
 <p>Returns a named list of CNA file paths. Supported callers:
 <code>"ascat"</code>, <code>"battenberg"</code>,
 <code>"sequenza"</code>, <code>"cnvkit"</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ASCAT</span></span>
 <span><span class="va">cna</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sarek_cna.html">get_sarek_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="st">"SPN04_1.1"</span>, <span class="fl">100</span>, <span class="fl">0.3</span>, <span class="st">"ascat"</span><span class="op">)</span></span>
 <span><span class="va">cna</span><span class="op">$</span><span class="va">segments</span></span>
@@ -418,7 +327,7 @@ named lists of file paths. All require <code>spn</code>,
 <div class="section level3">
 <h3 id="formatter">Formatter<a class="anchor" aria-label="anchor" href="#formatter"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Formatted SNV RDS (vcf2cnaqc)</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_snv.html">get_tumourevo_snv</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
 <span></span>
@@ -431,14 +340,14 @@ named lists of file paths. All require <code>spn</code>,
 <div class="section level3">
 <h3 id="variant-annotation">Variant annotation<a class="anchor" aria-label="anchor" href="#variant-annotation"></a>
 </h3>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># VEP annotated VCF</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_vep.html">get_tumourevo_vep</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="driver-annotation">Driver annotation<a class="anchor" aria-label="anchor" href="#driver-annotation"></a>
 </h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># One sample</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_driver.html">get_tumourevo_driver</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
 <span></span>
@@ -450,7 +359,7 @@ named lists of file paths. All require <code>spn</code>,
 </h3>
 <p>Supported tools: <code>"mobster"</code>, <code>"pyclonevi"</code>,
 <code>"ctree"</code>, <code>"viber"</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># mobster — sample required</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_subclonal.html">get_tumourevo_subclonal</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>,</span>
 <span>                         <span class="st">"mobster"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
@@ -468,7 +377,7 @@ named lists of file paths. All require <code>spn</code>,
 </h3>
 <p>Supported tools: <code>"cnaqc"</code>, <code>"join_cnaqc"</code>,
 <code>"tinc"</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># cnaqc / tinc — sample required</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_qc.html">get_tumourevo_qc</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"cnaqc"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_qc.html">get_tumourevo_qc</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"tinc"</span>,  <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
@@ -484,7 +393,7 @@ named lists of file paths. All require <code>spn</code>,
 <code>sigprofiler</code> requires a <code>context</code> argument
 (e.g. <code>"SBS96"</code>, <code>"ID83"</code>,
 <code>"DBS78"</code>).</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># BASCULE</span></span>
 <span><span class="va">sigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_tumourevo_signatures.html">get_tumourevo_signatures</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>,</span>
 <span>                                  <span class="st">"BASCULE"</span><span class="op">)</span></span>

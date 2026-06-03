@@ -7,6 +7,7 @@ Universal Tumours from R.
 |----|----|----|
 | **Tables** | Cohort metadata, ground truth tables | [`get_metadata()`](https://caravagnalab.github.io/SCOUT/reference/get_metadata.md), [`get_ground_truth_cna()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_cna.md), [`get_ground_truth_drivers()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_drivers.md), [`get_ground_truth_exposures()`](https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_exposures.md), [`get_sampling_information()`](https://caravagnalab.github.io/SCOUT/reference/get_sampling_information.md) |
 | **Zenodo** | Sequencing RDS files, normal and tumour sarek results, tumourevo results | [`get_sequencing_data()`](https://caravagnalab.github.io/SCOUT/reference/get_sequencing_data.md), [`get_normal_data()`](https://caravagnalab.github.io/SCOUT/reference/get_normal_data.md), [`get_sarek_results()`](https://caravagnalab.github.io/SCOUT/reference/get_sarek_results.md), [`get_tumourevo_results()`](https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_results.md) |
+| **ENA** (PRJEB97253) | Raw paired-end FASTQ files — 144 tumour + 14 normal (200× per sample, subsamplable to 50×/100×/150×) | — see **Raw FASTQ data** article |
 
 ## Installation
 
@@ -116,5 +117,28 @@ get_tumourevo_signatures("SPN04", 50, 0.6, "mutect2", "sequenza", "BASCULE")
 ```
 
 See the **Zenodo** article for the full function reference.
+
+------------------------------------------------------------------------
+
+## Raw FASTQ data
+
+Raw paired-end FASTQ files are available in the European Nucleotide
+Archive under accession **PRJEB97253**. There are 79 entries in total:
+72 tumour sample × purity combinations across all SPNs, plus 7 normal
+samples (one per SPN). Each entry contains files named
+`tXX_{spn}_{sample}.R1.fastq.gz` for `t00`–`t39` (40 bins × 5× = 200×
+total coverage per sample).
+
+Standard coverage levels can be reproduced by subsetting consecutive
+bins with SeqKit:
+
+| Coverage | Bins        |
+|----------|-------------|
+| 50×      | `t00`–`t09` |
+| 100×     | `t00`–`t19` |
+| 150×     | `t00`–`t29` |
+
+See the **Raw FASTQ data** article for installation instructions and the
+full subsampling commands.
 
 ------------------------------------------------------------------------

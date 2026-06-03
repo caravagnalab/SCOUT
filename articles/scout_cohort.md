@@ -27,7 +27,7 @@ The main features of SCOUT are:
   pipeline, with raw data in the format of whole-genome or whole-exome
   sequencing.
 
-With a total of ~20 TB of data, SCOUT samples can be used to benchmark
+With a total of ~27 TB of data, SCOUT samples can be used to benchmark
 pretty much most standard computational methods commonly used in the
 cancer genomics field.
 

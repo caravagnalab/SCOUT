@@ -11,3 +11,5 @@
   SCOUT](https://caravagnalab.github.io/SCOUT/articles/getting_started.md):
 - [Tables](https://caravagnalab.github.io/SCOUT/articles/google_sheets.md):
 - [Zenodo](https://caravagnalab.github.io/SCOUT/articles/zenodo.md):
+- [Raw FASTQ
+  data](https://caravagnalab.github.io/SCOUT/articles/raw_data.md):

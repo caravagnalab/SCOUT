@@ -43,6 +43,7 @@
     <li><a class="dropdown-item" href="../articles/getting_started.html">Getting started</a></li>
     <li><a class="dropdown-item" href="../articles/google_sheets.html">Tables</a></li>
     <li><a class="dropdown-item" href="../articles/zenodo.html">Zenodo</a></li>
+    <li><a class="dropdown-item" href="../articles/raw_data.html">Raw FASTQ data</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
@@ -105,6 +106,13 @@ results</td>
 <code><a href="../reference/get_sarek_results.html">get_sarek_results()</a></code>,
 <code><a href="../reference/get_tumourevo_results.html">get_tumourevo_results()</a></code>
 </td>
+</tr>
+<tr class="odd">
+<td>
+<strong>ENA</strong> (PRJEB97253)</td>
+<td>Raw paired-end FASTQ files — 144 tumour + 14 normal (200× per
+sample, subsamplable to 50×/100×/150×)</td>
+<td>— see <strong>Raw FASTQ data</strong> article</td>
 </tr>
 </tbody>
 </table>
@@ -267,6 +275,48 @@ directory navigation:</p>
 reference.</p>
 <hr>
 </div>
+</div>
+<div class="section level2">
+<h2 id="raw-fastq-data">Raw FASTQ data<a class="anchor" aria-label="anchor" href="#raw-fastq-data"></a>
+</h2>
+<p>Raw paired-end FASTQ files are available in the European Nucleotide
+Archive under accession <strong>PRJEB97253</strong>. There are 79
+entries in total: 72 tumour sample × purity combinations across all
+SPNs, plus 7 normal samples (one per SPN). Each entry contains files
+named <code>tXX_{spn}_{sample}.R1.fastq.gz</code> for
+<code>t00</code>–<code>t39</code> (40 bins × 5× = 200× total coverage
+per sample).</p>
+<p>Standard coverage levels can be reproduced by subsetting consecutive
+bins with SeqKit:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Coverage</th>
+<th>Bins</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>50×</td>
+<td>
+<code>t00</code>–<code>t09</code>
+</td>
+</tr>
+<tr class="even">
+<td>100×</td>
+<td>
+<code>t00</code>–<code>t19</code>
+</td>
+</tr>
+<tr class="odd">
+<td>150×</td>
+<td>
+<code>t00</code>–<code>t29</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See the <strong>Raw FASTQ data</strong> article for installation
+instructions and the full subsampling commands.</p>
+<hr>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
