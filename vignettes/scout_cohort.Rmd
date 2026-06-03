@@ -28,7 +28,7 @@ The main features of SCOUT are:
 -   for some tumours, the simulated effect of treatment following typical patterns for each tumour type, including resistance caused by pre-existing or de novo tumour clones;
 -   data available in the format of simulated read counts format, or as raw sequencing reads (FASTq) to be streamlined in any bioinformatics pipeline, with raw data in the format of whole-genome or whole-exome sequencing.
 
-With a total of ~20 TB of data, SCOUT samples can be used to benchmark pretty much most standard computational methods commonly used in the cancer genomics field.
+With a total of ~27 TB of data, SCOUT samples can be used to benchmark pretty much most standard computational methods commonly used in the cancer genomics field.
 
 
 <!-- # Summary statistics -->

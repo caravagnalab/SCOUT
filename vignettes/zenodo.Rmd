@@ -9,6 +9,7 @@ vignette: >
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+# the DT table chunk uses eval = TRUE explicitly
 ```
 
 SCOUT data are distributed across several Zenodo records organised by data
@@ -27,31 +28,142 @@ Sys.setenv(SCOUT_CACHE_DIR = "/scratch/shared/SCOUT")
 
 ## Zenodo record structure
 
-| Data type | Zenodo record ID | Archive name |
-|---|---|---|
-| Sequencing + normal (one shared record, all SPNs) | | `SPN01_sequencing.tar.gz`, `SPN01_normal_sequencing.tar.gz`, … `SPN07_sequencing.tar.gz`, `SPN07_normal_sequencing.tar.gz` |
-| SPN01 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN01 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN01 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN02 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN02 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN02 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN03 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN03 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN03 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN04 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN04 sarek + tumourevo purity 0.6 | 505306 | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN04 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN05 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN05 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN05 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN06 sarek + tumourevo purity 0.9 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN06 sarek + tumourevo purity 0.6 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN06 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN07 sarek purity 0.9 | | `sarek.tar.gz` |
-| SPN07 sarek purity 0.6 | | `sarek.tar.gz` |
-| SPN07 sarek + tumourevo purity 0.3 | | `sarek.tar.gz`, `tumourevo.tar.gz` |
-| SPN07 tumourevo purity 0.9 + 0.6 | | `tumourevo_0.9.tar.gz`, `tumourevo_0.6.tar.gz` |
+```{r zenodo-table, echo = FALSE, eval = TRUE}
+records <- data.frame(
+  SPN = c(
+    rep("all", 1),
+    rep("SPN01", 3), rep("SPN02", 3), rep("SPN03", 3),
+    rep("SPN04", 3), rep("SPN05", 3), rep("SPN06", 3),
+    rep("SPN07", 4)
+  ),
+  Purity = c(
+    "-",
+    "0.9", "0.6", "0.3",
+    "0.9", "0.6", "0.3",
+    "0.9", "0.6", "0.3",
+    "0.9", "0.6", "0.3",
+    "0.9", "0.6", "0.3",
+    "0.9", "0.6", "0.3",
+    "0.9", "0.6", "0.3", "0.9 + 0.6"
+  ),
+  Content = c(
+    "Sequencing + normal (all SPNs)",
+    rep("sarek + tumourevo", 3),
+    rep("sarek + tumourevo", 3),
+    rep("sarek + tumourevo", 3),
+    rep("sarek + tumourevo", 3),
+    rep("sarek + tumourevo", 3),
+    rep("sarek + tumourevo", 3),
+    "sarek only", "sarek only", "sarek + tumourevo", "tumourevo only"
+  ),
+  Record_ID = c(
+    "",
+    "", "", "",
+    "", "", "",
+    "", "", "",
+    "", "505306", "",
+    "", "", "",
+    "", "", "",
+    "", "", "", ""
+  ),
+  Archives = c(
+    "SPN01_sequencing.tar.gz, SPN01_normal_sequencing.tar.gz, ...",
+    rep("sarek.tar.gz, tumourevo.tar.gz", 3),
+    rep("sarek.tar.gz, tumourevo.tar.gz", 3),
+    rep("sarek.tar.gz, tumourevo.tar.gz", 3),
+    rep("sarek.tar.gz, tumourevo.tar.gz", 3),
+    rep("sarek.tar.gz, tumourevo.tar.gz", 3),
+    rep("sarek.tar.gz, tumourevo.tar.gz", 3),
+    "sarek.tar.gz", "sarek.tar.gz", "sarek.tar.gz, tumourevo.tar.gz",
+    "tumourevo_0.9.tar.gz, tumourevo_0.6.tar.gz"
+  ),
+  stringsAsFactors = FALSE
+)
+
+DT::datatable(
+  records,
+  colnames = c("SPN", "Purity", "Content", "Zenodo record ID", "Archives"),
+  rownames  = FALSE,
+  filter    = "top",
+  options   = list(pageLength = 25, dom = "ftip")
+)
+```
+
+---
+
+## Archive contents
+
+### `SPN0X_sequencing.tar.gz`
+
+Contains tumour mutation RDS files for all purity and coverage combinations.
+
+```
+sequencing/
+└── tumour/
+    ├── purity_0.9/data/mutations/seq_results_muts_merged_coverage_50x.rds
+    │                             seq_results_muts_merged_coverage_100x.rds
+    │                             seq_results_muts_merged_coverage_150x.rds
+    │                             seq_results_muts_merged_coverage_200x.rds
+    ├── purity_0.6/data/mutations/  (same files)
+    └── purity_0.3/data/mutations/  (same files)
+```
+
+### `SPN0X_normal_sequencing.tar.gz`
+
+Contains the matched normal mutation RDS file (fixed at 30x, purity 1).
+
+```
+sequencing/
+└── normal/
+    └── purity_1/data/mutations/seq_results_muts_merged_coverage_30x.rds
+```
+
+### `sarek.tar.gz`
+
+Contains Sarek variant calling results for all callers and samples.
+
+```
+sarek/
+└── <coverage>x_<purity>p/
+    └── variant_calling/
+        ├── mutect2/<spn>/                         (SPN-level)
+        ├── strelka/<sample>_vs_normal_sample/
+        ├── freebayes/<sample>_vs_normal_sample/
+        │           normal_sample/
+        ├── haplotypecaller/normal_sample/
+        ├── ascat/<sample>_vs_normal_sample/
+        ├── battenberg/<sample>_vs_normal_sample/
+        ├── sequenza/<sample>_vs_normal_sample/
+        └── cnvkit/<sample>_vs_normal_sample/
+```
+
+### `tumourevo.tar.gz`
+
+Contains tumourevo pipeline results for all tools and samples.
+
+```
+tumourevo/
+└── <coverage>x_<purity>p_<vcf_caller>_<cna_caller>/
+    ├── formatter/
+    │   ├── vcf2cnaqc/SCOUT/<spn>/<sample>/        (SNV RDS per sample)
+    │   ├── cna2cnaqc/SCOUT/<spn>/<sample>/        (CNA RDS per sample)
+    │   └── cnaqc2tsv/SCOUT/<spn>/                 (joint table TSV)
+    ├── variant_annotation/vep/SCOUT/<spn>/<sample>/
+    ├── driver_annotation/annotate_driver/SCOUT/<spn>/<sample>/
+    ├── qc/
+    │   ├── cnaqc/SCOUT/<spn>/<sample>/
+    │   ├── join_cnaqc/SCOUT/<spn>/
+    │   └── tinc/SCOUT/<spn>/<sample>/
+    ├── subclonal_deconvolution/
+    │   ├── mobster/SCOUT/<spn>/<sample>/
+    │   ├── viber/SCOUT/<spn>/
+    │   ├── pyclonevi/SCOUT/<spn>/
+    │   └── ctree/SCOUT/<spn>/  (and per sample)
+    └── signature_deconvolution/
+        ├── BASCULE/SCOUT/
+        ├── sigprofiler/SCOUT/results/<context>/
+        └── sparsesignatures/SCOUT/
+```
 
 ---
 

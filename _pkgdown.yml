@@ -20,6 +20,8 @@ navbar:
           href: articles/google_sheets.html
         - text: Zenodo
           href: articles/zenodo.html
+        - text: Raw FASTQ data
+          href: articles/raw_data.html
 
 articles:
   - title: The SCOUT cohort
@@ -30,6 +32,7 @@ articles:
       - getting_started
       - google_sheets
       - zenodo
+      - raw_data
 
 reference:
   - title: Tables

@@ -17,6 +17,7 @@ Imports:
     tibble,
     tools
 Suggests:
+    DT,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
