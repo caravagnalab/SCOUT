@@ -60,13 +60,13 @@ files by header pattern while preserving valid FASTQ format.
 
 ``` bash
 # Conda (recommended)
-conda install -c bioconda seqkit
+conda install bioconda::seqkit
 
 # Docker
-docker pull biocontainers/seqkit
+docker pull quay.io/biocontainers/seqkit:2.9.0--h9ee0642_0
 
 # Singularity
-singularity pull docker://biocontainers/seqkit
+singularity pull https://depot.galaxyproject.org/singularity/seqkit:2.9.0--h9ee0642_0
 ```
 
 The input is the merged FASTQ file from ENA
@@ -79,11 +79,11 @@ read name to extract a specific coverage level.
 Select bins `t00`–`t09` (10 × 5× = 50×):
 
 ``` bash
-seqkit grep -r -p '^t0[0-9]_' \
-  SPN02_1.1_0.9.R1.fastq.gz > SPN02_1.1_0.9_50x.R1.fastq.gz
+seqkit grep --threads 2 -n -r -p "^t0[0-9]" \
+  SPN02_1.1_0.9.R1.fastq.gz -o SPN02_1.1_0.9_50x.R1.fastq.gz
 
-seqkit grep -r -p '^t0[0-9]_' \
-  SPN02_1.1_0.9.R2.fastq.gz > SPN02_1.1_0.9_50x.R2.fastq.gz
+seqkit grep --threads 2 -n -r -p "^t0[0-9]" \
+  SPN02_1.1_0.9.R2.fastq.gz -o SPN02_1.1_0.9_50x.R2.fastq.gz
 ```
 
 ### 100× coverage
@@ -91,11 +91,11 @@ seqkit grep -r -p '^t0[0-9]_' \
 Select bins `t00`–`t19` (20 × 5× = 100×):
 
 ``` bash
-seqkit grep -r -p '^t(0[0-9]|1[0-9])_' \
-  SPN02_1.1_0.9.R1.fastq.gz > SPN02_1.1_0.9_100x.R1.fastq.gz
+seqkit grep --threads 2 -n -r -p "^t(0[0-9]|1[0-9])_" \
+  SPN02_1.1_0.9.R1.fastq.gz -o SPN02_1.1_0.9_100x.R1.fastq.gz
 
-seqkit grep -r -p '^t(0[0-9]|1[0-9])_' \
-  SPN02_1.1_0.9.R2.fastq.gz > SPN02_1.1_0.9_100x.R2.fastq.gz
+seqkit grep --threads 2 -n -r -p "^t(0[0-9]|1[0-9])_" \
+  SPN02_1.1_0.9.R2.fastq.gz -o SPN02_1.1_0.9_100x.R2.fastq.gz
 ```
 
 ### 150× coverage
@@ -103,11 +103,11 @@ seqkit grep -r -p '^t(0[0-9]|1[0-9])_' \
 Select bins `t00`–`t29` (30 × 5× = 150×):
 
 ``` bash
-seqkit grep -r -p '^t(0[0-9]|1[0-9]|2[0-9])_' \
-  SPN02_1.1_0.9.R1.fastq.gz > SPN02_1.1_0.9_150x.R1.fastq.gz
+seqkit grep --threads 2 -n -r -p "^t(0[0-9]|1[0-9]|2[0-9])_" \
+  SPN02_1.1_0.9.R1.fastq.gz -o SPN02_1.1_0.9_150x.R1.fastq.gz
 
-seqkit grep -r -p '^t(0[0-9]|1[0-9]|2[0-9])_' \
-  SPN02_1.1_0.9.R2.fastq.gz > SPN02_1.1_0.9_150x.R2.fastq.gz
+seqkit grep --threads 2 -n -r -p "^t(0[0-9]|1[0-9]|2[0-9])_" \
+  SPN02_1.1_0.9.R2.fastq.gz -o SPN02_1.1_0.9_150x.R2.fastq.gz
 ```
 
 ### 200× coverage (full)
