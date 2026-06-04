@@ -1,33 +1,35 @@
 # Zenodo record IDs.
 #
-# Sequencing + normal: one shared record for all SPNs, containing:
-#   SPN01_sequencing.tar.gz, SPN01_normal_sequencing.tar.gz,
-#   SPN02_sequencing.tar.gz, SPN02_normal_sequencing.tar.gz, ... SPN07
+# Sequencing + normal: one shared record for all SPNs (18839402), containing:
+#   SPN01_sequencing.tar.gz, SPN01_normal_sequencing.tar.gz, ... SPN07
+# Normal samples: one shared record (20201204)
 # tumourevo/sarek: one record per SPN per purity (SPN01-SPN06);
 #   SPN07 has separate records for sarek and tumourevo
 
 .SCOUT_ZENODO_RECORDS <- list(
 
   # ── One shared record for all sequencing + normal archives ────────────────
-  sequencing = NA_character_,
+  sequencing = "18839402",
+
+  # ── Normal samples ─────────────────────────────────────────────────────────
+  normal = "20201204",
 
   # ── tumourevo + sarek (one record per SPN per purity) ─────────────────────
-  SPN01 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
-  SPN02 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
-  SPN03 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
-  SPN04 = list(`0.9` = NA_character_, `0.6` = 505306,        `0.3` = NA_character_),
-  SPN05 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
-  SPN06 = list(`0.9` = NA_character_, `0.6` = NA_character_, `0.3` = NA_character_),
+  SPN01 = list(`0.9` = "20375904", `0.6` = "20369470", `0.3` = "20201559"),
+  SPN02 = list(`0.9` = "20375976", `0.6` = "20362893", `0.3` = "20201684"),
+  SPN03 = list(`0.9` = "20376007", `0.6` = "20369483", `0.3` = "20201729"),
+  SPN04 = list(`0.9` = "20376032", `0.6` = "20369494", `0.3` = "20201769"),
+  SPN05 = list(`0.9` = "20376054", `0.6` = "20369498", `0.3` = "20201784"),
+  SPN06 = list(`0.9` = "20376060", `0.6` = "20369500", `0.3` = "20201816"),
 
-  # SPN07: sarek per-purity; tumourevo split (0.9+0.6 share one record)
   # SPN07: sarek 0.9 and 0.6 are separate records;
   #         purity 0.3 has one record with both sarek + tumourevo;
   #         tumourevo 0.9+0.6 share one record
   SPN07 = list(
-    sarek_0.9     = NA_character_,
-    sarek_0.6     = NA_character_,
-    purity_0.3    = NA_character_,  # contains sarek.tar.gz + tumourevo.tar.gz
-    tumourevo_0.9_0.6 = NA_character_
+    sarek_0.9        = "20386282",
+    sarek_0.6        = "20374070",
+    purity_0.3       = "20201843",  # contains sarek.tar.gz + tumourevo.tar.gz
+    tumourevo_0.9_0.6 = "20386301"
   )
 )
 
