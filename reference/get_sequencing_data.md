@@ -9,7 +9,7 @@ tumour mutation RDS files for all purity and coverage combinations.
 ``` r
 get_sequencing_data(
   spn,
-  record_id = .scout_sequencing_record_id(spn),
+  record_id = .scout_sequencing_record_id(),
   cache_dir = .scout_cache_dir(spn)
 )
 ```

@@ -1,7 +1,7 @@
 # Download SCOUT normal sarek results for a SPN
 
-Downloads and extracts `SPN0X_normal.tar.gz` from the shared normal
-Zenodo record (if not already cached). The archive contains
+Downloads and extracts `SPN0X_normal_sequencing.tar.gz` from the SPN's
+sequencing Zenodo record (if not already cached). The archive contains
 haplotypecaller and freebayes VCF files for the normal sample.
 
 ## Usage
@@ -9,7 +9,7 @@ haplotypecaller and freebayes VCF files for the normal sample.
 ``` r
 get_normal_data(
   spn,
-  record_id = .scout_normal_record_id(),
+  record_id = .scout_sequencing_record_id(),
   cache_dir = .scout_cache_dir(spn)
 )
 ```
@@ -22,7 +22,7 @@ get_normal_data(
 
 - record_id:
 
-  Zenodo record ID. Defaults to the shared normal record.
+  Zenodo record ID. Defaults to the sequencing record for this SPN.
 
 - cache_dir:
 
