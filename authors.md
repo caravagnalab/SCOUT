@@ -7,15 +7,18 @@
 
 - **Giorgia Gandolfi**. Author.
 
+- **Giulio Caravagna**. Author.
+
 ## Citation
 
-Valeriani L, Gandolfi G (2026). *SCOUT: SCOUT*. R package version 0.0.1,
+Valeriani L, Gandolfi G, Caravagna G (2026). *SCOUT: Simulated Cohort Of
+Universal Tumour*. R package version 1.0.0,
 <https://caravagnalab.github.io/SCOUT/>.
 
     @Manual{,
-      title = {SCOUT: SCOUT},
-      author = {Lucrezia Valeriani and Giorgia Gandolfi},
+      title = {SCOUT: Simulated Cohort Of Universal Tumour},
+      author = {Lucrezia Valeriani and Giorgia Gandolfi and Giulio Caravagna},
       year = {2026},
-      note = {R package version 0.0.1},
+      note = {R package version 1.0.0},
       url = {https://caravagnalab.github.io/SCOUT/},
     }
