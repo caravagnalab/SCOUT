@@ -268,7 +268,8 @@ directory navigation:</p>
 <span><span class="fu"><a href="../reference/get_tumourevo_snv.html">get_tumourevo_snv</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_cna.html">get_tumourevo_cna</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_driver.html">get_tumourevo_driver</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/get_tumourevo_subclonal.html">get_tumourevo_subclonal</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"mobster"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_tumourevo_subclonal.html">get_tumourevo_subclonal</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>,</span>
+<span>                        <span class="st">"mobster"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_qc.html">get_tumourevo_qc</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"cnaqc"</span>, <span class="st">"SPN04_1.1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_tumourevo_signatures.html">get_tumourevo_signatures</a></span><span class="op">(</span><span class="st">"SPN04"</span>, <span class="fl">50</span>, <span class="fl">0.6</span>, <span class="st">"mutect2"</span>, <span class="st">"sequenza"</span>, <span class="st">"BASCULE"</span><span class="op">)</span></span></code></pre></div>
 <p>See the <strong>Zenodo</strong> article for the full function
@@ -280,12 +281,20 @@ reference.</p>
 <h2 id="raw-fastq-data">Raw FASTQ data<a class="anchor" aria-label="anchor" href="#raw-fastq-data"></a>
 </h2>
 <p>Raw paired-end FASTQ files are available in the European Nucleotide
-Archive under accession <strong>PRJEB97253</strong>. There are 79
-entries in total: 72 tumour sample × purity combinations across all
-SPNs, plus 7 normal samples (one per SPN). Each entry contains files
-named <code>tXX_{spn}_{sample}.R1.fastq.gz</code> for
-<code>t00</code>–<code>t39</code> (40 bins × 5× = 200× total coverage
-per sample).</p>
+Archive under accession <strong>PRJEB97253</strong>. There are 158 files
+in total: 144 tumour (24 samples × 3 purities × R1+R2) and 14 normal (7
+SPNs × R1+R2). Each file is 200× coverage, internally organised as 40
+bins of 5× each.</p>
+<p>Use <code><a href="../reference/list_ena_files.html">list_ena_files()</a></code> to inspect available files and
+<code><a href="../reference/get_fastq.html">get_fastq()</a></code> to download them:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># List all tumour files for SPN01 at purity 0.9</span></span>
+<span><span class="fu"><a href="../reference/list_ena_files.html">list_ena_files</a></span><span class="op">(</span><span class="st">"SPN01"</span>, purity <span class="op">=</span> <span class="st">"0.9"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Download R1 + R2 for SPN01 sample 1.1, purity 0.9</span></span>
+<span><span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_fastq.html">get_fastq</a></span><span class="op">(</span><span class="st">"SPN01"</span>, sample <span class="op">=</span> <span class="st">"1.1"</span>, purity <span class="op">=</span> <span class="st">"0.9"</span><span class="op">)</span></span>
+<span><span class="va">paths</span><span class="op">$</span><span class="va">R1</span></span>
+<span><span class="va">paths</span><span class="op">$</span><span class="va">R2</span></span></code></pre></div>
 <p>Standard coverage levels can be reproduced by subsetting consecutive
 bins with SeqKit:</p>
 <table class="table">
@@ -314,8 +323,8 @@ bins with SeqKit:</p>
 </tr>
 </tbody>
 </table>
-<p>See the <strong>Raw FASTQ data</strong> article for installation
-instructions and the full subsampling commands.</p>
+<p>See the <strong>Raw FASTQ data</strong> article for full download and
+subsampling commands.</p>
 <hr>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -329,7 +338,7 @@ instructions and the full subsampling commands.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

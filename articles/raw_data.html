@@ -61,8 +61,14 @@
 
 
 
-
-<div class="row">
+<link href="raw_data_files/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="raw_data_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="raw_data_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="raw_data_files/datatables-binding-0.34.0/datatables.js"></script><link href="raw_data_files/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="raw_data_files/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="raw_data_files/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="raw_data_files/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="raw_data_files/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="raw_data_files/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
+<script src="raw_data_files/selectize-0.12.0/selectize.min.js"></script><link href="raw_data_files/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="raw_data_files/crosstalk-1.2.2/js/crosstalk.min.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Raw FASTQ data</h1>
             
@@ -75,7 +81,9 @@
     
 <p>Raw FASTQ files for all SCOUT samples are deposited in the European
 Nucleotide Archive (ENA) under accession number
-<strong>PRJEB97253</strong>.</p>
+<strong>PRJEB97253</strong>. The SCOUT package provides two functions to
+interact with these files directly from R: <code><a href="../reference/list_ena_files.html">list_ena_files()</a></code>
+and <code><a href="../reference/get_fastq.html">get_fastq()</a></code>.</p>
 <hr>
 <div class="section level2">
 <h2 id="ena-record-structure">ENA record structure<a class="anchor" aria-label="anchor" href="#ena-record-structure"></a>
@@ -122,6 +130,16 @@ sample × purity × read direction, plus matched normals:</p>
 SPN02_1.1_0.6.R1.fastq.gz    SPN02_1.1_0.6.R2.fastq.gz
 SPN02_1.1_0.3.R1.fastq.gz    SPN02_1.1_0.3.R2.fastq.gz
 SPN05_normal.R1.fastq.gz      SPN05_normal.R2.fastq.gz</code></pre>
+</div>
+<div class="section level2">
+<h2 id="ena-run-accessions">ENA run accessions<a class="anchor" aria-label="anchor" href="#ena-run-accessions"></a>
+</h2>
+<p>Each sample × purity combination corresponds to one ENA run accession
+(ERR…). Both R1 and R2 files are stored under the same run. Use
+<code><a href="../reference/list_ena_files.html">list_ena_files()</a></code> to retrieve accessions
+programmatically.</p>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["SPN01","SPN01","SPN01","SPN01","SPN01","SPN01","SPN01","SPN01","SPN01","SPN01","SPN02","SPN02","SPN02","SPN02","SPN02","SPN03","SPN03","SPN03","SPN03","SPN03","SPN03","SPN03","SPN03","SPN03","SPN03","SPN03","SPN03","SPN03","SPN04","SPN04","SPN04","SPN04","SPN04","SPN04","SPN04","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN06","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07","SPN07"],["normal","1.1","1.1","1.1","1.2","1.2","1.2","1.3","1.3","1.3","normal","1.1","1.1","1.2","1.2","normal","1.1","1.1","1.1","2.1","2.1","2.1","3.1","3.1","3.1","4.1","4.1","4.1","normal","1.1","1.1","1.1","2.1","2.1","2.1","normal","1.1","1.1","1.1","1.2","1.2","1.2","2.1","2.1","2.1","3.1","3.1","3.1","3.2","3.2","3.2","normal","1.1","1.1","1.1","1.2","1.2","1.2","1.3","1.3","1.3","2.1","2.1","2.1","2.2","2.2","2.2"],[null,"0.3","0.6","0.9","0.3","0.6","0.9","0.3","0.6","0.9",null,"0.6","0.9","0.6","0.9",null,"0.3","0.6","0.9","0.3","0.6","0.9","0.3","0.6","0.9","0.3","0.6","0.9",null,"0.3","0.6","0.9","0.3","0.6","0.9",null,"0.3","0.6","0.9","0.3","0.6","0.9","0.3","0.6","0.9","0.3","0.6","0.9","0.3","0.6","0.9",null,"0.3","0.6","0.9","0.3","0.6","0.9","0.3","0.6","0.9","0.3","0.6","0.9","0.3","0.6","0.9"],["ERR15726468","ERR15743951","ERR15750078","ERR15750982","ERR15756720","ERR15757038","ERR15757711","ERR15760992","ERR15761713","ERR15761859","ERR17603652","ERR17625911","ERR17626192","ERR17630557","ERR17632556","ERR15751770","ERR15772337","ERR15772781","ERR15773219","ERR15797837","ERR15798553","ERR15799893","ERR15800648","ERR15801298","ERR15801715","ERR15805035","ERR15805842","ERR15806126","ERR15751912","ERR15765472","ERR15765510","ERR15765559","ERR15765578","ERR15766084","ERR15766489","ERR15752203","ERR15810993","ERR15811483","ERR15811585","ERR15811699","ERR15812456","ERR15813859","ERR15813942","ERR15814016","ERR15814028","ERR15814262","ERR15814505","ERR15814526","ERR15814543","ERR15815742","ERR15815983","ERR15764709","ERR15823985","ERR15824443","ERR15824573","ERR15826291","ERR15827077","ERR15827374","ERR15827485","ERR15828408","ERR15833982","ERR15834853","ERR15835036","ERR15835245","ERR15836007","ERR15836680","ERR15837918"],["SPN01_normal.R1.fastq.gz","SPN01_1.1_0.3.R1.fastq.gz","SPN01_1.1_0.6.R1.fastq.gz","SPN01_1.1_0.9.R1.fastq.gz","SPN01_1.2_0.3.R1.fastq.gz","SPN01_1.2_0.6.R1.fastq.gz","SPN01_1.2_0.9.R1.fastq.gz","SPN01_1.3_0.3.R1.fastq.gz","SPN01_1.3_0.6.R1.fastq.gz","SPN01_1.3_0.9.R1.fastq.gz","SPN02_normal.R1.fastq.gz","SPN02_1.1_0.6.R1.fastq.gz","SPN02_1.1_0.9.R1.fastq.gz","SPN02_1.2_0.6.R1.fastq.gz","SPN02_1.2_0.9.R1.fastq.gz","SPN03_normal.R1.fastq.gz","SPN03_1.1_0.3.R1.fastq.gz","SPN03_1.1_0.6.R1.fastq.gz","SPN03_1.1_0.9.R1.fastq.gz","SPN03_2.1_0.3.R1.fastq.gz","SPN03_2.1_0.6.R1.fastq.gz","SPN03_2.1_0.9.R1.fastq.gz","SPN03_3.1_0.3.R1.fastq.gz","SPN03_3.1_0.6.R1.fastq.gz","SPN03_3.1_0.9.R1.fastq.gz","SPN03_4.1_0.3.R1.fastq.gz","SPN03_4.1_0.6.R1.fastq.gz","SPN03_4.1_0.9.R1.fastq.gz","SPN04_normal.R1.fastq.gz","SPN04_1.1_0.3.R1.fastq.gz","SPN04_1.1_0.6.R1.fastq.gz","SPN04_1.1_0.9.R1.fastq.gz","SPN04_2.1_0.3.R1.fastq.gz","SPN04_2.1_0.6.R1.fastq.gz","SPN04_2.1_0.9.R1.fastq.gz","SPN06_normal.R1.fastq.gz","SPN06_1.1_0.3.R1.fastq.gz","SPN06_1.1_0.6.R1.fastq.gz","SPN06_1.1_0.9.R1.fastq.gz","SPN06_1.2_0.3.R1.fastq.gz","SPN06_1.2_0.6.R1.fastq.gz","SPN06_1.2_0.9.R1.fastq.gz","SPN06_2.1_0.3.R1.fastq.gz","SPN06_2.1_0.6.R1.fastq.gz","SPN06_2.1_0.9.R1.fastq.gz","SPN06_3.1_0.3.R1.fastq.gz","SPN06_3.1_0.6.R1.fastq.gz","SPN06_3.1_0.9.R1.fastq.gz","SPN06_3.2_0.3.R1.fastq.gz","SPN06_3.2_0.6.R1.fastq.gz","SPN06_3.2_0.9.R1.fastq.gz","SPN07_normal.R1.fastq.gz","SPN07_1.1_0.3.R1.fastq.gz","SPN07_1.1_0.6.R1.fastq.gz","SPN07_1.1_0.9.R1.fastq.gz","SPN07_1.2_0.3.R1.fastq.gz","SPN07_1.2_0.6.R1.fastq.gz","SPN07_1.2_0.9.R1.fastq.gz","SPN07_1.3_0.3.R1.fastq.gz","SPN07_1.3_0.6.R1.fastq.gz","SPN07_1.3_0.9.R1.fastq.gz","SPN07_2.1_0.3.R1.fastq.gz","SPN07_2.1_0.6.R1.fastq.gz","SPN07_2.1_0.9.R1.fastq.gz","SPN07_2.2_0.3.R1.fastq.gz","SPN07_2.2_0.6.R1.fastq.gz","SPN07_2.2_0.9.R1.fastq.gz"],["SPN01_normal.R2.fastq.gz","SPN01_1.1_0.3.R2.fastq.gz","SPN01_1.1_0.6.R2.fastq.gz","SPN01_1.1_0.9.R2.fastq.gz","SPN01_1.2_0.3.R2.fastq.gz","SPN01_1.2_0.6.R2.fastq.gz","SPN01_1.2_0.9.R2.fastq.gz","SPN01_1.3_0.3.R2.fastq.gz","SPN01_1.3_0.6.R2.fastq.gz","SPN01_1.3_0.9.R2.fastq.gz","SPN02_normal.R2.fastq.gz","SPN02_1.1_0.6.R2.fastq.gz","SPN02_1.1_0.9.R2.fastq.gz","SPN02_1.2_0.6.R2.fastq.gz","SPN02_1.2_0.9.R2.fastq.gz","SPN03_normal.R2.fastq.gz","SPN03_1.1_0.3.R2.fastq.gz","SPN03_1.1_0.6.R2.fastq.gz","SPN03_1.1_0.9.R2.fastq.gz","SPN03_2.1_0.3.R2.fastq.gz","SPN03_2.1_0.6.R2.fastq.gz","SPN03_2.1_0.9.R2.fastq.gz","SPN03_3.1_0.3.R2.fastq.gz","SPN03_3.1_0.6.R2.fastq.gz","SPN03_3.1_0.9.R2.fastq.gz","SPN03_4.1_0.3.R2.fastq.gz","SPN03_4.1_0.6.R2.fastq.gz","SPN03_4.1_0.9.R2.fastq.gz","SPN04_normal.R2.fastq.gz","SPN04_1.1_0.3.R2.fastq.gz","SPN04_1.1_0.6.R2.fastq.gz","SPN04_1.1_0.9.R2.fastq.gz","SPN04_2.1_0.3.R2.fastq.gz","SPN04_2.1_0.6.R2.fastq.gz","SPN04_2.1_0.9.R2.fastq.gz","SPN06_normal.R2.fastq.gz","SPN06_1.1_0.3.R2.fastq.gz","SPN06_1.1_0.6.R2.fastq.gz","SPN06_1.1_0.9.R2.fastq.gz","SPN06_1.2_0.3.R2.fastq.gz","SPN06_1.2_0.6.R2.fastq.gz","SPN06_1.2_0.9.R2.fastq.gz","SPN06_2.1_0.3.R2.fastq.gz","SPN06_2.1_0.6.R2.fastq.gz","SPN06_2.1_0.9.R2.fastq.gz","SPN06_3.1_0.3.R2.fastq.gz","SPN06_3.1_0.6.R2.fastq.gz","SPN06_3.1_0.9.R2.fastq.gz","SPN06_3.2_0.3.R2.fastq.gz","SPN06_3.2_0.6.R2.fastq.gz","SPN06_3.2_0.9.R2.fastq.gz","SPN07_normal.R2.fastq.gz","SPN07_1.1_0.3.R2.fastq.gz","SPN07_1.1_0.6.R2.fastq.gz","SPN07_1.1_0.9.R2.fastq.gz","SPN07_1.2_0.3.R2.fastq.gz","SPN07_1.2_0.6.R2.fastq.gz","SPN07_1.2_0.9.R2.fastq.gz","SPN07_1.3_0.3.R2.fastq.gz","SPN07_1.3_0.6.R2.fastq.gz","SPN07_1.3_0.9.R2.fastq.gz","SPN07_2.1_0.3.R2.fastq.gz","SPN07_2.1_0.6.R2.fastq.gz","SPN07_2.1_0.9.R2.fastq.gz","SPN07_2.2_0.3.R2.fastq.gz","SPN07_2.2_0.6.R2.fastq.gz","SPN07_2.2_0.9.R2.fastq.gz"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>SPN<\/th>\n      <th>Sample<\/th>\n      <th>Purity<\/th>\n      <th>Run accession<\/th>\n      <th>R1 file<\/th>\n      <th>R2 file<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"dom":"ftip","columnDefs":[{"name":"SPN","targets":0},{"name":"Sample","targets":1},{"name":"Purity","targets":2},{"name":"Run_accession","targets":3},{"name":"R1_file","targets":4},{"name":"R2_file","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[10,20,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="internal-structure-of-each-fastq-file">Internal structure of each FASTQ file<a class="anchor" aria-label="anchor" href="#internal-structure-of-each-fastq-file"></a>
@@ -180,6 +198,55 @@ standard coverage levels:</p>
 </tbody>
 </table>
 <hr>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="downloading-from-r">Downloading from R<a class="anchor" aria-label="anchor" href="#downloading-from-r"></a>
+</h2>
+<div class="section level3">
+<h3 id="list_ena_files">
+<code>list_ena_files()</code><a class="anchor" aria-label="anchor" href="#list_ena_files"></a>
+</h3>
+<p>Returns a tibble of expected filenames for a given SPN — no network
+request needed.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># All tumour files for SPN01</span></span>
+<span><span class="fu"><a href="../reference/list_ena_files.html">list_ena_files</a></span><span class="op">(</span><span class="st">"SPN01"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Only purity 0.9</span></span>
+<span><span class="fu"><a href="../reference/list_ena_files.html">list_ena_files</a></span><span class="op">(</span><span class="st">"SPN01"</span>, purity <span class="op">=</span> <span class="st">"0.9"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Normal files</span></span>
+<span><span class="fu"><a href="../reference/list_ena_files.html">list_ena_files</a></span><span class="op">(</span><span class="st">"SPN01"</span>, type <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Everything</span></span>
+<span><span class="fu"><a href="../reference/list_ena_files.html">list_ena_files</a></span><span class="op">(</span><span class="st">"SPN01"</span>, type <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="get_fastq">
+<code>get_fastq()</code><a class="anchor" aria-label="anchor" href="#get_fastq"></a>
+</h3>
+<p>Downloads FASTQ files from ENA and caches them at
+<code>~/.cache/SCOUT/&lt;spn&gt;/fastq/</code>. Repeat calls detect the
+cache and skip the download.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Download R1 + R2 for SPN01 sample 1.1, purity 0.9</span></span>
+<span><span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_fastq.html">get_fastq</a></span><span class="op">(</span><span class="st">"SPN01"</span>, sample <span class="op">=</span> <span class="st">"1.1"</span>, purity <span class="op">=</span> <span class="st">"0.9"</span><span class="op">)</span></span>
+<span><span class="va">paths</span><span class="op">$</span><span class="va">R1</span>   <span class="co"># local path to the R1 file</span></span>
+<span><span class="va">paths</span><span class="op">$</span><span class="va">R2</span>   <span class="co"># local path to the R2 file</span></span>
+<span></span>
+<span><span class="co"># Download only R1</span></span>
+<span><span class="fu"><a href="../reference/get_fastq.html">get_fastq</a></span><span class="op">(</span><span class="st">"SPN01"</span>, sample <span class="op">=</span> <span class="st">"1.1"</span>, purity <span class="op">=</span> <span class="st">"0.9"</span>, read <span class="op">=</span> <span class="st">"R1"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Download normal files</span></span>
+<span><span class="fu"><a href="../reference/get_fastq.html">get_fastq</a></span><span class="op">(</span><span class="st">"SPN01"</span>, sample <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<p>Override the cache root with the <code>SCOUT_CACHE_DIR</code>
+environment variable:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>SCOUT_CACHE_DIR <span class="op">=</span> <span class="st">"/scratch/shared/SCOUT"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_fastq.html">get_fastq</a></span><span class="op">(</span><span class="st">"SPN01"</span>, sample <span class="op">=</span> <span class="st">"1.1"</span>, purity <span class="op">=</span> <span class="st">"0.9"</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
 </div>
 <div class="section level2">
 <h2 id="subsampling-with-seqkit">Subsampling with SeqKit<a class="anchor" aria-label="anchor" href="#subsampling-with-seqkit"></a>
@@ -190,14 +257,14 @@ format.</p>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Conda (recommended)</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">conda</span> install bioconda::seqkit</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Docker</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="ex">docker</span> pull quay.io/biocontainers/seqkit:2.9.0--h9ee0642_0</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># Singularity</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="ex">singularity</span> pull https://depot.galaxyproject.org/singularity/seqkit:2.9.0--h9ee0642_0</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Conda (recommended)</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">conda</span> install bioconda::seqkit</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Docker</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="ex">docker</span> pull quay.io/biocontainers/seqkit:2.9.0--h9ee0642_0</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Singularity</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="ex">singularity</span> pull https://depot.galaxyproject.org/singularity/seqkit:2.9.0--h9ee0642_0</span></code></pre></div>
 <p>The input is the merged FASTQ file from ENA
 (e.g. <code>SPN02_1.1_0.9.R1.fastq.gz</code>), which contains reads from
 all 40 bins concatenated together. SeqKit filters by the
@@ -208,31 +275,31 @@ level.</p>
 <h3 id="coverage">50× coverage<a class="anchor" aria-label="anchor" href="#coverage"></a>
 </h3>
 <p>Select bins <code>t00</code>–<code>t09</code> (10 × 5× = 50×):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t0[0-9]"</span> <span class="dt">\</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  SPN02_1.1_0.9.R1.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_50x.R1.fastq.gz</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t0[0-9]"</span> <span class="dt">\</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  SPN02_1.1_0.9.R2.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_50x.R2.fastq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t0[0-9]"</span> <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  SPN02_1.1_0.9.R1.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_50x.R1.fastq.gz</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t0[0-9]"</span> <span class="dt">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  SPN02_1.1_0.9.R2.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_50x.R2.fastq.gz</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="coverage-1">100× coverage<a class="anchor" aria-label="anchor" href="#coverage-1"></a>
 </h3>
 <p>Select bins <code>t00</code>–<code>t19</code> (20 × 5× = 100×):</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t(0[0-9]|1[0-9])_"</span> <span class="dt">\</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  SPN02_1.1_0.9.R1.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_100x.R1.fastq.gz</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t(0[0-9]|1[0-9])_"</span> <span class="dt">\</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  SPN02_1.1_0.9.R2.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_100x.R2.fastq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t(0[0-9]|1[0-9])_"</span> <span class="dt">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  SPN02_1.1_0.9.R1.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_100x.R1.fastq.gz</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t(0[0-9]|1[0-9])_"</span> <span class="dt">\</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  SPN02_1.1_0.9.R2.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_100x.R2.fastq.gz</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="coverage-2">150× coverage<a class="anchor" aria-label="anchor" href="#coverage-2"></a>
 </h3>
 <p>Select bins <code>t00</code>–<code>t29</code> (30 × 5× = 150×):</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t(0[0-9]|1[0-9]|2[0-9])_"</span> <span class="dt">\</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  SPN02_1.1_0.9.R1.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_150x.R1.fastq.gz</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t(0[0-9]|1[0-9]|2[0-9])_"</span> <span class="dt">\</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  SPN02_1.1_0.9.R2.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_150x.R2.fastq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t(0[0-9]|1[0-9]|2[0-9])_"</span> <span class="dt">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  SPN02_1.1_0.9.R1.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_150x.R1.fastq.gz</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="ex">seqkit</span> grep <span class="at">--threads</span> 2 <span class="at">-n</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"^t(0[0-9]|1[0-9]|2[0-9])_"</span> <span class="dt">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  SPN02_1.1_0.9.R2.fastq.gz <span class="at">-o</span> SPN02_1.1_0.9_150x.R2.fastq.gz</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="coverage-full">200× coverage (full)<a class="anchor" aria-label="anchor" href="#coverage-full"></a>
@@ -265,7 +332,7 @@ memory usage.</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

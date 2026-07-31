@@ -10,6 +10,7 @@
 <url><loc>https://caravagnalab.github.io/SCOUT/articles/zenodo.html</loc></url>
 <url><loc>https://caravagnalab.github.io/SCOUT/authors.html</loc></url>
 <url><loc>https://caravagnalab.github.io/SCOUT/index.html</loc></url>
+<url><loc>https://caravagnalab.github.io/SCOUT/reference/get_fastq.html</loc></url>
 <url><loc>https://caravagnalab.github.io/SCOUT/reference/get_gender.html</loc></url>
 <url><loc>https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_cna.html</loc></url>
 <url><loc>https://caravagnalab.github.io/SCOUT/reference/get_ground_truth_drivers.html</loc></url>
@@ -34,6 +35,7 @@
 <url><loc>https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_subclonal.html</loc></url>
 <url><loc>https://caravagnalab.github.io/SCOUT/reference/get_tumourevo_vep.html</loc></url>
 <url><loc>https://caravagnalab.github.io/SCOUT/reference/index.html</loc></url>
+<url><loc>https://caravagnalab.github.io/SCOUT/reference/list_ena_files.html</loc></url>
 <url><loc>https://caravagnalab.github.io/SCOUT/reference/list_zenodo_files.html</loc></url>
 <url><loc>https://caravagnalab.github.io/SCOUT/reference/read_sheet.html</loc></url>
 </urlset>

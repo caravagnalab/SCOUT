@@ -63,6 +63,15 @@ Functions to download and cache per-SPN archives from Zenodo.
 - [`list_zenodo_files()`](https://caravagnalab.github.io/SCOUT/reference/list_zenodo_files.md)
   : List files available in a Zenodo record
 
+## ENA — raw FASTQ
+
+Functions to list and download raw FASTQ files from ENA (PRJEB97253).
+
+- [`list_ena_files()`](https://caravagnalab.github.io/SCOUT/reference/list_ena_files.md)
+  : List FASTQ files available for a SCOUT SPN on ENA
+- [`get_fastq()`](https://caravagnalab.github.io/SCOUT/reference/get_fastq.md)
+  : Download raw FASTQ files for a SCOUT SPN from ENA
+
 ## Ground truth getters
 
 Access sequencing ground truth mutation data.
