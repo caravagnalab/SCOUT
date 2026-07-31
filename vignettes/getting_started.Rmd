@@ -116,7 +116,8 @@ get_sarek_cna("SPN04", "SPN04_1.1", 100, 0.9, "ascat")
 get_tumourevo_snv("SPN04", 50, 0.6, "mutect2", "sequenza", "SPN04_1.1")
 get_tumourevo_cna("SPN04", 50, 0.6, "mutect2", "sequenza", "SPN04_1.1")
 get_tumourevo_driver("SPN04", 50, 0.6, "mutect2", "sequenza", "SPN04_1.1")
-get_tumourevo_subclonal("SPN04", 50, 0.6, "mutect2", "sequenza", "mobster", "SPN04_1.1")
+get_tumourevo_subclonal("SPN04", 50, 0.6, "mutect2", "sequenza",
+                        "mobster", "SPN04_1.1")
 get_tumourevo_qc("SPN04", 50, 0.6, "mutect2", "sequenza", "cnaqc", "SPN04_1.1")
 get_tumourevo_signatures("SPN04", 50, 0.6, "mutect2", "sequenza", "BASCULE")
 ```
@@ -128,10 +129,22 @@ See the **Zenodo** article for the full function reference.
 ## Raw FASTQ data
 
 Raw paired-end FASTQ files are available in the European Nucleotide Archive
-under accession **PRJEB97253**. There are 79 entries in total: 72 tumour
-sample × purity combinations across all SPNs, plus 7 normal samples (one per
-SPN). Each entry contains files named `tXX_{spn}_{sample}.R1.fastq.gz` for
-`t00`–`t39` (40 bins × 5× = 200× total coverage per sample).
+under accession **PRJEB97253**. There are 158 files in total: 144 tumour
+(24 samples × 3 purities × R1+R2) and 14 normal (7 SPNs × R1+R2). Each file
+is 200× coverage, internally organised as 40 bins of 5× each.
+
+Use `list_ena_files()` to inspect available files and `get_fastq()` to
+download them:
+
+```{r}
+# List all tumour files for SPN01 at purity 0.9
+list_ena_files("SPN01", purity = "0.9")
+
+# Download R1 + R2 for SPN01 sample 1.1, purity 0.9
+paths <- get_fastq("SPN01", sample = "1.1", purity = "0.9")
+paths$R1
+paths$R2
+```
 
 Standard coverage levels can be reproduced by subsetting consecutive bins with
 SeqKit:
@@ -142,7 +155,6 @@ SeqKit:
 | 100× | `t00`–`t19` |
 | 150× | `t00`–`t29` |
 
-See the **Raw FASTQ data** article for installation instructions and the full
-subsampling commands.
+See the **Raw FASTQ data** article for full download and subsampling commands.
 
 ---

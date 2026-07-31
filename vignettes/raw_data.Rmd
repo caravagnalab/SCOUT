@@ -12,7 +12,9 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
 ```
 
 Raw FASTQ files for all SCOUT samples are deposited in the European Nucleotide
-Archive (ENA) under accession number **PRJEB97253**.
+Archive (ENA) under accession number **PRJEB97253**. The SCOUT package provides
+two functions to interact with these files directly from R: `list_ena_files()`
+and `get_fastq()`.
 
 ---
 
@@ -34,6 +36,70 @@ SPN02_1.1_0.9.R1.fastq.gz    SPN02_1.1_0.9.R2.fastq.gz
 SPN02_1.1_0.6.R1.fastq.gz    SPN02_1.1_0.6.R2.fastq.gz
 SPN02_1.1_0.3.R1.fastq.gz    SPN02_1.1_0.3.R2.fastq.gz
 SPN05_normal.R1.fastq.gz      SPN05_normal.R2.fastq.gz
+```
+
+## ENA run accessions
+
+Each sample × purity combination corresponds to one ENA run accession (ERR…).
+Both R1 and R2 files are stored under the same run. Use `list_ena_files()` to
+retrieve accessions programmatically.
+
+```{r ena-table, echo = FALSE, eval = TRUE}
+runs <- c(
+  "SPN01_normal"   = "ERR15726468",
+  "SPN01_1.1_0.3"  = "ERR15743951", "SPN01_1.1_0.6" = "ERR15750078", "SPN01_1.1_0.9" = "ERR15750982",
+  "SPN01_1.2_0.3"  = "ERR15756720", "SPN01_1.2_0.6" = "ERR15757038", "SPN01_1.2_0.9" = "ERR15757711",
+  "SPN01_1.3_0.3"  = "ERR15760992", "SPN01_1.3_0.6" = "ERR15761713", "SPN01_1.3_0.9" = "ERR15761859",
+  "SPN02_normal"   = "ERR17603652",
+  "SPN02_1.1_0.6"  = "ERR17625911", "SPN02_1.1_0.9" = "ERR17626192",
+  "SPN02_1.2_0.6"  = "ERR17630557", "SPN02_1.2_0.9" = "ERR17632556",
+  "SPN03_normal"   = "ERR15751770",
+  "SPN03_1.1_0.3"  = "ERR15772337", "SPN03_1.1_0.6" = "ERR15772781", "SPN03_1.1_0.9" = "ERR15773219",
+  "SPN03_2.1_0.3"  = "ERR15797837", "SPN03_2.1_0.6" = "ERR15798553", "SPN03_2.1_0.9" = "ERR15799893",
+  "SPN03_3.1_0.3"  = "ERR15800648", "SPN03_3.1_0.6" = "ERR15801298", "SPN03_3.1_0.9" = "ERR15801715",
+  "SPN03_4.1_0.3"  = "ERR15805035", "SPN03_4.1_0.6" = "ERR15805842", "SPN03_4.1_0.9" = "ERR15806126",
+  "SPN04_normal"   = "ERR15751912",
+  "SPN04_1.1_0.3"  = "ERR15765472", "SPN04_1.1_0.6" = "ERR15765510", "SPN04_1.1_0.9" = "ERR15765559",
+  "SPN04_2.1_0.3"  = "ERR15765578", "SPN04_2.1_0.6" = "ERR15766084", "SPN04_2.1_0.9" = "ERR15766489",
+  "SPN06_normal"   = "ERR15752203",
+  "SPN06_1.1_0.3"  = "ERR15810993", "SPN06_1.1_0.6" = "ERR15811483", "SPN06_1.1_0.9" = "ERR15811585",
+  "SPN06_1.2_0.3"  = "ERR15811699", "SPN06_1.2_0.6" = "ERR15812456", "SPN06_1.2_0.9" = "ERR15813859",
+  "SPN06_2.1_0.3"  = "ERR15813942", "SPN06_2.1_0.6" = "ERR15814016", "SPN06_2.1_0.9" = "ERR15814028",
+  "SPN06_3.1_0.3"  = "ERR15814262", "SPN06_3.1_0.6" = "ERR15814505", "SPN06_3.1_0.9" = "ERR15814526",
+  "SPN06_3.2_0.3"  = "ERR15814543", "SPN06_3.2_0.6" = "ERR15815742", "SPN06_3.2_0.9" = "ERR15815983",
+  "SPN07_normal"   = "ERR15764709",
+  "SPN07_1.1_0.3"  = "ERR15823985", "SPN07_1.1_0.6" = "ERR15824443", "SPN07_1.1_0.9" = "ERR15824573",
+  "SPN07_1.2_0.3"  = "ERR15826291", "SPN07_1.2_0.6" = "ERR15827077", "SPN07_1.2_0.9" = "ERR15827374",
+  "SPN07_1.3_0.3"  = "ERR15827485", "SPN07_1.3_0.6" = "ERR15828408", "SPN07_1.3_0.9" = "ERR15833982",
+  "SPN07_2.1_0.3"  = "ERR15834853", "SPN07_2.1_0.6" = "ERR15835036", "SPN07_2.1_0.9" = "ERR15835245",
+  "SPN07_2.2_0.3"  = "ERR15836007", "SPN07_2.2_0.6" = "ERR15836680", "SPN07_2.2_0.9" = "ERR15837918"
+)
+
+keys   <- names(runs)
+parts  <- strsplit(keys, "_")
+spn    <- vapply(parts, `[`, character(1), 1)
+sample <- ifelse(lengths(parts) == 2, "normal",
+                 vapply(parts, function(p) p[2], character(1)))
+purity <- ifelse(lengths(parts) == 2, NA_character_,
+                 vapply(parts, function(p) p[3], character(1)))
+
+ena_df <- data.frame(
+  SPN           = spn,
+  Sample        = sample,
+  Purity        = purity,
+  Run_accession = unname(runs),
+  R1_file       = paste0(keys, ".R1.fastq.gz"),
+  R2_file       = paste0(keys, ".R2.fastq.gz"),
+  stringsAsFactors = FALSE
+)
+
+DT::datatable(
+  ena_df,
+  colnames  = c("SPN", "Sample", "Purity", "Run accession", "R1 file", "R2 file"),
+  rownames  = FALSE,
+  filter    = "top",
+  options   = list(pageLength = 20, dom = "ftip")
+)
 ```
 
 ## Internal structure of each FASTQ file
@@ -62,6 +128,57 @@ bins are combined to reproduce standard coverage levels:
 | 100× | `t00`–`t19` | 20 |
 | 150× | `t00`–`t29` | 30 |
 | 200× | `t00`–`t39` | 40 |
+
+---
+
+---
+
+## Downloading from R
+
+### `list_ena_files()`
+
+Returns a tibble of expected filenames for a given SPN — no network request
+needed.
+
+```{r}
+# All tumour files for SPN01
+list_ena_files("SPN01")
+
+# Only purity 0.9
+list_ena_files("SPN01", purity = "0.9")
+
+# Normal files
+list_ena_files("SPN01", type = "normal")
+
+# Everything
+list_ena_files("SPN01", type = "all")
+```
+
+### `get_fastq()`
+
+Downloads FASTQ files from ENA and caches them at
+`~/.cache/SCOUT/<spn>/fastq/`. Repeat calls detect the cache and skip the
+download.
+
+```{r}
+# Download R1 + R2 for SPN01 sample 1.1, purity 0.9
+paths <- get_fastq("SPN01", sample = "1.1", purity = "0.9")
+paths$R1   # local path to the R1 file
+paths$R2   # local path to the R2 file
+
+# Download only R1
+get_fastq("SPN01", sample = "1.1", purity = "0.9", read = "R1")
+
+# Download normal files
+get_fastq("SPN01", sample = NULL)
+```
+
+Override the cache root with the `SCOUT_CACHE_DIR` environment variable:
+
+```{r}
+Sys.setenv(SCOUT_CACHE_DIR = "/scratch/shared/SCOUT")
+get_fastq("SPN01", sample = "1.1", purity = "0.9")
+```
 
 ---
 

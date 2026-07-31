@@ -55,6 +55,11 @@ reference:
       - get_sarek_results
       - get_tumourevo_results
       - list_zenodo_files
+  - title: ENA — raw FASTQ
+    desc: Functions to list and download raw FASTQ files from ENA (PRJEB97253).
+    contents:
+      - list_ena_files
+      - get_fastq
   - title: Ground truth getters
     desc: Access sequencing ground truth mutation data.
     contents:
